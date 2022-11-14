@@ -1,0 +1,49 @@
+baseURL = 'https://fabiorehm.com/'
+defaultContentLanguage = 'en'
+title = 'fabiorehm.com'
+theme = 'kiss'
+copyright = "&copy; <a href=\"https://github.com/fgrehm\">Fabio Rehm</a> 2013-2022"
+googleAnalytics = "G-Z78MGSF72P"
+
+enableRobotsTXT = true
+paginate = 5 # Number of posts per page
+disqusShortname = "fgrehm"
+
+# https://gohugo.io/content-management/multilingual/
+[languages]
+  [languages.en]
+    contentDir = 'content/en'
+    languageName = 'English'
+    weight = 1
+  [languages.pt]
+    contentDir = 'content/pt'
+    languageName = 'Português'
+    weight = 2
+
+# https://github.com/ribice/kiss
+[params.rss]
+  authorName = 'Fábio Rehm'
+  authorEmail = 'ribice@gmail.com'
+[params.info]
+  # adsense = "" # Adsense ID (ID only, without ca-pub-)
+  enableSocial = true # Adds OpenGraph and Twitter cards
+  # homeTitle = "" # Title for home page
+  poweredby = true # Adds powered by hugo and kiss below Copyright
+  related = true # Includes related articles at the bottom of the article
+  codeCopy = true # Add copy button above code blocks
+  taxonomiesCount = true # Add taxonomies count
+[params.features]
+  disqusOnDemand = true  # Load Disqus comments on click
+  mathjax = false
+  katex = false
+[params.social]
+  twitter = "fgrehm"
+  github = "fgrehm"
+  email = "site@fabiorehm.com"
+  linkedin = "fgrehm"
+  # facebook = "???"
+  # instagram = "???"
+  # codepen = "???"
+  rss = "index.xml" # Add this to show RSS button in social.
+[params.social.config]
+  platforms = ["email", "github", "twitter", "codepen", "linkedin", "facebook", "instagram", "rss"]
