@@ -10,6 +10,7 @@ tags:
 - vagrant
 ---
 
+<!-- FIXME -->
 <a href="/images/posts/letter_opener_web-ui.png"><img src="/images/posts/letter_opener_web-ui.png#c"></a>
 
 One of the things I missed the most after going [100% on Vagrant](/blog/2013-01-17-100-percent-on-vagrant)

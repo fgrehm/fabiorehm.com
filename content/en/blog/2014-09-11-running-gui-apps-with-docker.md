@@ -54,6 +54,7 @@ docker run -ti --rm \
 
 If all goes well you should see Firefox running from within a Docker container.
 
+<!-- FIXME -->
 <figure class="center">
   <a href="/images/posts/2014-09-11/firefox-demo.gif"><img src="/images/posts/2014-09-11/firefox-demo.gif"></a>
 </figure>
@@ -72,6 +73,7 @@ with sources on [GitHub](https://github.com/fgrehm/docker-netbeans).
 
 Here's a quick demo of it in action:
 
+<!-- FIXME -->
 <figure class="center">
   <a href="/images/posts/2014-09-11/firefox-demo.gif"><img src="/images/posts/2014-09-11/netbeans-demo.gif"></a>
 </figure>
