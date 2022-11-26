@@ -1,0 +1,142 @@
+<!doctype html><html xmlns=http://www.w3.org/1999/xhtml><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Adventures in Serverless Land to Support a Fight Against Corruption | fabiorehm.com</title><meta property="og:title" content="Adventures in Serverless Land to Support a Fight Against Corruption - fabiorehm.com"><meta property="og:description" content="As most people in tech know, Serverless is the new &#34;hotness&#34;. This post outlines my initial experience with it, the issues I had along the way and some considerations in case you, like me, are thinking about giving it a try for the first time"><meta property="og:url" content="https://fabiorehm.com/blog/2017/12/08/adventures-in-serverless-land-to-support-a-fight-against-corruption/"><meta property="og:site_name" content="fabiorehm.com"><meta property="og:type" content="article"><meta property="og:image" content="https://www.gravatar.com/avatar/2b78c6da27ec7e1419eebc8b683c25a3?s=256"><meta property="article:section" content="Blog"><meta property="article:tag" content="serverless"><meta property="article:tag" content="serenata-de-amor"><meta property="article:tag" content="ocr"><meta property="article:published_time" content="2017-12-08T00:00:00Z"><meta property="article:modified_time" content="2017-12-08T00:00:00Z"><meta name=twitter:card content="summary"><meta name=twitter:site content="@fgrehm"><meta name=twitter:creator content="@fgrehm"><link href=https://fabiorehm.com/index.xml rel=alternate type=application/rss+xml title=fabiorehm.com><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=https://fabiorehm.com/css/site.css><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=canonical href=https://fabiorehm.com/blog/2017/12/08/adventures-in-serverless-land-to-support-a-fight-against-corruption/><meta name=msapplication-TileColor content="#da532c"><meta name=theme-color content="#ffffff"></head><body><section class=section><div class=container><nav id=nav-main class=nav><div id=nav-name class=nav-left><a id=nav-anchor class=nav-item href=https://fabiorehm.com/><h1 id=nav-heading class="title is-4">fabiorehm.com</h1></a></div><div class=nav-right><nav id=nav-items class="nav-item level is-mobile"><a class=level-item aria-label=email href=mailto:site@fabiorehm.com target=_blank rel=noopener><span class=icon><i><svg viewbox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1.0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1.0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></i></span></a><a class=level-item aria-label=github href=https://github.com/fgrehm target=_blank rel=noopener><span class=icon><i><svg viewbox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg></i></span></a><a class=level-item aria-label=twitter href=https://twitter.com/fgrehm target=_blank rel=noopener><span class=icon><i><svg viewbox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true"><path d="M23 3a10.9 10.9.0 01-3.14 1.53 4.48 4.48.0 00-7.86 3v1A10.66 10.66.0 013 4s-4 9 5 13a11.64 11.64.0 01-7 2c9 5 20 0 20-11.5a4.5 4.5.0 00-.08-.83A7.72 7.72.0 0023 3z"/></svg></i></span></a><a class=level-item aria-label=linkedin href=https://linkedin.com/in/fgrehm target=_blank rel=noopener><span class=icon><i><svg viewbox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true"><path stroke-width="1.8" d="m5.839218 4.101561c0 1.211972-.974141 2.194011-2.176459 2.194011S1.4863 5.313533 1.4863 4.101561c0-1.211094.974141-2.194011 2.176459-2.194011s2.176459.982917 2.176459 2.194011zm.017552 3.94922H1.468748v14.04167H5.85677V8.050781zm7.005038.0H8.501869v14.04167h4.360816v-7.370999c0-4.098413 5.291077-4.433657 5.291077.0v7.370999h4.377491v-8.89101c0-6.915523-7.829986-6.66365-9.669445-3.259423V8.050781z"/></svg></i></span></a><a class=level-item aria-label=rss href=/index.xml target=_blank rel=noopener><span class=icon><i><svg viewbox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true"><path d="M4 11a9 9 0 019 9"/><path d="M4 4a16 16 0 0116 16"/><circle cx="5" cy="19" r="1"/></svg></i></span></a></nav></div></nav><nav class=nav></nav></div><script src=/js/navicon-shift.js></script></section><section class=section><div class=container><div class="subtitle tags is-6 is-pulled-right"><a class="subtitle is-6" href=/tags/serverless/>#serverless</a>
+| <a class="subtitle is-6" href=/tags/serenata-de-amor/>#serenata-de-amor</a>
+| <a class="subtitle is-6" href=/tags/ocr/>#ocr</a></div><h2 class="subtitle is-6">December 8, 2017</h2><h1 class=title>Adventures in Serverless Land to Support a Fight Against Corruption</h1><div class=content><p>As most people in tech know,
+&ldquo;<a href=https://www.martinfowler.com/articles/serverless.html>serverless</a>&rdquo; is the new
+<del>buzzword</del> &ldquo;hotness&rdquo; and lots of blog posts/books/utilities/tweets/etc. are
+being written about it every day. This post outlines my initial experience with
+serverless computing, the issues I had along the way, and some considerations in
+case you, like me, are thinking about giving it a try for the first time.</p><h2 id=background>Background
+<a href=#background><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentcolor" class="bi bi-link" viewBox="0 0 16 16"><path d="M6.354 5.5H4a3 3 0 000 6h3a3 3 0 002.83-4H9c-.086.0-.17.01-.25.031A2 2 0 017 10.5H4a2 2 0 110-4h1.535c.218-.376.495-.714.82-1z"/><path d="M9 5.5a3 3 0 00-2.83 4h1.098A2 2 0 019 6.5h3a2 2 0 110 4h-1.535a4.02 4.02.0 01-.82 1H12a3 3 0 100-6H9z"/></svg></a></h2><p>Not many people outside of Brazil might&rsquo;ve heard about the <a href=https://serenatadeamor.org/en/>Serenata de
+Amor</a> project, but it’s making a lot of noise on
+this side of the globe. Operação Serenata de Amor is an artificial intelligence
+and data science project that aims to inform the general public about government
+corruption and spending (more info can be found at the project&rsquo;s website and
+this nice podcast at <a href=https://changelog.com/podcast/268>The Changelog</a>).</p><p>Serenata de Amor is also an open source project that I contribute to whenever I
+have some free time. Recently, I&rsquo;ve been thinking about how we can leverage
+serverless computing to help in the fight. Before getting into the details of
+why I think serverless computing makes sense for the project and how I
+approached the problem, it might help to know a bit more about the Serenata
+project itself.</p><p>So far, the main focus of the Serenata team (and where it currently excels) is
+analyzing meal reimbursements from congresspeople. Those reimbursements are
+funded by the CEAP (&ldquo;Cota para Exercício da Atividade Parlamentar&rdquo; or &ldquo;Quota for
+Exercising Parliamentary Activity&rdquo; in English) provided by the <a href=https://en.wikipedia.org/wiki/Chamber_of_Deputies_(Brazil)>Chamber of
+Deputies</a>.</p><p>The infographic below offers a bit more context on the project:</p><p>One interesting aspect of the project is its need to &ldquo;read&rdquo; scanned
+reimbursement receipt PDFs provided by deputies in search for things like
+alcoholic beverages and exact timestamps of when a meal was purchased. That data
+can be used to flag congress person&rsquo;s reimbursements as suspicious, since they
+should not be reimbursed for alcohol. Another use case is crossing the
+timestamps found in the receipt with other datasets we have about parliamentary
+activity: if a congressperson was in a session and the meal receipt is around
+the same time in another city, it probably means they bought food for other
+people (also not allowed).</p><h2 id=why-do-i-think-a-serverless-architecture-makes-sense-in-this-fight-against-corruption>Why do I think a serverless architecture makes sense in this fight against corruption?
+<a href=#why-do-i-think-a-serverless-architecture-makes-sense-in-this-fight-against-corruption><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentcolor" class="bi bi-link" viewBox="0 0 16 16"><path d="M6.354 5.5H4a3 3 0 000 6h3a3 3 0 002.83-4H9c-.086.0-.17.01-.25.031A2 2 0 017 10.5H4a2 2 0 110-4h1.535c.218-.376.495-.714.82-1z"/><path d="M9 5.5a3 3 0 00-2.83 4h1.098A2 2 0 019 6.5h3a2 2 0 110 4h-1.535a4.02 4.02.0 01-.82 1H12a3 3 0 100-6H9z"/></svg></a></h2><p>Mostly to reduce operational overhead and costs of managing dedicated servers
+for getting the job done.</p><p>In order to extract text out of those reimbursement receipts we need to apply
+<a href=https://en.wikipedia.org/wiki/Optical_character_recognition>OCR</a> to them.
+While PDFs generated by Word provide readers the ability to search within the
+text with <em>Ctrl+F</em>, the PDFs provided by congresspeople to justify the
+reimbursements are basically &ldquo;scanned pieces of paper.&rdquo; In other words, the
+receipt files are actually <em>images</em> inside a PDF! While we could put together
+some self-hosted infra for this using OSS tools like
+<a href=https://github.com/tesseract-ocr/tesseract#tesseract-ocr>Tesseract</a>, big
+players like Google and Microsoft provide OCR as a service with a reasonable
+price. In using those, we don&rsquo;t have to worry about managing and monitoring our
+own boxes and fine-tuning Tesseract configs, saving both time and money.</p><p>Another reason for going serverless is the fact that Serenata de amor is
+<a href=https://apoia.se/serenata>crowdfunded</a>, which (as of today) means having a
+small team/budget to keep their infra going. It also means the project doesn’t
+have a person to work on it on a daily basis.</p><p>In terms of $, some initial estimates I made showed that it&rsquo;d cost less than
+US$100 total to have a serverless API handling OCR of the 20k+ receipts
+submitted by deputies each month (mostly the Google Cloud Vision API bill).
+Imagine how much we&rsquo;d pay for running a set of beefy boxes to handle the OCR
+work which, for long periods of time, would just sit idle. Also consider the
+fact that at the end of the day, those third-party services are probably going
+to do a better job than us.</p><h2 id=how-did-it-go>How did it go?
+<a href=#how-did-it-go><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentcolor" class="bi bi-link" viewBox="0 0 16 16"><path d="M6.354 5.5H4a3 3 0 000 6h3a3 3 0 002.83-4H9c-.086.0-.17.01-.25.031A2 2 0 017 10.5H4a2 2 0 110-4h1.535c.218-.376.495-.714.82-1z"/><path d="M9 5.5a3 3 0 00-2.83 4h1.098A2 2 0 019 6.5h3a2 2 0 110 4h-1.535a4.02 4.02.0 01-.82 1H12a3 3 0 100-6H9z"/></svg></a></h2><p>Instead of dealing with the nitty gritty of configuring and deploying a
+&ldquo;Serverless API,&rdquo; I decided to explore this new world by leveraging tools that
+automate processes and reduce the boilerplate required to get up and running.</p><p>From what I&rsquo;ve heard, the most popular tools seem to be the <a href=http://serverless.com/>Serverless
+Framework</a> and <a href=https://claudiajs.com/>Claudia.JS</a>.</p><p>The Serverless framework is &ldquo;a CLI tool that allows users to build & deploy
+auto-scaling, pay-per-execution, event-driven functions.&rdquo; It supports seven
+different cloud providers (as of today).</p><p>Claudia.JS is a simpler tool with a focus on deploying Node.js projects to AWS
+Lambda.</p><h3 id=1st-try>1st try
+<a href=#1st-try><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentcolor" class="bi bi-link" viewBox="0 0 16 16"><path d="M6.354 5.5H4a3 3 0 000 6h3a3 3 0 002.83-4H9c-.086.0-.17.01-.25.031A2 2 0 017 10.5H4a2 2 0 110-4h1.535c.218-.376.495-.714.82-1z"/><path d="M9 5.5a3 3 0 00-2.83 4h1.098A2 2 0 019 6.5h3a2 2 0 110 4h-1.535a4.02 4.02.0 01-.82 1H12a3 3 0 100-6H9z"/></svg></a></h3><p>While serverless was new to me, the &ldquo;<a href=https://github.com/datasciencebr/serenata-de-amor/blob/master/research/develop/2016-12-30-fgrehm-ocr-receipts-with-google-cloud-vision.ipynb>OCR with Google Cloud Vision
+API</a>&rdquo;
+part was not. I&rsquo;ve been able to OCR <a href=https://github.com/datasciencebr/serenata-de-amor/blob/master/docs/receipts-ocr.md>nearly 200k receipts
+already</a>,
+so my first approach to the problem was to convert the <a href=https://gist.github.com/fgrehm/d3612ee6a84fc74e4595e52078040d46>Python code I previously
+wrote</a> into a
+serverless function. Google provides support for deploying Python functions, so
+I chose to stick to the Serverless CLI and use <a href=https://cloud.google.com/functions/>Google Cloud
+Functions</a> in order to reduce the network
+latency between hosts.</p><p>The original plan was to have a client provide the reimbursement ID and let my
+new API handle all the rest. It would load the reimbursements CSV (containing
+<em>all</em> of the reimbursements submitted), identify the reimbursement, and use the
+additional data it provides to build a URL and then download and OCR the
+receipt.</p><p>Reading the CSV and doing the reimbursement lookup reusing the code meant using
+Python&rsquo;s <a href=http://pandas.pydata.org/>pandas</a> and <a href=http://www.numpy.org/>numpy</a>
+under the hood, relying on native extensions in order for things to work. That&rsquo;s
+when things started getting hairy.</p><p>These days my main dev environment is a MacBook, and the cloud function runs on
+Linux. In order to cross compile extensions for deployment, I used a
+<a href=https://github.com/UnitedIncome/serverless-python-requirements#serverless-python-requirements>plugin</a>
+that deals with compiling the code in a docker container that resembles the
+function env. The plugin seemed to work, but the problem I faced after that was
+that my function&rsquo;s resulting pkg was too big to be deployed due to the native
+extensions and the CSV.</p><p>In hindsight, I&rsquo;m thankful that it didn&rsquo;t work well. I realized that it was a
+lot for a function to handle since it’s supposed to be something lightweight and
+short lived.</p><h3 id=2nd-try>2nd try
+<a href=#2nd-try><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentcolor" class="bi bi-link" viewBox="0 0 16 16"><path d="M6.354 5.5H4a3 3 0 000 6h3a3 3 0 002.83-4H9c-.086.0-.17.01-.25.031A2 2 0 017 10.5H4a2 2 0 110-4h1.535c.218-.376.495-.714.82-1z"/><path d="M9 5.5a3 3 0 00-2.83 4h1.098A2 2 0 019 6.5h3a2 2 0 110 4h-1.535a4.02 4.02.0 01-.82 1H12a3 3 0 100-6H9z"/></svg></a></h3><p>With pandas out of the equation, I decided to switch to a simpler approach using
+node.js. I still attempted a deployment to a Google Cloud Function to reduce
+network latency and used the Serverless CLI for the heavy lifting.</p><p>The idea would be to keep the additional reimbursement information lookup for
+downloading receipts in the client so the function didn&rsquo;t have to read a large
+dataset to grab a handful of values to build the download URL. In other words,
+instead of hitting an endpoint like <code>/ocr/&lt;reimbursement_id></code>, clients would hit
+<code>/ocr/&lt;applicant_id>/&lt;year>/&lt;reimbursement_id></code>.</p><p>This went fine, until I had to convert a PDF into a PNG image to be sent over to
+the Cloud Vision API.</p><p>I originally used <a href=https://poppler.freedesktop.org/>poppler</a> to handle the
+conversion, but no serverless function has that tool in its default stack. I
+tried using <a href=https://github.com/mozilla/pdf.js/#pdfjs>pdfjs</a> to handle that,
+but <a href=https://github.com/mozilla/pdf.js/issues/8489>that also didn&rsquo;t work</a>.</p><p>After some digging, I found out that <a href=http://www.imagemagick.org/>ImageMagick</a>
+can handle PDF to PNG, and it’s available in the Google Cloud Function stack. I
+got this part of the process working locally, but it failed in &ldquo;production.&rdquo;
+Turns out that for ImageMagick to handle the PDF-to-PNG conversion, it needs to
+have <a href=https://www.ghostscript.com/>Ghostscript</a> available. Later, I found out
+that it got out of the <a href=https://stackoverflow.com/a/45105954>cloud function
+stack</a>.</p><h3 id=3rd-try>3rd try
+<a href=#3rd-try><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentcolor" class="bi bi-link" viewBox="0 0 16 16"><path d="M6.354 5.5H4a3 3 0 000 6h3a3 3 0 002.83-4H9c-.086.0-.17.01-.25.031A2 2 0 017 10.5H4a2 2 0 110-4h1.535c.218-.376.495-.714.82-1z"/><path d="M9 5.5a3 3 0 00-2.83 4h1.098A2 2 0 019 6.5h3a2 2 0 110 4h-1.535a4.02 4.02.0 01-.82 1H12a3 3 0 100-6H9z"/></svg></a></h3><p>As you might&rsquo;ve guessed, I eventually gave up on Google Functions and moved on
+to <a href=https://aws.amazon.com/lambda/>AWS Lambda</a>. Along with that I chose to use
+ClaudiaJS, since it seemed like a simpler tool and more focused on the Node.js +
+Lambda combo.</p><p>I eventually got things working with the official Node.js <a href=https://www.npmjs.com/package/@google-cloud/vision>Cloud Vision API
+Client</a> locally. But, again,
+it failed on Lambda. This time I tracked it down to the fact that the official
+npm pkg for cloud vision uses <a href=https://grpc.io/>gRPC</a> under the hood, which
+requires some native extensions as well.</p><p>I tried Docker to compile extensions using the
+<a href=https://github.com/lambci/docker-lambda><code>lambci/lambda</code></a> image, but for
+whatever reason, it also didn&rsquo;t work. After some debugging and digging through
+AWS&rsquo;s UI, I noticed the function size increased quite a lot (about 20MB+ IIRC)
+and realized that things could actually be made simpler.</p><h3 id=4th-and-last-try>4th and last try
+<a href=#4th-and-last-try><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentcolor" class="bi bi-link" viewBox="0 0 16 16"><path d="M6.354 5.5H4a3 3 0 000 6h3a3 3 0 002.83-4H9c-.086.0-.17.01-.25.031A2 2 0 017 10.5H4a2 2 0 110-4h1.535c.218-.376.495-.714.82-1z"/><path d="M9 5.5a3 3 0 00-2.83 4h1.098A2 2 0 019 6.5h3a2 2 0 110 4h-1.535a4.02 4.02.0 01-.82 1H12a3 3 0 100-6H9z"/></svg></a></h3><p>The Cloud Vision API has a rest interface that can be easily used with simple
+HTTP clients. While gRPC is probably more efficient, HTTP also gets the job
+done. So, I adapted my original Python code to JS using
+<a href=https://github.com/bitinn/node-fetch><code>node-fetch</code></a> and called it a day. I
+still had to bump the function&rsquo;s memory to 1Gb to handle big documents (6+
+pages) and &ldquo;massage&rdquo; ImageMagick parameters to handle some corner cases, but I
+eventually managed to get a proof of concept that worked for all the initial
+tests I made.</p><p>The code is available in <a href=https://github.com/fgrehm/serenata-ocr>GitHub</a>, and I
+already have some ideas of next steps documented in the <a href=https://github.com/fgrehm/serenata-ocr/issues>issue
+tracker</a>. Here&rsquo;s a quick demo of
+going from zero to OCR in close to a minute:</p><h2 id=tldr>TL;DR
+<a href=#tldr><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentcolor" class="bi bi-link" viewBox="0 0 16 16"><path d="M6.354 5.5H4a3 3 0 000 6h3a3 3 0 002.83-4H9c-.086.0-.17.01-.25.031A2 2 0 017 10.5H4a2 2 0 110-4h1.535c.218-.376.495-.714.82-1z"/><path d="M9 5.5a3 3 0 00-2.83 4h1.098A2 2 0 019 6.5h3a2 2 0 110 4h-1.535a4.02 4.02.0 01-.82 1H12a3 3 0 100-6H9z"/></svg></a></h2><p>The problem of <em>deploying</em> applications that leverage serverless infrastructures
+seems to be handled nicely by tools like the Serverless Framework CLI and
+Claudia.JS. While that can save us a bunch of time, given the issues outlined
+above, I believe that deployment is going to be a small effort of your
+serverless endeavours.</p><p>Based on this initial experience, my opinion is that the most important things
+to watch out for are function sizes (making sure they have the least amount of
+responsibilities) and dependencies (they can become a big PITA to get working in
+prod if they have to be compiled). The experience with FaaS (Function as a
+Service) seems to be similar to most PaaS environments like &ldquo;Heroku pre-Docker.&rdquo;
+Back in those days we didn&rsquo;t have much control over <a href=https://devcenter.heroku.com/articles/stack-packages>system packages installed
+in our Dynos</a>, and even
+these days we need to watch out for our <a href=https://devcenter.heroku.com/articles/slug-compiler#slug-size>slug
+sizes</a>.</p><p>Finally, my main recommendation to people trying out serverless architectures
+for the first time is to embrace eXtreme Programming&rsquo;s baby steps and don&rsquo;t go
+too far with &ldquo;Works in my machine.&rdquo; :)</p><hr><p><em>Many thanks to some fellow coworkers and Serenata de Amor core team members for
+reading drafts of this post and for giving me their feedback! A special thanks
+goes out to Aaron Moncivaiz for fixing my broken english :)</em></p><div class=related></div></div></div></section><section class=section><div class=container><aside><div id=disqus_thread></div></aside><div id=show_comments><a id=load_comments class="button is-link">Load comments</a></div><script type=text/javascript>var disqus_shortname="fgrehm",hash;function disqus(){var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src="//"+disqus_shortname+".disqus.com/embed.js",(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(e)}hash=window.location.hash.substr(1),hash.length>8&&hash.substring(0,8)==="comment-"?(disqus(),document.getElementById("show_comments").style.display="none"):document.getElementById("load_comments").onclick=function(){disqus(),document.getElementById("show_comments").style.display="none"}</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript rel=nofollow>comments powered by Disqus.</a></noscript></div></section><section class=section><div class="container has-text-centered"><p>&copy; <a href=https://github.com/fgrehm>Fabio Rehm</a> 2013-2022</p><p>Powered by <a href=https://gohugo.io/>Hugo</a> & <a href=https://github.com/ribice/kiss>Kiss</a>.</p></div></section><script async src="https://www.googletagmanager.com/gtag/js?id=G-Z78MGSF72P"></script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-Z78MGSF72P",{anonymize_ip:!1})}</script></body></html>
