@@ -4,7 +4,7 @@ title = 'fabiorehm.com'
 theme = 'kiss'
 copyright = "&copy; <a href=\"https://github.com/fgrehm\">Fabio Rehm</a> 2013-2022"
 googleAnalytics = "G-Z78MGSF72P"
-
+enableEmoji = true
 enableRobotsTXT = true
 paginate = 5 # Number of posts per page
 disqusShortname = "fgrehm"
@@ -47,3 +47,5 @@ disqusShortname = "fgrehm"
   rss = "index.xml" # Add this to show RSS button in social.
 [params.social.config]
   platforms = ["email", "github", "twitter", "codepen", "linkedin", "facebook", "instagram", "rss"]
+[params.assets]
+  customCSS = ["css/site.css"]

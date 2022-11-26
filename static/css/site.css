@@ -1,0 +1,10 @@
+details summary {
+  cursor: pointer;
+  display: list-item;
+  list-style-type: '→ ';
+  font-size: 110%;
+}
+
+details[open] summary {
+  list-style-type: '↴ ';
+}
