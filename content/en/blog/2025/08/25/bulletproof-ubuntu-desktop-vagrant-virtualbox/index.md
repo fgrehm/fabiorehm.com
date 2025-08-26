@@ -169,9 +169,9 @@ apt-mark manual gnome-session gnome-session-bin gnome-session-common \
     lightdm lightdm-gtk-greeter ubuntu-session xdg-desktop-portal-gnome
 
 # CRITICAL: Verify it worked - fail fast if it didn't
-protected_count=$(apt-mark showmanual | grep -E "(gnome-session|ubuntu-session|xdg-desktop-portal)" | wc -l)
-if [ "$protected_count" -lt 6 ]; then
-    echo "❌ MARKING FAILED! Only $protected_count/6 packages marked as manual"
+protected_count=$(apt-mark showmanual | grep -E "(gnome-session|ubuntu-session|xdg-desktop-portal|lightdm)" | wc -l)
+if [ "$protected_count" -lt 7 ]; then
+    echo "❌ MARKING FAILED! Only $protected_count/7 packages marked as manual"
     exit 1
 fi
 
@@ -299,9 +299,9 @@ EOF
     apt-mark manual gnome-session gnome-session-bin gnome-session-common lightdm lightdm-gtk-greeter ubuntu-session xdg-desktop-portal-gnome
 
     # Verify it worked
-    protected_count=$(apt-mark showmanual | grep -E "(gnome-session|ubuntu-session|xdg-desktop-portal)" | wc -l)
-    if [ "$protected_count" -lt 6 ]; then
-        echo "❌ MARKING FAILED! Only $protected_count/6 packages marked as manual"
+    protected_count=$(apt-mark showmanual | grep -E "(gnome-session|ubuntu-session|xdg-desktop-portal|lightdm)" | wc -l)
+    if [ "$protected_count" -lt 7 ]; then
+        echo "❌ MARKING FAILED! Only $protected_count/7 packages marked as manual"
         exit 1
     fi
 
