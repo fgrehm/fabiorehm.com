@@ -1,15 +1,15 @@
 baseURL = 'https://fabiorehm.com/'
 defaultContentLanguage = 'en'
 title = 'fabiorehm.com'
-theme = 'kiss'
-copyright = "&copy; <a href=\"https://github.com/fgrehm\">Fabio Rehm</a> 2013-2022"
-# googleAnalytics = "G-Z78MGSF72P" # deprecated - moved to services section
+theme = 'hugo-coder'
+copyright = "&copy; <a href=\"https://github.com/fgrehm\">Fabio Rehm</a> 2013-2025"
 enableEmoji = true
 enableRobotsTXT = true
-# paginate = 5 # Number of posts per page - DEPRECATED, use pagination.pagerSize
+languageCode = "en"
+
+# Modern Hugo pagination configuration
 [pagination]
   pagerSize = 5
-# disqusShortname = "fgrehm" # deprecated - moved to services section
 
 # https://gohugo.io/content-management/multilingual/
 [languages]
@@ -17,40 +17,6 @@ enableRobotsTXT = true
     contentDir = 'content/en'
     languageName = 'English'
     weight = 1
-  [languages.pt]
-    contentDir = 'content/pt'
-    languageName = 'Português'
-    weight = 2
-
-# https://github.com/ribice/kiss
-[params.rss]
-  authorName = 'Fábio Rehm'
-  authorEmail = 'ribice@gmail.com'
-[params.info]
-  # adsense = "" # Adsense ID (ID only, without ca-pub-)
-  enableSocial = true # Adds OpenGraph and Twitter cards
-  # homeTitle = "" # Title for home page
-  poweredby = true # Adds powered by hugo and kiss below Copyright
-  related = true # Includes related articles at the bottom of the article
-  codeCopy = true # Add copy button above code blocks
-  taxonomiesCount = true # Add taxonomies count
-[params.features]
-  disqusOnDemand = true  # Load Disqus comments on click
-  mathjax = false
-  katex = false
-[params.social]
-  twitter = "fgrehm"
-  github = "fgrehm"
-  email = "site@fabiorehm.com"
-  linkedin = "fgrehm"
-  # facebook = "???"
-  # instagram = "???"
-  # codepen = "???"
-  rss = "index.xml" # Add this to show RSS button in social.
-[params.social.config]
-  platforms = ["email", "github", "twitter", "codepen", "linkedin", "facebook", "instagram", "rss"]
-[params.assets]
-  customCSS = ["css/site.css"]
 
 # Modern Hugo services configuration
 [services]
@@ -61,6 +27,68 @@ enableRobotsTXT = true
 
 # Allow raw HTML in markdown (needed for older blog posts)
 [markup]
+  [markup.highlight]
+    noClasses = false
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
+
+# Hugo Coder theme parameters
+[params]
+  author = "Fabio Rehm"
+  description = "Rails developer, DevOps tinkerer, and open source contributor. Writing about practical solutions and tools that make development life easier."
+  keywords = "blog,developer,rails,devops,vagrant,docker,ruby"
+  info = ["Software Engineer"]
+  dateFormat = "January 2, 2006"
+  since = 2013
+  # Use Gravatar for avatar based on email
+  gravatar = "fgrehm@gmail.com"
+  colorScheme = "auto"
+  hideColorSchemeToggle = false
+  maxSeeAlsoItems = 5
+  customCSS = ["css/site.css"]
+
+# Social media links
+[[params.social]]
+  name = "GitHub"
+  icon = "fa-brands fa-github fa-2x"
+  weight = 1
+  url = "https://github.com/fgrehm"
+
+[[params.social]]
+  name = "LinkedIn"
+  icon = "fa-brands fa-linkedin fa-2x"
+  weight = 2
+  url = "https://linkedin.com/in/fgrehm"
+
+[[params.social]]
+  name = "Email"
+  icon = "fa-solid fa-envelope fa-2x"
+  weight = 3
+  url = "mailto:site@fabiorehm.com"
+
+[[params.social]]
+  name = "RSS"
+  icon = "fa-solid fa-rss fa-2x"
+  weight = 4
+  url = "https://fabiorehm.com/index.xml"
+  rel = "alternate"
+  type = "application/rss+xml"
+
+# English menu
+[[languages.en.menu.main]]
+  name = "Blog"
+  weight = 1
+  url = "blog/"
+
+[[languages.en.menu.main]]
+  name = "About"
+  weight = 2
+  url = "about/"
+
+# Taxonomies
+[taxonomies]
+  category = "categories"
+  series = "series"
+  tag = "tags"
+  author = "authors"
