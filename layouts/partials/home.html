@@ -1,0 +1,117 @@
+<section class="container centered">
+  <div class="about">
+    {{ partialCached "home/avatar.html" . }}
+    {{ partialCached "home/author.html" . }}
+    {{ partialCached "home/social.html" . }}
+  </div>
+
+  <!-- Recent blog posts -->
+  <div class="recent-posts">
+    <h3>Recent Posts</h3>
+    {{ $posts := where .Site.RegularPages "Section" "blog" }}
+    {{ range first 3 $posts }}
+      <div class="post-item">
+        <h4><a href="{{ .Permalink }}">{{ .Title }}</a></h4>
+        <time class="post-date">{{ .Date.Format .Site.Params.dateFormat }}</time>
+        {{ if .Description }}
+          <p>{{ .Description | truncate 120 }}</p>
+        {{ else }}
+          <p>{{ .Summary | truncate 100 }}</p>
+        {{ end }}
+      </div>
+    {{ end }}
+    <p><a href="{{ "/blog/" | relURL }}">View all posts →</a></p>
+  </div>
+</section>
+
+<style>
+/* Center the avatar and bylines */
+.about {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.recent-posts {
+  margin-top: 3rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+
+.recent-posts h3 {
+  margin-bottom: 2rem;
+  text-align: center;
+  font-size: 1.5rem;
+  color: var(--accent-color, #007acc);
+}
+
+.post-item {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color, #eee);
+}
+
+.post-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.post-item h4 {
+  margin: 0 0 0.75rem 0;
+  line-height: 1.3;
+}
+
+.post-item h4 a {
+  text-decoration: none;
+  color: var(--heading-color, inherit);
+  font-weight: 600;
+}
+
+.post-item h4 a:hover {
+  color: var(--accent-color, #007acc);
+  text-decoration: underline;
+}
+
+.post-date {
+  color: var(--text-light, #666);
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.post-item p {
+  margin: 0;
+  color: var(--text-color, #555);
+  line-height: 1.5;
+}
+
+.recent-posts > p:last-child {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.recent-posts > p:last-child a {
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--accent-color, #007acc);
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--accent-color, #007acc);
+  border-radius: 4px;
+  display: inline-block;
+  transition: all 0.2s ease;
+}
+
+.recent-posts > p:last-child a:hover {
+  background-color: var(--accent-color, #007acc);
+  color: var(--background-color, white);
+  text-decoration: none;
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .post-item {
+    border-bottom-color: #444;
+  }
+}
+</style>
