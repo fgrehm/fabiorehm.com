@@ -23,7 +23,7 @@ languageCode = "en"
   [services.disqus]
     shortname = "fgrehm"
   [services.googleAnalytics]
-    ID = "G-Z78MGSF72P"
+    ID = "G-3SYR4MH1JV"
 
 # Allow raw HTML in markdown (needed for older blog posts)
 [markup]
