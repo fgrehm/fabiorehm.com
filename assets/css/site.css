@@ -8,3 +8,50 @@ details summary {
 details[open] summary {
   list-style-type: '↴ ';
 }
+
+/* Mobile homepage fixes */
+@media only screen and (max-width: 768px) {
+  /* Fix excessive top padding and stack vertically on mobile */
+  .container.centered {
+    display: block !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    padding-top: 0.5rem !important;
+  }
+
+  /* Ensure profile section takes full width on mobile */
+  .container.centered .about {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-bottom: 2rem !important;
+    float: none !important;
+  }
+
+  /* Smaller avatar on mobile */
+  .container.centered .about img.avatar {
+    width: 12rem !important;
+    height: 12rem !important;
+  }
+
+  /* Smaller fonts for name and title on mobile */
+  .container.centered .about h1 {
+    font-size: 2.4rem !important;
+    margin-top: 1rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .container.centered .about h2 {
+    font-size: 1.6rem !important;
+    margin-top: 0.5rem !important;
+  }
+
+  /* Make recent posts full width on mobile */
+  .recent-posts {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-top: 2rem !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    float: none !important;
+  }
+}
