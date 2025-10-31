@@ -1,0 +1,18 @@
+{
+  "cleanupPeriodDays": 5,
+  "includeCoAuthoredBy": false,
+  "permissions": {
+    "allow": [
+      "Bash(hugo:*)",
+      "WebFetch(domain:github.com)",
+      "WebSearch",
+      "Bash(git log:*)"
+    ],
+    "deny": [],
+    "ask": [
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
+    ]
+  }
+}
+
