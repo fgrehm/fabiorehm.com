@@ -1,0 +1,33 @@
+{{ define "title" }}
+  {{ title (i18n (lower .Title)) | default .Title }} · {{ .Site.Title }}
+{{ end }}
+
+{{ define "content" }}
+  <section class="container list">
+    <header>
+      <h1 class="title">
+        <a class="title-link" href="{{ .Permalink | safeURL }}">
+          {{ title (i18n (lower .Title)) | default .Title }}
+        </a>
+      </h1>
+    </header>
+
+    <div style="background: #ffd700; padding: 1rem; margin-bottom: 2rem; border-radius: 4px; color: #000;">
+      <strong>⚠️ Development Only</strong> - These posts are in draft mode and not published.
+    </div>
+
+    {{ $drafts := where .Site.RegularPages "Section" "drafts" }}
+    {{ if $drafts }}
+      <ul>
+        {{ range $drafts }}
+          <li>
+            <span class="date">{{ .Date.Format "2006-01-02" }}</span>
+            <a class="title" href="{{ .Permalink }}">{{ .Title }}</a>
+          </li>
+        {{ end }}
+      </ul>
+    {{ else }}
+      <p>No draft posts yet.</p>
+    {{ end }}
+  </section>
+{{ end }}

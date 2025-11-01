@@ -17,9 +17,9 @@ Trigger when user wants to create a new blog post or says "new post", "write abo
    - What's the "why bother" for readers?
 
 2. **Create structure** (only after understanding angle)
-   - Directory: `content/posts/YYYY/MM/slug-from-title/`
+   - Directory: `content/en/drafts/slug-from-title/`
    - File: `index.md`
-   - Frontmatter with `draft: true`
+   - Frontmatter with current date and `draft: true`
    - Headers with `##` and bullet point guidance
    - NO content filling - just structure
 
@@ -32,7 +32,7 @@ Trigger when user wants to create a new blog post or says "new post", "write abo
 ```yaml
 ---
 title: "Post Title Here"
-date: YYYY-MM-DD
+date: YYYY-MM-DD  # Current date when scaffolding, update when publishing
 draft: true
 tags:
   - tag1
@@ -40,6 +40,8 @@ tags:
 description: "TODO(@fabio): Add one-line description for SEO"
 ---
 ```
+
+**Note**: Post stays in `/content/en/drafts/` until ready to publish. When publishing, move to `/content/en/blog/YYYY/MM/DD/slug/` and update date.
 
 ## Post Structure Patterns
 

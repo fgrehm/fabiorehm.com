@@ -19,6 +19,7 @@ TODO(@fabio): Write about the problem with the monolithic CLAUDE.md approach - w
 - Experiencing context limits on other projects (not blog specifically)
 - CLAUDE.md size contributes to more frequent context compression (larger = more tokens per message = more compression)
 - Side note: Been playing with status line monitoring for better visibility (see references)
+- TODO: Check out <https://github.com/sirmalloc/ccstatusline?tab=readme-ov-file>
 
 **Learning about Skills:**
 
@@ -161,6 +162,15 @@ TODO(@fabio): Where do you see this going? More skills? Different approach? Stil
 
 TODO(@fabio): Compare the refactored skills in this commit with the original skills Claude generated on claude.ai (available as zip download from that chat). Document any interesting differences in approach or structure.
 
+TODO(@fabio): Integrate insights from [Brian Casel's Skills video][brian-casel-skills-video]. Key notes by claude:
+
+- "Skills are opportunistic, slash commands are surgical" - Skills trade predictability for context efficiency
+- "Can't direct execute skills, just hope Claude uses them" - relies on intelligent discovery vs guaranteed execution
+- Skills excel at well-defined utility tasks that pop up unpredictably (your blog workflows fit this pattern perfectly)
+- **Agent-os uses "Standards" patterns, not Skills** - explains why agent-os Skills didn't work for them (different tradeoff)
+- Subagents have their own context window, Skills work on main context
+- Consider: Should you compare Skills vs Slash Commands vs Subagents? Or just note agent-os made different architectural choices?
+
 ## That's it
 
 TODO(@fabio): Wrap up with invitation for feedback and your usual sign-off.
@@ -171,5 +181,6 @@ TODO(@fabio): Wrap up with invitation for feedback and your usual sign-off.
 [agent-skills-deep-dive]: https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills
 [agent-os-skills]: https://github.com/buildermethods/agent-os/discussions/253#discussioncomment-14819381
 [commit-9839bf7]: https://github.com/fabiorehm/fabiorehm.com/commit/9839bf7ecf6b903d190fc033f102bcce3bfd0c2d
+[brian-casel-skills-video]: https://www.youtube.com/watch?v=Z0DB0kCfNOM
 
 TODO(@fabio): Get the <https://aitmpl.com/> link (page not loading) and add any other references as you write

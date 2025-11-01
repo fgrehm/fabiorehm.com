@@ -22,6 +22,18 @@
 - Don't assume what the conclusion should be
 - Don't remove the authentic voice in favor of "cleaner" writing
 
+## Content Workflow
+
+### Draft Posts
+- All new posts start in `/content/en/drafts/slug/`
+- Visible at `/drafts/` when running dev server
+- No date path required until publishing
+
+### Publishing
+- Move post from `/content/en/drafts/slug/` to `/content/en/blog/YYYY/MM/DD/slug/`
+- Update `date` field in frontmatter to publish date
+- Can remove `draft: true` from frontmatter (optional - location determines status)
+
 ## Skills
 
 All writing workflows and style guidelines live in `.claude/skills/` and load only when needed:
