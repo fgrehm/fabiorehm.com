@@ -22,6 +22,14 @@
 - Don't assume what the conclusion should be
 - Don't remove the authentic voice in favor of "cleaner" writing
 
+## Git Commit Guidelines
+
+For this blog project:
+- Skip scopes in commit messages (e.g., `feat: add drafts workflow` not `feat(blog): add drafts workflow`)
+- For infrastructure/code changes: `feat`, `fix`, `docs`, `refactor`, `chore`
+- For content changes: use plain descriptive messages without type prefix (e.g., `add post on devcontainers`, `update about page`)
+- Keep subject line clear and concise
+
 ## Content Workflow
 
 ### Draft Posts
