@@ -19,6 +19,19 @@ description: Review blog content for authentic voice and tone. Use when checking
 - Marketing speak
 - Phrases like "leverage", "utilize" instead of "use"
 
+## Title & Clickbait Check
+Watch for clickbait patterns in titles:
+- Excessive superlatives ("worst", "best", "ultimate")
+- Manufactured urgency or drama
+- Promising more than the content delivers
+- "You won't believe..." or similar hooks
+
+**Good titles:**
+- Honest about scope ("one of my bad habits" not "my worst habit")
+- Clear about what the post covers
+- Personal and specific
+- No artificial drama
+
 ## Style Guide
 For detailed voice guidelines, see `style-guide.md`
 
