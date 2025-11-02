@@ -114,6 +114,27 @@ The AI stops, asks about existing solutions, and suggests research before implem
 <!-- TODO(@fabio): Reflect on what this experiment shows -->
 The contrast is striking. Same model, same request, completely different behavior based on system prompt. This confirms the guardrails work - the AI will follow the instructions to pause and research first.
 
+### The Prompt in Practice
+
+Here's a real example of the detection guardrail catching me mid-tangent:
+
+![Claude challenging the "should I build this" impulse](claude-prompt-in-practice.png)
+
+I was working on a DevPod wrapper script and had the thought: "Should I generalize this into a standalone tool?"
+
+Instead of enthusiastically helping me build, Claude:
+- Analyzed whether it's actually worth extracting
+- Pointed out my current per-project solution works
+- Suggested lighter-weight alternatives (shell alias, feature request, copy-paste template)
+- Gave an honest "not now" with clear reasoning
+- Provided conditions for when to revisit ("if you're using DevPod for 5+ projects...")
+
+This is the **detection guardrail** working - catching the tangent after I'd already started, but before I invested hours in extraction that would add overhead for a nice-to-have.
+
+The key phrase: "Given your 'baby steps' philosophy and focus on shipping... I'd say: **not now**."
+
+That's what I need - an AI that challenges the impulse to over-engineer, not one that amplifies it.
+
 ## The Lesson
 
 <!-- TODO(@fabio): What you learned about yourself and AI-assisted development -->

@@ -125,6 +125,42 @@ CLAUDE.md now only contains collaboration essentials that affect every conversat
 
 Posts span multiple conversations. You start a draft, life happens, you come back days later. The resume skill helps restore context: what's done, what's TODO, what was decided in earlier chats. Without it, every session starts from scratch.
 
+**Third pass: Preventing generic content**
+
+After validating the worktree and DevPod posts were actually unique, realized we needed a skill to catch this earlier:
+
+- **blog-topic-research**: Validates topic uniqueness BEFORE scaffolding
+- Searches existing content (internal + external)
+- Identifies common angles already covered
+- Forces articulation of YOUR unique value/experience
+- Prevents "I think people should know about X" posts with no personal angle
+
+**The problem it solves:**
+
+Without this skill, you might invest hours writing a post only to discover:
+- It's already been covered extensively
+- You don't actually have unique experience to share
+- Your angle is generic summarization of others' work
+
+With the skill, you validate uniqueness upfront:
+- "Topic with generic tutorials" → Found basic coverage but you built automation nobody discusses → ✅ Unique angle
+- "Getting started with X" → Well-documented already, you have no specific struggles/discoveries → ❌ Skip or find different angle
+- "Popular framework Y" → Everyone covers the happy path, you hit edge cases and workarounds → ✅ Unique experience worth sharing
+
+**Integration point:**
+
+Runs BEFORE blog-scaffolding. The scaffolding skill then uses the validated unique angle to structure the post around YOUR experience, not generic advice.
+
+**Current skill lineup:**
+
+1. **blog-topic-research** - Pre-scaffolding validation
+2. **blog-scaffolding** - New post creation through conversation
+3. **blog-voice-review** - Authentic voice checking (includes style guide)
+4. **blog-proofreading** - Technical review (flow, links, formatting)
+5. **blog-fact-checking** - Claim verification against sources
+6. **blog-publishing** - Pre-publish validation checklist
+7. **blog-resume** - Context restoration across sessions
+
 ## How it's working so far
 
 TODO(@fabio): Share your actual experience. Has it been better? Worse? Different?

@@ -46,6 +46,7 @@ For this blog project:
 
 All writing workflows and style guidelines live in `.claude/skills/` and load only when needed:
 
+- **blog-topic-research**: Validate topic uniqueness and identify unique angles (run before scaffolding)
 - **blog-scaffolding**: Create new post structure through conversation
 - **blog-voice-review**: Check content for authentic voice (includes full style guide)
 - **blog-proofreading**: Technical review for flow, links, formatting

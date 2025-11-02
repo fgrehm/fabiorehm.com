@@ -2,7 +2,7 @@
 title: "DevPod: Using Devcontainers Without the IDE Lock-in"
 date: 2025-11-01
 draft: true
-description: "A terminal-first developer's journey with DevPod - SSH-based workflow, worktree management, and the honest reality of ditching VSCode/Cursor for devcontainers."
+description: "A terminal-first developer's journey with DevPod - SSH-based workflow, terminal multiplexing, and the honest reality of ditching VSCode/Cursor for devcontainers."
 tags:
   - devcontainers
   - terminal
@@ -10,7 +10,7 @@ tags:
   - docker
   - neovim
   - devpod
-  - git-worktrees
+  - zellij
 ---
 
 ## The Problem
@@ -70,7 +70,14 @@ devpod provider use docker
 # Configure context options
 devpod context set-options -o DOTFILES_URL=https://github.com/yourusername/dotfiles
 devpod context set-options -o EXIT_AFTER_TIMEOUT=false
+
+# Disable telemetry (enabled by default)
+devpod context set-options -o TELEMETRY=false
 ```
+
+**Note on telemetry:** DevPod sends usage data by default. If you prefer not to share telemetry, disable it with the command above. You can review all context options with `devpod context options`.
+
+**Note on dotfiles:** The `DOTFILES_URL` setting is global - it applies to ALL DevPod workspaces you create. When DevPod starts a new workspace, it clones your dotfiles repo and runs the installation script (specified by `DOTFILES_SCRIPT` option, defaults to `install.sh`). This means your shell config, aliases, and tools are consistent across every project. No per-project dotfiles setup needed.
 
 ### The Workspace Inference Problem
 
@@ -105,47 +112,27 @@ esac
 
 Now `bin/dpod up` just works.
 
-### Port Mapping & Config Mounts (Cross-Platform)
+### Config Mounts
 
-For worktree workflows with multiple branches running simultaneously, use port ranges (works on Linux, macOS, Windows):
+For DevPod, centralize your editor configs across all projects:
 
 ```yaml
 # .devcontainer/compose.devpod.yaml
 services:
   rails-app:
-    # Port ranges support main + up to 9 worktrees
-    ports:
-      - "3000-3009:3000-3009"   # Rails (main: 3000, worktrees: 3001-3009)
-      - "3036-3045:3036-3045"   # Vite  (main: 3036, worktrees: 3037-3045)
     volumes:
       - ~/.ssh:/home/vscode/.ssh
       - ~/.claude/CLAUDE.md:/home/vscode/.claude/CLAUDE.md
       - ~/.claude/settings.json:/home/vscode/.claude/settings.json
-      - ~/agent-os:/home/vscode/agent-os
       # Centralized configs shared across all DevPod projects
       - ../../devpod-data/nvim:/home/vscode/.config/nvim
       - ../../devpod-data/zellij:/home/vscode/.config/zellij
-  postgres-db:
-    ports:
-      - "5432:5432"
-  chrome:
-    ports:
-      - "4444:4444"
 ```
 
-**Port mapping approach:**
-- Cross-platform (works on Linux, macOS, Windows)
-- Main project: Rails on 3000, Vite on 3036
-- Worktrees: Rails 3001-3009, Vite 3037-3045
-- Max 9 concurrent worktrees (adjustable by expanding range)
-- `wtm new` enforces limit and shows error if range exhausted
-
-**Centralized configs:**
+**Benefits:**
 - One nvim/zellij setup for all DevPod projects
 - Configs persist outside any single project
-- No git worktree conflicts with bind-mounted directories
-
-**Note:** Initially tried `network_mode: host` (Linux-only, unlimited ports) but switched to port ranges for team compatibility.
+- No git conflicts with bind-mounted directories
 
 ## The Daily Workflow
 
@@ -177,113 +164,15 @@ bin/dev          # Rails on localhost:3000
 
 ### Git Worktrees for Parallel Development
 
-Built a worktree manager (`bin/wtm`) for working on multiple branches:
+One killer feature: DevPod's `../..:/workspaces` mount makes git worktrees persistent and accessible from both host and container.
 
-```bash
-bin/wtm new my-feature
-# Creates: /workspaces/my-app-worktrees/my-feature/
-# - Dedicated port (3001, 3002, etc.)
-# - Dedicated databases (dev + 3 parallel test DBs)
-# - Runs bin/setup automatically
-# - Ready in ~1 minute
+I built a worktree manager (`bin/wtm`) that handles:
+- Port assignment for parallel branches
+- Database isolation per branch
+- Branch-specific Claude Code context (via SessionStart hooks)
+- Automatic setup and cleanup
 
-bin/wtm list
-# Shows all worktrees with ports and databases
-
-bin/wtm cleanup my-feature
-# Removes worktree and drops databases
-```
-
-The worktree manager:
-- Auto-assigns unique ports
-- Creates isolated databases per branch
-- Copies credentials (not code - it's in git!)
-- Runs `bundle install`, `yarn install`, `db:setup`, and parallel test setup
-- Handles cleanup including all test databases
-
-**Key insight:** Worktrees are persistent! The devcontainer mounts `../..:/workspaces`, so worktrees survive container recreation.
-
-### Branch-Specific Context with Claude Code
-
-One powerful benefit of persistent worktrees: branch-specific context that survives container restarts.
-
-Created a SessionStart hook that automatically loads context for each branch:
-
-```bash
-# .claude/hooks/session-start-worktree-context.sh
-# Detects current branch and loads .claude/worktree-contexts/{branch}.md
-```
-
-Wire it up in `.claude/settings.json`:
-```json
-{
-  "hooks": {
-    "SessionStart": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash .claude/hooks/session-start-worktree-context.sh",
-            "timeout": 10
-          }
-        ]
-      }
-    ]
-  }
-}
-```
-
-**Workflow:**
-```bash
-# Create new worktree
-bin/wtm new my-feature
-
-# After worktree creation, you'll be prompted:
-# 📝 Claude Code Context Setup
-#
-# Would you like to create branch-specific context for Claude Code?
-#   [e] Edit template now (opens in $EDITOR)
-#   [s] Skip - use basic context only
-#
-# Choice [e/s]:
-
-# Choose 'e' for detailed features (opens template in editor)
-# Choose 's' for quick fixes (uses basic worktree context)
-```
-
-**What goes in the context file:**
-- Related ticket/issue number
-- Feature description and goals
-- Key files and components
-- Testing strategy
-- Local TODOs and blockers
-
-**Benefits:**
-- Interactive prompt during `wtm new` - easy to set up or skip
-- Claude knows what you're working on when you switch branches
-- No need to re-explain context after container restart
-- Keeps notes out of git (`.gitignore` excludes these files)
-- Skip context for quick fixes, use it for complex features
-- Template provides structure for consistency
-
-**Example context:**
-```markdown
-## Worktree Context
-
-**Related Issue:** #1234
-**Feature:** Add OAuth login support
-
-**Key Components:**
-- app/controllers/auth/oauth_controller.rb
-- app/services/auth/oauth/google.rb
-
-**Testing:**
-- [ ] Unit tests for OAuth service
-- [ ] Integration test for full flow
-- [ ] Manual test with Google OAuth
-```
-
-When you start Claude Code in that worktree, this context automatically loads. No more "what was I building here?"
+Details on the worktree workflow, port ranges, and Claude Code integration: **[Managing Parallel Git Branches in Docker with Worktrees](/drafts/git-worktrees-docker-parallel-development/)** (separate post - the pattern works beyond DevPod too)
 
 ## The Git Signing Saga
 
@@ -387,9 +276,7 @@ devpod up . --devcontainer-path .devcontainer-devpod
 
 Both read the same `.devcontainer.json` format. The only differences are mount points (centralized nvim/zellij) and port ranges (for parallel worktrees). Team never affected, terminal users opt-in.
 
-## The Setup Scripts
-
-### Environment Setup
+## The Setup Script
 
 Created `setup-devpod.sh` that handles:
 - Neovim v0.11.4 installation
@@ -400,49 +287,17 @@ Created `setup-devpod.sh` that handles:
 - Rails directories and credentials
 - ripgrep and fd for telescope
 
-Idempotent - safe to re-run.
-
-### Worktree Manager
-
-Built `bin/wtm` (bash-based, ~500 lines) with modular structure:
-```
-tools/wtm/
-├── wtm              # Main entry point
-├── commands/        # new, list, cleanup
-└── lib/             # common, worktree, database
-```
-
-Handles:
-- Port scanning and assignment
-- Database naming (supports parallel tests)
-- Credential copying
-- Container detection (skips setup if on host)
-- All database cleanup (including parallel test DBs)
-- Relative .git path fixing (worktrees work from both host and container)
+Idempotent - safe to re-run. Cursor does this automatically, but here you configure it yourself.
 
 ## Key Learnings
 
-**Simplified database configuration:**
-```yaml
-# config/database.yml
-development:
-  database: <%= ENV.fetch("DATABASE_NAME", "my_app") %>_development
-
-test:
-  database: <%= ENV.fetch("DATABASE_NAME", "my_app") %>_test<%= ENV['TEST_ENV_NUMBER'] %>
-```
-
-Single `DATABASE_NAME` env var drives both dev and test databases. Rails appends suffixes.
-
-**Port ranges enable cross-platform worktree workflows.** Supports Linux, macOS, and Windows with a reasonable limit (9 concurrent worktrees).
-
-**Worktrees + devcontainers = powerful:** The `../..:/workspaces` mount means worktrees are persistent and accessible from both host and container.
-
-**Relative .git paths:** Git worktrees create `.git` files with absolute paths (`/workspaces/...`) that only work inside containers. The `wtm new` command automatically converts these to relative paths (`../../project/.git/worktrees/branch`) so git works from both host and container.
-
 **Centralized configs:** Nvim and zellij configs live in `../../devpod-data/` (shared across all DevPod projects) rather than per-project bind mounts. Cleaner than duplicating configs or using `git update-index --skip-worktree`.
 
-**Team-friendly deployment:** DevPod supports multiple devcontainer configs. Instead of modifying `.devcontainer/` (disrupts Cursor/VSCode users), create `.devcontainer-devpod/` and use `devpod up . --devcontainer-path .devcontainer-devpod`. Team keeps default setup, DevPod users opt-in.
+**Team-friendly deployment:** DevPod supports multiple devcontainer configs. Instead of modifying `.devcontainer/` (disrupts Cursor/VSCode users), create `.devcontainer-devpod/` and use `devpod up . --devcontainer-path .devcontainer-devpod`. Team keeps default setup, terminal users opt-in.
+
+**SSH-based workflow matters:** Persistent shells, terminal multiplexers, and copy/paste all work naturally. DevPod feels like SSHing to a remote dev machine, not wrapping Docker exec.
+
+**Git worktrees benefit from persistence:** The `../..:/workspaces` mount makes worktrees survive container recreation. See the [worktree post](/drafts/git-worktrees-docker-parallel-development/) for the full pattern.
 
 ## What's Next
 
