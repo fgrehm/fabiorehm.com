@@ -61,8 +61,12 @@ Both read the same `.devcontainer.json` format. DevPod just prioritizes terminal
 ### Installation
 
 ```bash
-# Install DevPod
-brew install devpod
+# Install DevPod (Linux)
+curl -L -o devpod "https://github.com/loft-sh/devpod/releases/latest/download/devpod-linux-amd64" && \
+  sudo install -c -m 0755 devpod /usr/local/bin && \
+  rm -f devpod
+
+# macOS users: brew install devpod
 
 # Set default provider to Docker
 devpod provider use docker
@@ -100,17 +104,42 @@ case "${1:-up}" in
       devpod up . --id "$WORKSPACE_ID" --ide "$IDE"
     fi
     ;;
+  setup)
+    # Alias for up (setup runs via postCreateCommand)
+    if devpod list 2>/dev/null | grep -q "^$WORKSPACE_ID"; then
+      devpod up "$WORKSPACE_ID"
+    else
+      echo "→ Creating workspace '$WORKSPACE_ID' with IDE=$IDE..."
+      echo "  (setup runs automatically via postCreateCommand)"
+      devpod up . --id "$WORKSPACE_ID" --ide "$IDE"
+    fi
+    ;;
+  recreate)
+    # Rebuild container (setup runs automatically)
+    echo "→ Recreating workspace '$WORKSPACE_ID'..."
+    echo "  (setup runs automatically via postCreateCommand)"
+    devpod up "$WORKSPACE_ID" --recreate
+    ;;
   ssh)
-    ssh "$WORKSPACE_ID.devpod"
+    ssh "$WORKSPACE_ID.devpod" "$@"
     ;;
   stop)
     devpod stop "$WORKSPACE_ID"
     ;;
-  # ... other commands
+  delete)
+    devpod delete "$WORKSPACE_ID"
+    ;;
+  status)
+    devpod list | grep -E "^NAME|^$WORKSPACE_ID"
+    ;;
 esac
 ```
 
-Now `bin/dpod up` just works.
+**Key features:**
+- `setup` command creates workspace (setup runs via postCreateCommand)
+- `recreate` rebuilds container and re-runs setup automatically
+- `ssh` passes through extra arguments
+- No manual setup script calls needed
 
 ### Config Mounts
 
@@ -133,6 +162,24 @@ services:
 - One nvim/zellij setup for all DevPod projects
 - Configs persist outside any single project
 - No git conflicts with bind-mounted directories
+
+**Alternative: Per-project configs**
+
+For project-specific customizations, mount to `tmp/` (gitignored):
+
+```yaml
+# .devcontainer/compose.yaml
+services:
+  rails-app:
+    volumes:
+      - ../:/workspaces/my-app:cached
+      - ../tmp/nvim-config:/home/vscode/.config/nvim:cached
+      - ../tmp/shell-history:/home/vscode/.shell-history:cached
+```
+
+**Trade-offs:**
+- **Centralized** (`~/../../devpod-data/`): One config for all projects, easier to maintain
+- **Per-project** (`tmp/`): Project-specific customizations, configs travel with repo (though gitignored)
 
 ## The Daily Workflow
 
@@ -186,20 +233,24 @@ error Error receiving git ssh signature: %!w(*status.Error=...)
 1. ❌ Was using private key path instead of public key
 2. ❌ DevPod injects a broken `gpg.ssh.program` wrapper
 
-**The fix:**
+**The fix (add to `.devcontainer/setup.sh`):**
 ```bash
-# Remove DevPod's wrapper
-git config --global --unset gpg.ssh.program
+# CRITICAL: Remove DevPod's broken SSH signature wrapper
+# DevPod sets gpg.ssh.program to a wrapper that breaks signing
+echo "Configuring Git..."
+git config --global --unset gpg.ssh.program 2>/dev/null || true
+git config --local --unset gpg.ssh.program 2>/dev/null || true
+git config --system --unset gpg.ssh.program 2>/dev/null || true
 
-# Use PUBLIC key (not private)
+# Use PUBLIC key (not private) - git finds the private key automatically
 git config --global user.signingkey ~/.ssh/id_ed25519-sign.pub
 git config --global gpg.format ssh
 git config --global commit.gpgsign true
 ```
 
-**But:** DevPod's agent recreates the broken wrapper on every SSH login. Current workaround: manually unset it each session.
+Put this in your setup script so it runs automatically on container creation via `postCreateCommand`. The aggressive unset commands handle all git config levels (global, local, system).
 
-This is friction Cursor doesn't have - it just syncs your host gitconfig and everything works.
+**Status:** ✅ This fixes the issue permanently. No manual intervention needed each session.
 
 ## What's Good
 
@@ -217,8 +268,6 @@ This is friction Cursor doesn't have - it just syncs your host gitconfig and eve
 
 ## What's Rough
 
-**Git signing:** Broken by DevPod's wrapper. Requires manual fix each session. Cursor "just works."
-
 **Port forwarding errors:** Harmless but loud on disconnect:
 ```
 error Error port forwarding 3000: accept tcp 127.0.0.1:3000: use of closed network connection
@@ -235,11 +284,11 @@ You learn to ignore them.
 
 **Would I use this for daily work?**
 
-Yes, with caveats:
+Yes:
 - The worktree workflow is excellent for parallel feature development
 - Terminal multiplexing (zellij) is better than IDE panels
 - Speed and control are worth the setup friction
-- But git signing needs fixing (might file a DevPod issue)
+- Git signing works reliably with the setup script fix
 
 **Would I recommend it?**
 
@@ -278,7 +327,7 @@ Both read the same `.devcontainer.json` format. The only differences are mount p
 
 ## The Setup Script
 
-Created `setup-devpod.sh` that handles:
+Created `.devcontainer/setup.sh` that handles:
 - Neovim v0.11.4 installation
 - LazyVim with Slim syntax support
 - Zellij terminal multiplexer
@@ -288,6 +337,19 @@ Created `setup-devpod.sh` that handles:
 - ripgrep and fd for telescope
 
 Idempotent - safe to re-run. Cursor does this automatically, but here you configure it yourself.
+
+## Automating Setup with postCreateCommand
+
+Instead of manually running the setup script, use devcontainer.json's `postCreateCommand`:
+
+```json
+{
+  "name": "my-app",
+  "postCreateCommand": ".devcontainer/setup.sh && bin/setup"
+}
+```
+
+DevPod (and VSCode/Cursor) automatically runs this after container creation. No need for manual setup script calls in your wrapper - it just happens when you run `devpod up` or `bin/dpod recreate`.
 
 ## Key Learnings
 
@@ -300,8 +362,6 @@ Idempotent - safe to re-run. Cursor does this automatically, but here you config
 **Git worktrees benefit from persistence:** The `../..:/workspaces` mount makes worktrees survive container recreation. See the [worktree post](/drafts/git-worktrees-docker-parallel-development/) for the full pattern.
 
 ## What's Next
-
-**Fix git signing:** Either solve DevPod's wrapper issue or file an upstream bug.
 
 **Test full-day productivity:** How does LSP performance feel with Ruby/TypeScript? Any hidden friction points?
 
