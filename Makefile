@@ -1,2 +1,2 @@
 dev:
-	hugo server -D
+	bin/start

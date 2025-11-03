@@ -8,6 +8,7 @@
 set -e
 
 PROJECT_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+BIN_DIR="$(cd "$(dirname "$0")" && pwd)"
 cd "$PROJECT_ROOT"
 
 # Colors for output
@@ -58,7 +59,7 @@ echo -e "${GREEN}[2/2]${NC} Starting drafts auto-commit loop (every 30 minutes).
     while true; do
         sleep 1800  # 30 minutes
         echo -e "${YELLOW}[$(date +%H:%M:%S)]${NC} Running drafts auto-commit..."
-        bin/drafts-autocommit
+        "$BIN_DIR/drafts-autocommit"
     done
 ) &
 AUTOCOMMIT_PID=$!

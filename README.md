@@ -34,7 +34,7 @@ Drafts are visible at <http://localhost:1313/drafts/> when running the dev serve
 Start the development server with auto-commit for drafts:
 
 ```bash
-./start
+make dev
 ```
 
 This starts:
@@ -48,8 +48,6 @@ bin/drafts-autocommit
 
 **Alternative (Hugo only, no auto-commit):**
 ```bash
-make dev
-# or
 hugo server -D
 ```
 
