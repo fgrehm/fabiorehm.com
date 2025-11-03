@@ -1,0 +1,82 @@
+#!/bin/bash
+#
+# Start blog development environment
+# - Hugo server (localhost:1313)
+# - Auto-commit loop for drafts (every 30 minutes)
+#
+
+set -e
+
+PROJECT_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$PROJECT_ROOT"
+
+# Colors for output
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+
+# PIDs for cleanup
+HUGO_PID=""
+AUTOCOMMIT_PID=""
+
+# Cleanup on exit
+cleanup() {
+    echo ""
+    echo -e "${YELLOW}Shutting down services...${NC}"
+
+    if [ -n "$HUGO_PID" ]; then
+        echo "  Stopping Hugo server (PID $HUGO_PID)"
+        kill $HUGO_PID 2>/dev/null || true
+    fi
+
+    if [ -n "$AUTOCOMMIT_PID" ]; then
+        echo "  Stopping auto-commit loop (PID $AUTOCOMMIT_PID)"
+        kill $AUTOCOMMIT_PID 2>/dev/null || true
+    fi
+
+    echo -e "${GREEN}✓ All services stopped${NC}"
+}
+
+trap cleanup EXIT INT TERM
+
+# Banner
+echo "================================================"
+echo "🚀 Starting fabiorehm.com dev environment"
+echo "================================================"
+echo ""
+
+# 1. Start Hugo server
+echo -e "${GREEN}[1/2]${NC} Starting Hugo server..."
+hugo server -D &
+HUGO_PID=$!
+echo "  ✓ Hugo running on http://localhost:1313 (PID $HUGO_PID)"
+
+# 2. Start auto-commit loop for drafts
+echo -e "${GREEN}[2/2]${NC} Starting drafts auto-commit loop (every 30 minutes)..."
+(
+    while true; do
+        sleep 1800  # 30 minutes
+        echo -e "${YELLOW}[$(date +%H:%M:%S)]${NC} Running drafts auto-commit..."
+        bin/drafts-autocommit
+    done
+) &
+AUTOCOMMIT_PID=$!
+echo "  ✓ Auto-commit scheduled (PID $AUTOCOMMIT_PID)"
+
+echo ""
+echo "================================================"
+echo -e "${GREEN}✓ All services running${NC}"
+echo "================================================"
+echo ""
+echo "  🏠 Blog:          http://localhost:1313/"
+echo "  📝 Drafts:        http://localhost:1313/drafts/"
+echo ""
+echo "  Auto-commit: Every 30 minutes"
+echo "  Manual commit: bin/drafts-autocommit"
+echo ""
+echo "  Press Ctrl+C to stop all services"
+echo ""
+
+# Wait for any process to exit
+wait

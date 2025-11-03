@@ -14,17 +14,44 @@ sudo snap install hugo
 
 Alternative installation methods: <https://gohugo.io/installation/>
 
+### Content Structure
+
+This blog uses a dual-repository setup:
+
+- **Main repo (public):** Site structure, published posts, configuration
+- **Drafts repo (private):** Located at `content/en/drafts/` (nested git repo, gitignored)
+
+To set up the drafts repo:
+
+```bash
+git clone git@github.com:fgrehm/blog-drafts.git content/en/drafts
+```
+
+Drafts are visible at <http://localhost:1313/drafts/> when running the dev server.
+
 ### Local Development
 
-Start the development server:
+Start the development server with auto-commit for drafts:
 
+```bash
+./start
+```
+
+This starts:
+- Hugo server at <http://localhost:1313>
+- Auto-commit loop for drafts (every 30 minutes)
+
+**Manual draft commit:**
+```bash
+bin/drafts-autocommit
+```
+
+**Alternative (Hugo only, no auto-commit):**
 ```bash
 make dev
 # or
 hugo server -D
 ```
-
-The site will be available at <http://localhost:1313>
 
 ### Building
 

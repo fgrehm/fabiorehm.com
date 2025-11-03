@@ -1,0 +1,30 @@
+#!/bin/bash
+#
+# Auto-commit and push draft changes
+# Run this periodically to checkpoint your draft posts
+#
+
+DRAFTS_DIR="content/en/drafts"
+
+cd "$DRAFTS_DIR" || exit 1
+
+# Check if there are any changes
+if ! git diff --quiet || ! git diff --cached --quiet; then
+    # Stage all changes
+    git add -A
+
+    # Create commit with timestamp
+    TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
+    git commit -m "autocommit: drafts snapshot @ $TIMESTAMP
+
+Changes since last commit:
+$(git diff HEAD --stat 2>/dev/null | head -20)
+"
+
+    # Push to remote
+    git push origin main 2>&1 | sed 's/^/  /'
+
+    echo "✓ Drafts committed and pushed at $TIMESTAMP"
+else
+    echo "• No draft changes to commit"
+fi
