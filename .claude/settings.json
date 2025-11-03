@@ -10,9 +10,8 @@
     ],
     "deny": [],
     "ask": [
-      "Bash(git add:*)",
+      "Bash(git add -A:*)",
       "Bash(git commit:*)"
     ]
   }
 }
-
