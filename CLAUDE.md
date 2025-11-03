@@ -30,6 +30,30 @@ For this blog project:
 - For content changes: use plain descriptive messages without type prefix (e.g., `add post on devcontainers`, `update about page`)
 - Keep subject line clear and concise
 
+## Dual-Repo Setup
+
+This blog uses two separate git repositories:
+
+**Main repo (fabiorehm/fabiorehm.com - public):**
+- Hugo site structure, theme, configuration
+- Published blog posts in `/content/en/blog/`
+- Layouts, assets, etc.
+- Git commands: `git add`, `git commit`, `git push` (default, from project root)
+
+**Drafts repo (fgrehm/blog-drafts - private):**
+- Located at `/content/en/drafts/` (nested git repo, gitignored by main repo)
+- All draft posts and `_index.md`
+- Git commands: `git -C content/en/drafts add/commit/push`
+
+**When working on drafts:**
+- Read/write files normally: `content/en/drafts/post-name/index.md`
+- Commit to drafts repo: `git -C content/en/drafts commit -m "update post"`
+- Hugo serves drafts at `/drafts/` in dev mode
+
+**When publishing:**
+- Move post from drafts to blog with date path
+- Commit the move in BOTH repos (removal in drafts, addition in main)
+
 ## Content Workflow
 
 ### Draft Posts
