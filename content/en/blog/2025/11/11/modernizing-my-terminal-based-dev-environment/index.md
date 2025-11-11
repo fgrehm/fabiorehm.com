@@ -25,7 +25,7 @@ When my current team adopted devcontainers, I ended up moving to Cursor because 
 
 I recently discovered DevPod and realized it solved my problem: SSH-based devcontainers without IDE lock-in. I could return to neovim, move to zellij (from tmux), and use my terminal tools while keeping the team's devcontainer benefits. Claude Code, which I was already using in Cursor's terminal, now works even better in a real terminal setup.
 
-This is me scratching my own itch again - the latest "evolutions" of a 10+ year journey improving my own virtualized dev environments, this time building on top of other people's tooling instead of building my own :)
+This is me scratching my own itch again - the latest evolution of a 10+ year journey improving my own virtualized dev environments, this time building on top of other people's tooling instead of building my own :)
 
 ## Who This Is For
 
@@ -44,7 +44,7 @@ This is me scratching my own itch again - the latest "evolutions" of a 10+ year 
 
 ## The Series
 
-### Part 1: [DevPod: SSH-Based Devcontainers Without IDE Lock-in](/drafts/devpod-ssh-devcontainers/)
+### Part 1: [DevPod: SSH-Based Devcontainers Without IDE Lock-in](/blog/2025/11/11/devpod-ssh-devcontainers/)
 
 How to use DevPod to SSH into devcontainers instead of opening them in VSCode/Cursor. Covers installation, wrapper scripts, config persistence, git signing fixes, and team adoption (dual-setup approach so you don't disrupt teammates).
 

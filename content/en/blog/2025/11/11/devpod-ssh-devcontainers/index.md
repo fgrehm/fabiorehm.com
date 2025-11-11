@@ -39,7 +39,7 @@ The workflow goes like:
 
 1. `devpod up` - creates or starts your workspace with your desired IDE (or `--ide none` in my case)
 2. `ssh workspace-name.devpod` - SSH into the workspace
-3. Use your terminal tools (nvim, zellij, whatever) to hack away and GSD
+3. Use your terminal tools (nvim, zellij, whatever) to hack away and [GSD](https://www.urbandictionary.com/define.php?term=GSD)
 
 If you are more of a GUI person, you can also use their [desktop app](https://devpod.sh/docs/getting-started/update) to manage containers / workspaces:
 
@@ -65,7 +65,7 @@ devcontainer exec --workspace-folder . bash
 
 - **No SSH support** - must wrap every command in `devcontainer exec`
 - **No persistent shell** - each exec is a new process
-- **No stop/delete commands** - can't manage workspace lifecycle (marked as TODO [per their README](https://github.com/devcontainers/cli/blame/ac2d5b7aeaf0eff69c25ba923609013b28ed67c2/README.md#L20-L21) for like 3+yrs)
+- **No stop/delete commands** - can't manage workspace lifecycle (marked as TODO [per their README](https://github.com/devcontainers/cli/blame/ac2d5b7aeaf0eff69c25ba923609013b28ed67c2/README.md#L20-L21) for over 3 years)
 - **Node.js dependency** - requires npm/node runtime
 
 **DevPod difference:**
@@ -80,7 +80,7 @@ Both read the same `.devcontainer.json` format, but based on my limited experien
 
 ## Installation
 
-_Please refer to their [official documentation](https://devpod.sh/docs/getting-started/install#install-devpod-cli) for up to date instructions in case the ones below dont work for you._
+_Please refer to their [official documentation](https://devpod.sh/docs/getting-started/install#install-devpod-cli) for up to date instructions in case the ones below don't work for you._
 
 ```bash
 # Install DevPod (Linux)
@@ -138,7 +138,7 @@ I set up this "new way of using devcontainers" at work alongside our existing Cu
 .devcontainer-devpod/    # DevPod setup - OPT-IN
 ```
 
-I know that the [devcontainer spec allows placing `devcontainer.json` in subfolders](https://containers.dev/implementors/spec/#devcontainerjson), but VSCode/Cursor will prompt users to select which config to use if multiple exist and might disrupt existing environments. The custom `.devcontainer-devpod/` path avoids this entirely - IDEs won't recognize it and will just continue using `.devcontainer/` as usual. "Terminal-based developers" like me can opt into DevPod with the custom script I mentioned above using `dpod up`.
+I know that the [devcontainer spec allows placing `devcontainer.json` in subfolders](https://containers.dev/implementors/spec/#devcontainerjson), but VSCode/Cursor will prompt users to select which config to use if multiple exist and might disrupt existing environments. The custom `.devcontainer-devpod/` path avoids this entirely - IDEs won't recognize it and will just continue using `.devcontainer/` as usual. "Terminal-based developers" like me can opt into DevPod with a custom wrapper script (shown below) using `dpod up`.
 
 For those interested in the full devcontainer.json capabilities, check out the [complete JSON reference](https://containers.dev/implementors/json_reference/).
 
@@ -150,7 +150,7 @@ Now that you understand the dual-config approach, let me walk through the specif
 
 ### Workspace "Stickiness"
 
-Providing all of the `devpod` paramters for every interaction gets old fast, to me it'd mean something like this to bring a workspace up for my project at work:
+Providing all of the `devpod` parameters for every interaction gets old fast, to me it'd mean something like this to bring a workspace up for my project at work:
 
 ```bash
 devpod up . \
@@ -424,7 +424,7 @@ After a week of experimentation and setting this up at work, I'm ready to use it
 
 ### Would I recommend it?
 
-- For "terminal-based developers": Absolutely try it. You'll appreciate the SSH-based workflow, specially if you, like me, recently switched to a ~~click based~~ "more modern IDE" for whatever reason.
+- For "terminal-based developers": Absolutely try it. You'll appreciate the SSH-based workflow, especially if you, like me, recently switched to a ~~click based~~ "more modern IDE" for whatever reason.
 - For happy VSCode/Cursor users: Probably not worth switching. The IDE integration works well for devcontainers.
 
 ---
