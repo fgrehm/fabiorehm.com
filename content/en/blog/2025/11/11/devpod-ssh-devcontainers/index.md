@@ -390,6 +390,57 @@ git cat-file commit HEAD
 
 **Note on git config sync:** Much like VSCode's Remote Containers, DevPod automatically syncs your git configuration from the host into the container (including `user.name`, `user.email`, `user.signingkey`, etc.). This is convenient but explains why the broken wrapper appears - DevPod's trying to be helpful by configuring signing, but their implementation is broken. The workaround above removes their wrapper while keeping your signing config intact.
 
+## Port Forwarding: Choose Your Approach
+
+While setting up another project with DevPod, I noticed these errors during `devpod up`:
+
+```
+info Error port forwarding 3000: listen tcp 127.0.0.1:3000: bind: address already in use
+info Error port forwarding 35729: accept tcp 127.0.0.1:35729: use of closed network connection
+```
+
+The same errors appeared when running `bin/dpod ssh`. Things worked fine - the app was accessible on port 3000 - but the errors were noisy and confusing.
+
+### The Problem
+
+The conflict came from defining ports in **two places**:
+
+1. **Docker Compose** (`compose.yaml`): Native Docker port mapping (`3000:3000`)
+2. **devcontainer.json**: SSH-based port forwarding (`"forwardPorts": [3000]`)
+
+These are different mechanisms:
+
+- **`ports` in compose.yaml**: Docker's native port mapping. Works immediately when the container starts, no SSH session required.
+- **`forwardPorts` in devcontainer.json**: Part of the [devcontainer spec](https://containers.dev/implementors/json_reference/#general-properties). DevPod implements this using SSH port forwarding (like `ssh -L 3000:localhost:3000`), which requires an active SSH connection.
+
+When both are configured, Docker binds the port first. Then when DevPod establishes the SSH connection, it tries to forward the same port and gets "address already in use" errors.
+
+### The Solution
+
+**For terminal-based workflows**: Remove `forwardPorts` from `devcontainer.json` and rely only on Docker Compose's `ports` mapping.
+
+```yaml
+# .devcontainer-devpod/compose.yaml
+services:
+  rails-app:
+    ports:
+      - "3000:3000"  # Native Docker port mapping
+```
+
+```json
+// .devcontainer-devpod/devcontainer.json
+{
+  "name": "my-app",
+  // No forwardPorts needed for terminal workflow
+}
+```
+
+**Why this works for terminal users:** You're not maintaining a persistent SSH session - you SSH in when needed, do your work, and disconnect. Docker's native port mapping is active regardless of SSH connections, making it more suitable for this workflow.
+
+**Why VSCode users do it differently:** IDEs typically use `forwardPorts` *instead of* compose ports because they maintain persistent SSH connections and need this for remote scenarios (like Codespaces) where Docker's native port mapping won't work from your local browser.
+
+**Related DevPod issues:** The errors are somewhat harmless but noisy - tracked in [#793](https://github.com/loft-sh/devpod/issues/793). The need for active SSH sessions with `forwardPorts` is explained in [#871](https://github.com/loft-sh/devpod/issues/871).
+
 ## Summing up
 
 The main thing here is that DevPod is letting me regain control over my development environment and letting me get back to neovim. I'm already used to the SSH workflow using terminal multiplexers and am pretty comfortable with that. The downside is that everything requires explicit configuration and things are "less magical", but I personally see that as an opportunity to learn about "new stuff".
