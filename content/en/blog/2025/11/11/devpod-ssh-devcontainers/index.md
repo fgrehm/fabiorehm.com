@@ -257,68 +257,34 @@ fi
 
 This way, your Claude Code authentication (already in `~/.claude/.credentials.json`) and config files both survive container recreation.
 
-<!--
-TODO(@fabio): Gem caching needs more work, commenting out for now
+### Speeding Up Bundle Install
 
-**Optional: Cache gems across recreations**
+By default, `bundle install` checks rubygems.org even when gems are already in `vendor/cache`. Since the workspace mount includes `vendor/cache` from your host, you can skip network calls entirely with the `--local` flag.
 
-If you're using mise to manage Ruby versions and `bin/setup` installs gems at runtime (via `postCreateCommand`), gems get reinstalled on every container recreation. You can persist them with symlinks.
-
-First, add the bundle cache to your compose volumes:
-
-```yaml
-# .devcontainer-devpod/compose.yaml
-services:
-  rails-app:
-    volumes:
-      - ../..:/workspaces:cached
-      - ../../devpod-data/ssh:/home/vscode/.ssh
-      - ../../devpod-data/nvim:/home/vscode/.config/nvim
-      - ../../devpod-data/zellij:/home/vscode/.config/zellij
-      - ../../devpod-data/claude:/home/vscode/.claude
-      - ../../devpod-data/bundle:/home/vscode/.bundle-cache  # Add this
+In `bin/setup`, replace:
+```ruby
+system('bundle check') || system!('bundle install')
 ```
 
-Then in your setup script, symlink the gem cache:
-
-```bash
-# In .devcontainer-devpod/setup.sh (before bin/setup runs)
-
-# Fix permissions if Docker Compose created the directory as root
-sudo chown -R vscode:vscode ~/.bundle-cache 2>/dev/null || true
-
-# Get Ruby version from mise
-RUBY_VERSION=$(~/.local/bin/mise current ruby 2>/dev/null || echo "")
-if [ -z "$RUBY_VERSION" ]; then
-  echo "Warning: Could not detect Ruby version, skipping gem cache setup"
-else
-  # Create versioned cache directory
-  BUNDLE_CACHE="/home/vscode/.bundle-cache/${RUBY_VERSION}"
-  mkdir -p "$BUNDLE_CACHE"
-
-  # Get gem directory from Ruby (need to activate mise first)
-  eval "$(~/.local/bin/mise activate bash)"
-  GEM_DIR=$(gem environment gemdir 2>/dev/null)
-
-  if [ -n "$GEM_DIR" ] && [ ! -L "$GEM_DIR" ]; then
-    # Move existing gems to cache if they exist (first run)
-    if [ -d "$GEM_DIR" ] && [ "$(ls -A "$GEM_DIR")" ]; then
-      cp -r "$GEM_DIR"/* "$BUNDLE_CACHE"/ 2>/dev/null || true
-      rm -rf "$GEM_DIR"
-    fi
-    mkdir -p "$(dirname "$GEM_DIR")"
-    ln -s "$BUNDLE_CACHE" "$GEM_DIR"
-  fi
-fi
+With a local-first approach that falls back to network when needed:
+```ruby
+unless system('bundle check')
+  # Try local first (fast for rebuilds), fall back to network if missing gems
+  system('bundle install --local') || system!('bundle install')
+  system!('bundle cache')
+end
 ```
 
-**Benefits:**
-- Gems persist across recreations for the same Ruby version
-- Changing Ruby versions creates a new cache automatically (no conflicts)
-- Significantly faster container rebuilds
+**How it works:**
+- **On rebuild**: Uses `--local`, installs from `vendor/cache` without hitting rubygems.org
+- **After Gemfile changes**: Falls back to network install, then updates `vendor/cache`
+- **No manual intervention**: The script handles both cases automatically
+
+This makes container recreations significantly faster since bundler doesn't need to check gem versions against the remote registry.
+
+**Platform compatibility note:** This approach works well for devcontainer workflows because `bundle install` runs inside the container (Linux), not on your host. Even if team members use different host platforms (macOS/Linux), `vendor/cache` gets populated with Linux-compatible gems since bundler runs in the container. Everyone using the same devcontainer means everyone gets the same platform-specific gems.
 
 **Note:** `node_modules` already persist automatically since they're in your workspace directory (`./node_modules`), which is already mounted.
--->
 
 ### The Setup Script
 
