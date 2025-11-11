@@ -275,7 +275,7 @@ services:
       - ../../devpod-data/nvim:/home/vscode/.config/nvim
       - ../../devpod-data/zellij:/home/vscode/.config/zellij
       - ../../devpod-data/claude:/home/vscode/.claude
-      - ../../devpod-data/bundle:/workspaces/devpod-data/bundle  # Add this
+      - ../../devpod-data/bundle:/home/vscode/.bundle-cache  # Add this
 ```
 
 Then in your setup script, symlink the gem cache:
@@ -283,18 +283,24 @@ Then in your setup script, symlink the gem cache:
 ```bash
 # In .devcontainer-devpod/setup.sh (before bin/setup runs)
 
+# Fix permissions if Docker Compose created the directory as root
+sudo chown -R vscode:vscode ~/.bundle-cache 2>/dev/null || true
+
 # Get Ruby version from mise
 RUBY_VERSION=$(mise current ruby | awk '{print $2}')
 
 # Create versioned cache directory
-BUNDLE_CACHE="/workspaces/devpod-data/bundle/${RUBY_VERSION}"
+BUNDLE_CACHE="/home/vscode/.bundle-cache/${RUBY_VERSION}"
 mkdir -p "$BUNDLE_CACHE"
 
 # Symlink mise's gem location to persisted cache
 GEM_HOME=$(mise env | grep GEM_HOME | cut -d= -f2)
 if [ -n "$GEM_HOME" ] && [ ! -L "$GEM_HOME" ]; then
-  # Back up if gems already exist (first run)
-  [ -d "$GEM_HOME" ] && mv "$GEM_HOME" "$GEM_HOME.bak"
+  # Move existing gems to cache if they exist (first run)
+  if [ -d "$GEM_HOME" ] && [ "$(ls -A "$GEM_HOME")" ]; then
+    cp -r "$GEM_HOME"/* "$BUNDLE_CACHE"/ 2>/dev/null || true
+    rm -rf "$GEM_HOME"
+  fi
   ln -s "$BUNDLE_CACHE" "$GEM_HOME"
 fi
 ```
