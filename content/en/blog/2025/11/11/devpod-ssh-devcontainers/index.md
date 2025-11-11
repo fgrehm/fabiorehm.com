@@ -257,8 +257,6 @@ fi
 
 This way, your Claude Code authentication (already in `~/.claude/.credentials.json`) and config files both survive container recreation.
 
-`TODO(@fabio): Test this gem caching approach before publishing`
-
 **Optional: Cache gems across recreations**
 
 If you're using mise to manage Ruby versions and `bin/setup` installs gems at runtime (via `postCreateCommand`), gems get reinstalled on every container recreation. You can persist them with symlinks.
@@ -287,21 +285,27 @@ Then in your setup script, symlink the gem cache:
 sudo chown -R vscode:vscode ~/.bundle-cache 2>/dev/null || true
 
 # Get Ruby version from mise
-RUBY_VERSION=$(mise current ruby | awk '{print $2}')
+RUBY_VERSION=$(~/.local/bin/mise current ruby 2>/dev/null || echo "")
+if [ -z "$RUBY_VERSION" ]; then
+  echo "Warning: Could not detect Ruby version, skipping gem cache setup"
+else
+  # Create versioned cache directory
+  BUNDLE_CACHE="/home/vscode/.bundle-cache/${RUBY_VERSION}"
+  mkdir -p "$BUNDLE_CACHE"
 
-# Create versioned cache directory
-BUNDLE_CACHE="/home/vscode/.bundle-cache/${RUBY_VERSION}"
-mkdir -p "$BUNDLE_CACHE"
+  # Get gem directory from Ruby (need to activate mise first)
+  eval "$(~/.local/bin/mise activate bash)"
+  GEM_DIR=$(gem environment gemdir 2>/dev/null)
 
-# Symlink mise's gem location to persisted cache
-GEM_HOME=$(mise env | grep GEM_HOME | cut -d= -f2)
-if [ -n "$GEM_HOME" ] && [ ! -L "$GEM_HOME" ]; then
-  # Move existing gems to cache if they exist (first run)
-  if [ -d "$GEM_HOME" ] && [ "$(ls -A "$GEM_HOME")" ]; then
-    cp -r "$GEM_HOME"/* "$BUNDLE_CACHE"/ 2>/dev/null || true
-    rm -rf "$GEM_HOME"
+  if [ -n "$GEM_DIR" ] && [ ! -L "$GEM_DIR" ]; then
+    # Move existing gems to cache if they exist (first run)
+    if [ -d "$GEM_DIR" ] && [ "$(ls -A "$GEM_DIR")" ]; then
+      cp -r "$GEM_DIR"/* "$BUNDLE_CACHE"/ 2>/dev/null || true
+      rm -rf "$GEM_DIR"
+    fi
+    mkdir -p "$(dirname "$GEM_DIR")"
+    ln -s "$BUNDLE_CACHE" "$GEM_DIR"
   fi
-  ln -s "$BUNDLE_CACHE" "$GEM_HOME"
 fi
 ```
 
