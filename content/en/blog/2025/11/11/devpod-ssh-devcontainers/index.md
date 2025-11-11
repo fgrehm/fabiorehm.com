@@ -257,6 +257,38 @@ fi
 
 This way, your Claude Code authentication (already in `~/.claude/.credentials.json`) and config files both survive container recreation.
 
+`TODO(@fabio): Test this gem caching approach before publishing`
+
+**Optional: Cache gems across recreations**
+
+If you're using mise to manage Ruby versions and `bin/setup` installs gems at runtime (via `postCreateCommand`), gems get reinstalled on every container recreation. You can persist them with symlinks:
+
+```bash
+# In .devcontainer-devpod/setup.sh (before bin/setup runs)
+
+# Get Ruby version from mise
+RUBY_VERSION=$(mise current ruby | awk '{print $2}')
+
+# Create versioned cache directory
+BUNDLE_CACHE="/workspaces/devpod-data/bundle/${RUBY_VERSION}"
+mkdir -p "$BUNDLE_CACHE"
+
+# Symlink mise's gem location to persisted cache
+GEM_HOME=$(mise env | grep GEM_HOME | cut -d= -f2)
+if [ -n "$GEM_HOME" ] && [ ! -L "$GEM_HOME" ]; then
+  # Back up if gems already exist (first run)
+  [ -d "$GEM_HOME" ] && mv "$GEM_HOME" "$GEM_HOME.bak"
+  ln -s "$BUNDLE_CACHE" "$GEM_HOME"
+fi
+```
+
+**Benefits:**
+- Gems persist across recreations for the same Ruby version
+- Changing Ruby versions creates a new cache automatically (no conflicts)
+- Significantly faster container rebuilds
+
+**Note:** `node_modules` already persist automatically since they're in your workspace directory (`./node_modules`), which is already mounted.
+
 ### The Setup Script
 
 In addition to setting up the app with `bin/setup` as part of container creation, I created a `setup.sh` script [that runs via `postCreateCommand`](https://containers.dev/implementors/json_reference/#lifecycle-scripts) before the app setup:
