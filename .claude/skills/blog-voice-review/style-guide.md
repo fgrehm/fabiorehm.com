@@ -11,6 +11,9 @@ _Extracted from analyzing 15+ blog posts (2013-2017) and refined through 2025 co
 - Focus on actual personal use cases rather than generic examples
 - Don't shy away from stronger expressions: "complete pain in the ass", "took me forever"
 - Use "stuff" instead of overly formal language when appropriate
+- **Balance casual tone with precision**: Be conversational about feelings/process, precise about facts/timelines
+  - Good: "for over 3 years" (precise)
+  - Too casual: "for like 3+yrs" (hurts credibility)
 - **Avoid English idioms** that may confuse non-native speakers - use direct language instead of phrases like "voting with my wallet"
 
 **Technical but Accessible**
@@ -41,6 +44,18 @@ _Extracted from analyzing 15+ blog posts (2013-2017) and refined through 2025 co
 - "Worth mentioning limitations" (honest about drawbacks)
 - "That's it!" / "Summing up" (conclusion)
 
+### Living Document Notes
+- State upfront when content will evolve: "This is a living document/series"
+- Set expectations for updates: "I'll update as I discover new patterns, gotchas, and solutions"
+- Positions posts as authentic ongoing learning vs one-time definitive guides
+
+### Series Index Posts
+- Start with personal context (why you're doing this)
+- "Who This Is For" section with positive + negative criteria
+- Each part gets: description + **key takeaway** in bold
+- Technical stack overview with links
+- "The Bottom Line" with honest tradeoffs (What you gain / What you deal with)
+
 ### Signature Language
 - Use casual abbreviations: "IMHO", "TBH", "AFAIK", "YMMV"
 - Transitional phrases: "That said...", "To be really honest..."
@@ -60,9 +75,26 @@ _Extracted from analyzing 15+ blog posts (2013-2017) and refined through 2025 co
 - Discuss architecture decisions and trade-offs
 - Provide concrete numbers for performance claims
 - Break down complex processes into numbered steps
+- Add inline notes for potential gotchas: "Platform compatibility note:", "Permission gotcha:"
+- Clarify assumptions that might not be obvious
+- Preempt common confusions with brief callouts
+
+### Acronyms and Jargon
+- Common abbreviations (IMHO, TBH, YMMV) - use freely
+- Technical acronyms your audience knows - use without explanation
+- Slang/casual acronyms (GSD, RTFM) - link to explanation or spell out
+- When in doubt: assume international, non-native English audience
 
 ### Authenticity Markers
 - Share real usage scenarios from work
 - Discuss time constraints and practical limitations
 - Show project evolution over time
 - Acknowledge collaborators and reviewers
+- Frame work as "scratching my own itch" - personal problem-solving, not generic tutorials
+- Connect current work to 10+ year patterns/journey when applicable
+- Be honest about experimentation stage - "after a week of trying X" not "now using X daily" unless truly established
+
+### Presentation Patterns
+- Tradeoffs: Use **bold headings** ("What you gain:" / "What you deal with:") over emoji/checkmarks for accessibility and professionalism
+- External links: Include links to docs, community resources, and related posts for SEO and credibility
+- Stack overviews: Link to official resources (docs, homepages) alongside descriptions
