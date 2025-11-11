@@ -1,7 +1,6 @@
 ---
 title: "DevPod: SSH-Based Devcontainers Without IDE Lock-in"
 date: 2025-11-11
-draft: true
 description: "How DevPod enables terminal-based devcontainer workflows through SSH, allowing you to use your own tools without VSCode/Cursor lock-in."
 tags:
   - devcontainers
@@ -48,11 +47,11 @@ If you are more of a GUI person, you can also use their [desktop app](https://de
   <figcaption>DevPod desktop app workflow (source: <a href="https://devpod.sh/docs/what-is-devpod">DevPod documentation</a>)</figcaption>
 </figure>
 
-**Note:** DevPod defaults to [OpenVSCode Server](https://github.com/gitpod-io/openvscode-server) (a web-based VS Code) when you don't specify `--ide none`. I learned about this while exploring the project - it's a nice default for GUI users who want to quickly spin up a browser-based IDE.
+**Note:** DevPod defaults to [OpenVSCode Server](https://github.com/gitpod-io/openvscode-server) (a web-based VSCode) when you don't specify `--ide none`. I learned about this while exploring the project - it's a nice default for GUI users who want to quickly spin up a browser-based IDE.
 
 ### Why Not the Official Dev Containers CLI?
 
-The [official `@devcontainers/cli`](https://github.com/devcontainers/cli) exists, but my understanding is that it's heavily designed for VS Code integration. For terminal-based development, it's awkward:
+The [official `@devcontainers/cli`](https://github.com/devcontainers/cli) exists, but my understanding is that it's heavily designed for VSCode integration. For terminal-based development, it's awkward:
 
 ```bash
 # Official CLI workflow
@@ -103,7 +102,7 @@ devpod context set-options -o TELEMETRY=false
 
 **Note on telemetry:** [DevPod sends usage data by default](https://devpod.sh/docs/other-topics/telemetry). Disable it with the command above if you prefer not to share. You can review all context options with `devpod context options`.
 
-**Note on dotfiles:** The `DOTFILES_URL` setting is global - it applies to ALL DevPod workspaces ([VSCode has a similar feature](https://code.visualstudio.com/docs/devcontainers/containers#_personalizing-with-dotfile-repositories)). When DevPod starts a workspace, it clones your dotfiles repo and runs the installation script (defaults to `install.sh`). Your shell config, aliases, and tools can stay consistent across every project. More information [here](https://devpod.sh/docs/developing-in-workspaces/dotfiles-in-a-workspace).
+**Note on dotfiles:** The `DOTFILES_URL` setting is global - it applies to ALL DevPod workspaces (VSCode has a [similar feature](https://code.visualstudio.com/docs/devcontainers/containers#_personalizing-with-dotfile-repositories)). When DevPod starts a workspace, it clones your dotfiles repo and runs the installation script (defaults to `install.sh`). Your shell config, aliases, and tools can stay consistent across every project. More information [here](https://devpod.sh/docs/developing-in-workspaces/dotfiles-in-a-workspace).
 
 ## Basic Usage
 
@@ -419,7 +418,7 @@ git cat-file commit HEAD
 
 **Alternative:** If you don't need signed commits from inside the container, simply disable signing: `git config --global commit.gpgsign false`.
 
-**Note on git config sync:** Much like VSCode's Remote Containers, DevPod automatically syncs your git configuration from the host into the container (including `user.name`, `user.email`, `user.signingkey`, etc.). This is convenient but explains why the broken wrapper appears - DevPod's trying to be helpful by configuring signing, but their implementation is broken. The workaround above removes their wrapper while keeping your signing config intact.
+**Note on git config sync:** Much like VSCode Remote Containers, DevPod automatically syncs your git configuration from the host into the container (including `user.name`, `user.email`, `user.signingkey`, etc.). This is convenient but explains why the broken wrapper appears - DevPod's trying to be helpful by configuring signing, but their implementation is broken. The workaround above removes their wrapper while keeping your signing config intact.
 
 ## Port Forwarding: Choose Your Approach
 
@@ -487,7 +486,15 @@ After a week of experimentation and setting this up at work, I'm ready to use it
 
 ## Resources
 
+**Official Documentation:**
+
 - [DevPod Documentation](https://devpod.sh/)
 - [DevContainer Specification](https://containers.dev/)
 - [DevContainer JSON Reference](https://containers.dev/implementors/json_reference/) - Complete spec for devcontainer.json
 - [DevPod Issue #1803](https://github.com/loft-sh/devpod/issues/1803) - Git SSH signing bug tracker
+
+**Related Reading:**
+
+- [Things I Learned About DevPod After Obsessing Over it for a Week](https://geekingoutpodcast.substack.com/p/things-i-learned-about-devpod-after) - Another developer's week-long DevPod exploration with practical lessons learned
+- [Devcontainers without VSCode (Ruby on Rails)](https://rubyonrails.org/2025/1/24/this-week-in-rails) - Rails community's recent devcontainer CLI scripts (January 2025)
+- [Devcontainers in 2025: A Personal Take](https://ivanlee.me/devcontainers-in-2025-a-personal-take/) - Broader perspective on the devcontainers ecosystem and alternatives

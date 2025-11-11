@@ -1,7 +1,6 @@
 ---
 title: "Modernizing my Terminal-Based Development Environment"
 date: 2025-11-11
-draft: true
 description: "Returning to terminal-based development after a Cursor detour: SSH-based workflows with DevPod, modern multiplexers, and AI tools - the latest chapter in a 10+ year journey of working with virtualized dev environments."
 tags:
   - terminal
@@ -62,6 +61,8 @@ How I built a Git worktree manager for running multiple branches simultaneously,
 
 **Key takeaway:** Once you have SSH-based devcontainers working, git worktrees become incredibly powerful for parallel development. Review PRs while working on features, test main while debugging your branch, run two features side-by-side for comparison.
 
+**Timing note:** Git worktrees for parallel AI development has become a major trend in 2024-2025, but most guides focus on basic worktree + Claude Code workflows. The devcontainer-specific challenges (port conflicts, database isolation, persistent AI context across recreations) remain largely unexplored.
+
 ## The Technical Stack
 
 Here's what the final setup looks like:
@@ -80,7 +81,7 @@ Here's what the final setup looks like:
 
 **AI & Development:**
 
-- **[Claude Code](https://www.anthropic.com/claude/code)** - AI coding assistant (CLI, not GUI)
+- **[Claude Code](https://claude.com/download)** - AI coding assistant (CLI, not GUI)
 - **[Git worktrees](https://git-scm.com/docs/git-worktree)** - Parallel branch development
 - **Persistent configs** - Volume mounts survive container recreation
 
@@ -111,3 +112,19 @@ This workflow trades IDE convenience for terminal flexibility.
 After a week of using this setup, I'm sticking with it. The control and understanding are worth the friction. But it's not necessarily better than Cursor/VSCode - it's a different set of tradeoffs that happens to match my preferences.
 
 Your experience will vary based on your workflow, team structure, and how much you value terminal tools over IDE convenience.
+
+---
+
+## Resources
+
+**Series Posts:**
+
+- [Part 1: DevPod: SSH-Based Devcontainers Without IDE Lock-in](/blog/2025/11/11/devpod-ssh-devcontainers/)
+- Part 2: Terminal-Based Development (Coming Soon)
+- Part 3: Git Worktrees in Devcontainers (Coming Soon)
+
+**Background Reading:**
+
+- [Parallel AI Coding with Git Worktrees and Claude Code](https://docs.agentinterviews.com/blog/parallel-ai-coding-with-gitworktrees/) - The parallel development trend driving Part 3
+- [Things I Learned About DevPod After Obsessing Over it for a Week](https://geekingoutpodcast.substack.com/p/things-i-learned-about-devpod-after) - Complementary DevPod experience
+- [Zellij as Part of Your Development Workflow](https://haseebmajid.dev/posts/2024-12-18-part-7-zellij-as-part-of-your-development-workflow/) - Practical Zellij setup guide
