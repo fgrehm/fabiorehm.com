@@ -257,6 +257,9 @@ fi
 
 This way, your Claude Code authentication (already in `~/.claude/.credentials.json`) and config files both survive container recreation.
 
+<!--
+TODO(@fabio): Gem caching needs more work, commenting out for now
+
 **Optional: Cache gems across recreations**
 
 If you're using mise to manage Ruby versions and `bin/setup` installs gems at runtime (via `postCreateCommand`), gems get reinstalled on every container recreation. You can persist them with symlinks.
@@ -315,6 +318,7 @@ fi
 - Significantly faster container rebuilds
 
 **Note:** `node_modules` already persist automatically since they're in your workspace directory (`./node_modules`), which is already mounted.
+-->
 
 ### The Setup Script
 
