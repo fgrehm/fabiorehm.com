@@ -261,7 +261,24 @@ This way, your Claude Code authentication (already in `~/.claude/.credentials.js
 
 **Optional: Cache gems across recreations**
 
-If you're using mise to manage Ruby versions and `bin/setup` installs gems at runtime (via `postCreateCommand`), gems get reinstalled on every container recreation. You can persist them with symlinks:
+If you're using mise to manage Ruby versions and `bin/setup` installs gems at runtime (via `postCreateCommand`), gems get reinstalled on every container recreation. You can persist them with symlinks.
+
+First, add the bundle cache to your compose volumes:
+
+```yaml
+# .devcontainer-devpod/compose.yaml
+services:
+  rails-app:
+    volumes:
+      - ../..:/workspaces:cached
+      - ../../devpod-data/ssh:/home/vscode/.ssh
+      - ../../devpod-data/nvim:/home/vscode/.config/nvim
+      - ../../devpod-data/zellij:/home/vscode/.config/zellij
+      - ../../devpod-data/claude:/home/vscode/.claude
+      - ../../devpod-data/bundle:/workspaces/devpod-data/bundle  # Add this
+```
+
+Then in your setup script, symlink the gem cache:
 
 ```bash
 # In .devcontainer-devpod/setup.sh (before bin/setup runs)
