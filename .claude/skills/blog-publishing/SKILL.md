@@ -9,7 +9,7 @@ description: Pre-publish validation and checklist for blog posts. Use when prepa
 
 Run validation script:
 ```bash
-python scripts/validate-post.py <path-to-post>
+python3 .claude/skills/blog-publishing/scripts/validate-post.py <path-to-post>
 ```
 
 The script checks:
@@ -121,4 +121,4 @@ If all checks pass:
 4. **Commit and push** - Post will be live on next build
 
 ## Script Location
-See `scripts/validate-post.py` for implementation.
+See `.claude/skills/blog-publishing/scripts/validate-post.py` for implementation.
