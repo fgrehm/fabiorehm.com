@@ -19,7 +19,7 @@ tags:
 **Note:** This post focuses on DevPod setup and SSH devcontainer workflow. For the daily terminal workflow experience (zellij, shortcuts, friction), see the companion post: [Terminal-Based Development Workflow](/drafts/terminal-based-development-workflow/).
 -->
 
-## The Problem
+## Background
 
 My team uses [devcontainers](https://containers.dev/) and they're great for consistency - everyone gets the same Ruby version, Postgres, Chrome for system tests... It Works :tm:. New developers run one command and they're productive.
 
@@ -324,7 +324,10 @@ unknown shorthand flag: 'U' in -U
 
 **The problem:** DevPod automatically configures git to use a custom SSH signing wrapper by setting `gpg.ssh.program=devpod-ssh-signature`. This wrapper is meant to bridge SSH signing between host and container, but it's broken - it doesn't support the `-U` flag that modern git versions use for SSH signing ([tracked in issue #1803](https://github.com/loft-sh/devpod/issues/1803)).
 
-**Why it's tricky:** [DevPod keeps re-adding this configuration](https://github.com/loft-sh/devpod/issues/1803#issuecomment-3497641284) even after you manually remove it. Simply running `git config --global --unset gpg.ssh.program` once only provides a temporary fix.
+**Why it's tricky:**
+- [DevPod keeps re-adding this configuration](https://github.com/loft-sh/devpod/issues/1803#issuecomment-3497641284) even after you manually remove it
+- Simply running `git config --global --unset gpg.ssh.program` once only provides a temporary fix
+- **DevPod doesn't sync `commit.gpgsign` from your host** - even if signing is enabled on your host, it won't be in the container
 
 ### The Solution
 
@@ -333,20 +336,48 @@ The fix requires persistence: **remove the broken wrapper on every shell startup
 **1. Add to your setup script (`.devcontainer-devpod/setup.sh`):**
 
 ```bash
-# Remove DevPod's broken signing wrapper
-git config --global --unset gpg.ssh.program 2>/dev/null || true
+# Remove DevPod's broken SSH signing wrapper (issue #1803)
+# This wrapper doesn't support the -U flag that modern git uses
+if git config --global --get gpg.ssh.program &>/dev/null; then
+  git config --global --unset gpg.ssh.program
+  echo "✓ Removed DevPod's broken gpg.ssh.program wrapper"
+fi
 
-# Add persistent removal to shell rc files
-echo 'git config --global --unset gpg.ssh.program 2>/dev/null || true' >> ~/.zshrc
-echo 'git config --global --unset gpg.ssh.program 2>/dev/null || true' >> ~/.bashrc
+# Add persistent removal to shell rc files (DevPod re-adds it on SSH connect)
+if ! grep -q "gpg.ssh.program" ~/.zshrc 2>/dev/null; then
+  echo 'git config --global --unset gpg.ssh.program 2>/dev/null || true' >> ~/.zshrc
+fi
+if ! grep -q "gpg.ssh.program" ~/.bashrc 2>/dev/null; then
+  echo 'git config --global --unset gpg.ssh.program 2>/dev/null || true' >> ~/.bashrc
+fi
 
-# Configure SSH signing properly
-git config --global gpg.format ssh
-git config --global user.signingkey ~/.ssh/id_ed25519-sign.pub
-git config --global commit.gpgsign true
+# Configure SSH signing (DevPod syncs user.signingkey but NOT commit.gpgsign)
+if git config --global user.signingkey &>/dev/null; then
+  # Ensure SSH format is set
+  if [ "$(git config --global --get gpg.format)" != "ssh" ]; then
+    git config --global gpg.format ssh
+    echo "✓ Git GPG format set to SSH"
+  fi
+
+  # Enable commit signing (NOT synced from host!)
+  if ! git config --global commit.gpgsign &>/dev/null; then
+    git config --global commit.gpgsign true
+    echo "✓ Git commit signing enabled"
+  fi
+fi
 ```
 
-**2. Mount only your public SSH key (`.devcontainer-devpod/compose.yaml`):**
+**2. Mount your SSH directory (`.devcontainer-devpod/compose.yaml`):**
+
+```yaml
+volumes:
+  # Mount .ssh directory for git signing and GitHub access
+  - ../../devpod-data/ssh:/home/vscode/.ssh
+```
+
+**Alternative - mount only the public key:**
+
+If you prefer minimal mounting, you can mount just the public key instead:
 
 ```yaml
 volumes:
@@ -354,7 +385,7 @@ volumes:
   - ~/.ssh/id_ed25519-sign.pub:/home/vscode/.ssh/id_ed25519-sign.pub:ro
 ```
 
-**Why only the public key?** DevPod's `ForwardAgent yes` configuration forwards your SSH agent socket into the container. Git only needs the public key to identify which key to use - the private key is accessed securely through the forwarded SSH agent. This is more secure since the private key never enters the container.
+**Why the public key approach works:** DevPod's `ForwardAgent yes` configuration forwards your SSH agent socket into the container. Git only needs the public key to identify which key to use - the private key is accessed securely through the forwarded SSH agent. This is more secure since the private key never enters the container.
 
 ### How It Works
 
