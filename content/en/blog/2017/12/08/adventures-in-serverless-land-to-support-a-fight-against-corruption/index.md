@@ -18,7 +18,7 @@ case you, like me, are thinking about giving it a try for the first time.
 ## Background
 
 Not many people outside of Brazil might've heard about the [Serenata de
-Amor](https://serenatadeamor.org/en/) project, but it’s making a lot of noise on
+Amor](https://serenata.ai/en/) project, but it's making a lot of noise on
 this side of the globe. Operação Serenata de Amor is an artificial intelligence
 and data science project that aims to inform the general public about government
 corruption and spending (more info can be found at the project's website and
@@ -40,7 +40,7 @@ Deputies](https://en.wikipedia.org/wiki/Chamber_of_Deputies_(Brazil)).
 The infographic below offers a bit more context on the project:
 
 <center>
-  <img src="https://serenatadeamor.org/images/infographic.png" alt="serenata-infographic" />
+  <img src="serenata-infographic.png" alt="serenata-infographic" />
   <em>As of today, one Brazilian Real (R$) is worth US$ 0.31<br>(image source:
   Serenata's Website)</em>
 </center>

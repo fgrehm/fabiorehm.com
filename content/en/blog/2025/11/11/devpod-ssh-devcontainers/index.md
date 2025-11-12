@@ -43,7 +43,7 @@ The workflow goes like:
 If you are more of a GUI person, you can also use their [desktop app](https://devpod.sh/docs/getting-started/update) to manage containers / workspaces:
 
 <figure>
-  <img src="https://devpod.sh/docs/media/devpod-flow.gif" alt="DevPod desktop application workflow showing workspace creation and management">
+  <img src="devpod-flow.gif" alt="DevPod desktop application workflow showing workspace creation and management">
   <figcaption>DevPod desktop app workflow (source: <a href="https://devpod.sh/docs/what-is-devpod">DevPod documentation</a>)</figcaption>
 </figure>
 
