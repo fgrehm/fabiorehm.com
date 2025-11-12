@@ -61,7 +61,7 @@ How I built a Git worktree manager for running multiple branches simultaneously,
 
 **Key takeaway:** Once you have SSH-based devcontainers working, git worktrees become incredibly powerful for parallel development. Review PRs while working on features, test main while debugging your branch, run two features side-by-side for comparison.
 
-**Timing note:** Git worktrees for parallel AI development has become a major trend in 2024-2025, but most guides focus on basic worktree + Claude Code workflows. The devcontainer-specific challenges (port conflicts, database isolation, persistent AI context across recreations) remain largely unexplored.
+**Timing note:** Git worktrees have gained significant traction in the development community during 2024-2025, but most guides focus on basic worktree workflows. The devcontainer-specific challenges (port conflicts, database isolation, persistent AI context across recreations) remain largely unexplored.
 
 ## The Technical Stack
 
@@ -115,16 +115,8 @@ Your experience will vary based on your workflow, team structure, and how much y
 
 ---
 
-## Resources
-
-**Series Posts:**
+## Series Posts
 
 - [Part 1: DevPod: SSH-Based Devcontainers Without IDE Lock-in](/blog/2025/11/11/devpod-ssh-devcontainers/)
 - Part 2: Terminal-Based Development (Coming Soon)
 - Part 3: Git Worktrees in Devcontainers (Coming Soon)
-
-**Background Reading:**
-
-- [Parallel AI Coding with Git Worktrees and Claude Code](https://docs.agentinterviews.com/blog/parallel-ai-coding-with-gitworktrees/) - The parallel development trend driving Part 3
-- [Things I Learned About DevPod After Obsessing Over it for a Week](https://geekingoutpodcast.substack.com/p/things-i-learned-about-devpod-after) - Complementary DevPod experience
-- [Zellij as Part of Your Development Workflow](https://haseebmajid.dev/posts/2024-12-18-part-7-zellij-as-part-of-your-development-workflow/) - Practical Zellij setup guide

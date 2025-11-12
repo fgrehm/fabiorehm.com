@@ -497,4 +497,3 @@ After a week of experimentation and setting this up at work, I'm ready to use it
 
 - [Things I Learned About DevPod After Obsessing Over it for a Week](https://geekingoutpodcast.substack.com/p/things-i-learned-about-devpod-after) - Another developer's week-long DevPod exploration with practical lessons learned
 - [Devcontainers without VSCode (Ruby on Rails)](https://rubyonrails.org/2025/1/24/this-week-in-rails) - Rails community's recent devcontainer CLI scripts (January 2025)
-- [Devcontainers in 2025: A Personal Take](https://ivanlee.me/devcontainers-in-2025-a-personal-take/) - Broader perspective on the devcontainers ecosystem and alternatives
