@@ -92,3 +92,9 @@ languageCode = "en"
   series = "series"
   tag = "tags"
   author = "authors"
+
+# GitHub Discussions integration
+[params.githubDiscussions]
+  enabled = true
+  repo = "fgrehm/fabiorehm.com"
+  category = "blog-posts"

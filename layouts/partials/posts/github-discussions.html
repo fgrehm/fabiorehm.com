@@ -1,0 +1,22 @@
+{{ if .Site.Params.githubdiscussions.enabled }}
+  {{ $discussionTitle := printf "Re: %s" .Title }}
+  {{ $postURL := .Permalink }}
+  {{ $repo := .Site.Params.githubdiscussions.repo }}
+  {{ $category := .Site.Params.githubdiscussions.category | default "blog-posts" }}
+  {{ $body := printf "Original post: %s" $postURL }}
+  {{ $queryString := querify "category" $category "title" $discussionTitle "body" $body }}
+  {{ $email := "site@fabiorehm.com" }}
+
+  <hr>
+  <div class="github-discussions">
+    <p>
+      💬 <a href="https://github.com/{{ $repo }}/discussions/new?{{ $queryString | safeURL }}" target="_blank" rel="noopener noreferrer">
+        Discuss this post on GitHub
+      </a>
+      or
+      📧 <a href="mailto:{{ $email }}">
+        reply via email
+      </a>
+    </p>
+  </div>
+{{ end }}

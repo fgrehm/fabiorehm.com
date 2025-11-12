@@ -1,6 +1,6 @@
 # fabiorehm.com
 
-The code behind [fabiorehm.com](https://fabiorehm.com).
+The code and content behind [fabiorehm.com](https://fabiorehm.com).
 
 ## Development Setup
 
@@ -38,15 +38,18 @@ make dev
 ```
 
 This starts:
+
 - Hugo server at <http://localhost:1313>
 - Auto-commit loop for drafts (every 30 minutes)
 
 **Manual draft commit:**
+
 ```bash
 bin/drafts-autocommit
 ```
 
 **Alternative (Hugo only, no auto-commit):**
+
 ```bash
 hugo server -D
 ```
