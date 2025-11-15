@@ -2,7 +2,7 @@
 #
 # Start blog development environment
 # - Hugo server (localhost:1313)
-# - Auto-commit loop for drafts (every 30 minutes)
+# - Auto-commit loop for drafts (every 10 minutes)
 #
 
 set -e
@@ -23,20 +23,20 @@ AUTOCOMMIT_PID=""
 
 # Cleanup on exit
 cleanup() {
-    echo ""
-    echo -e "${YELLOW}Shutting down services...${NC}"
+  echo ""
+  echo -e "${YELLOW}Shutting down services...${NC}"
 
-    if [ -n "$HUGO_PID" ]; then
-        echo "  Stopping Hugo server (PID $HUGO_PID)"
-        kill $HUGO_PID 2>/dev/null || true
-    fi
+  if [ -n "$HUGO_PID" ]; then
+    echo "  Stopping Hugo server (PID $HUGO_PID)"
+    kill $HUGO_PID 2>/dev/null || true
+  fi
 
-    if [ -n "$AUTOCOMMIT_PID" ]; then
-        echo "  Stopping auto-commit loop (PID $AUTOCOMMIT_PID)"
-        kill $AUTOCOMMIT_PID 2>/dev/null || true
-    fi
+  if [ -n "$AUTOCOMMIT_PID" ]; then
+    echo "  Stopping auto-commit loop (PID $AUTOCOMMIT_PID)"
+    kill $AUTOCOMMIT_PID 2>/dev/null || true
+  fi
 
-    echo -e "${GREEN}✓ All services stopped${NC}"
+  echo -e "${GREEN}✓ All services stopped${NC}"
 }
 
 trap cleanup EXIT INT TERM
@@ -54,13 +54,13 @@ HUGO_PID=$!
 echo "  ✓ Hugo running on http://localhost:1313 (PID $HUGO_PID)"
 
 # 2. Start auto-commit loop for drafts
-echo -e "${GREEN}[2/2]${NC} Starting drafts auto-commit loop (every 30 minutes)..."
+echo -e "${GREEN}[2/2]${NC} Starting drafts auto-commit loop (every 10 minutes)..."
 (
-    while true; do
-        sleep 1800  # 30 minutes
-        echo -e "${YELLOW}[$(date +%H:%M:%S)]${NC} Running drafts auto-commit..."
-        "$BIN_DIR/drafts-autocommit"
-    done
+  while true; do
+    sleep 600 # 10 minutes
+    echo -e "${YELLOW}[$(date +%H:%M:%S)]${NC} Running drafts auto-commit..."
+    "$BIN_DIR/drafts-autocommit"
+  done
 ) &
 AUTOCOMMIT_PID=$!
 echo "  ✓ Auto-commit scheduled (PID $AUTOCOMMIT_PID)"
@@ -73,7 +73,7 @@ echo ""
 echo "  🏠 Blog:          http://localhost:1313/"
 echo "  📝 Drafts:        http://localhost:1313/drafts/"
 echo ""
-echo "  Auto-commit: Every 30 minutes"
+echo "  Auto-commit: Every 10 minutes"
 echo "  Manual commit: bin/drafts-autocommit"
 echo ""
 echo "  Press Ctrl+C to stop all services"
