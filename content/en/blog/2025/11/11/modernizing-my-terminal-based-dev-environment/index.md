@@ -49,13 +49,19 @@ How to use DevPod to SSH into devcontainers instead of opening them in VSCode/Cu
 
 **Key takeaway:** You can have devcontainer consistency without IDE lock-in. DevPod reads the same `.devcontainer.json` format but gives you SSH access instead of forcing a GUI editor.
 
-### Part 2: Terminal-Based Development: SSH, Multiplexers, and the Honest Friction (Coming Soon)
+### Part 2: Daily Terminal Workflow with Zellij and Claude Code (Coming Soon)
 
-What daily development actually feels like with this setup. Covers Zellij (terminal multiplexer), keyboard shortcuts, session management, and the honest friction points that IDE users don't deal with.
+What daily development actually feels like with Zellij (terminal multiplexer) and Claude Code CLI. Covers keyboard shortcuts, persistent sessions, layouts, and the honest friction points that IDE users don't deal with.
 
-**Key takeaway:** Terminal-based development has real tradeoffs. You get control and flexibility, but you also get shortcut conflicts, and a good amount of manual configuration. It's not necessarily better - it's different.
+**Key takeaway:** Terminal multiplexers add complexity but provide powerful session management. You get persistent sessions and flexible layouts, but you also deal with shortcut conflicts and occasional recovery issues. It's a different set of tradeoffs.
 
-### Part 3: Managing Parallel Git Branches in devcontainers with Worktrees (Coming Soon)
+### Part 3: Neovim and LazyVim for Rails Development (Coming Soon)
+
+Setting up Neovim with LazyVim for Rails development over SSH. Covers clipboard integration (OSC 52), Ruby LSP configuration with bundled gems, multi-cursor editing, global find/replace, and performance considerations for git worktrees.
+
+**Key takeaway:** Neovim over SSH works surprisingly well. Ruby LSP requires avoiding Mason's global installation in favor of bundled gems for proper Rails integration. The manual configuration gives you deep understanding of your editor setup.
+
+### Part 4: Managing Parallel Git Branches in Devcontainers with Worktrees (Coming Soon)
 
 How I built a Git worktree manager for running multiple branches simultaneously, dealing with port allocation, database isolation, and branch-specific AI context that survives container recreation.
 
@@ -118,5 +124,6 @@ Your experience will vary based on your workflow, team structure, and how much y
 ## Series Posts
 
 - [Part 1: DevPod: SSH-Based Devcontainers Without IDE Lock-in](/blog/2025/11/11/devpod-ssh-devcontainers/)
-- Part 2: Terminal-Based Development (Coming Soon)
-- Part 3: Git Worktrees in Devcontainers (Coming Soon)
+- Part 2: Daily Terminal Workflow with Zellij and Claude Code (Coming Soon)
+- Part 3: Neovim and LazyVim for Rails Development (Coming Soon)
+- Part 4: Git Worktrees in Devcontainers (Coming Soon)

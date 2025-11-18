@@ -166,42 +166,93 @@ Instead of the command above, I just do:
 bin/dpod up
 ```
 
-Here's an excerpt of the wrapper if you are interested:
+<details>
+<summary>Click to see the complete wrapper script</summary>
 
 ```bash
 #!/bin/bash
-# bin/dpod - DevPod wrapper
+# bin/dpod - DevPod wrapper with project defaults
 
-# Use custom .devcontainer-devpod/ path (explained in "Giving the team an option" above)
-DEVCONTAINER_PATH="${DEVCONTAINER_PATH:-.devcontainer-devpod/devcontainer.json}"
+set -e
+
+# Prevent execution inside containers
+if [ -f /.dockerenv ] || [ -f /run/.containerenv ] || [ -n "$DEVCONTAINER" ]; then
+  echo "Error: bin/dpod must be run on the host machine, not inside a container"
+  exit 1
+fi
+
+# Project defaults
 WORKSPACE_ID="${DEVPOD_WORKSPACE_ID:-my-app}"
+DEVCONTAINER_PATH="${DEVCONTAINER_PATH:-.devcontainer-devpod/devcontainer.json}"
 IDE="${DEVPOD_IDE:-none}"
 
-case "$1" in
+# Show usage if no arguments
+if [ $# -eq 0 ]; then
+  echo "Usage: bin/dpod <command> [flags]"
+  echo ""
+  echo "Commands:"
+  echo "  up        Start/create workspace"
+  echo "  stop      Stop workspace"
+  echo "  recreate  Recreate workspace container"
+  echo "  delete    Delete workspace"
+  echo "  ssh       SSH into workspace"
+  echo "  status    Show workspace status"
+  echo ""
+  echo "Environment variables:"
+  echo "  DEVPOD_WORKSPACE_ID  Override workspace ID (default: my-app)"
+  echo "  DEVPOD_IDE           Override IDE setting (default: none)"
+  echo "  DEVCONTAINER_PATH    Override devcontainer path (default: .devcontainer-devpod/devcontainer.json)"
+  exit 0
+fi
+
+COMMAND="$1"
+shift
+
+case "$COMMAND" in
   up)
     if devpod list 2>/dev/null | grep -q "^$WORKSPACE_ID"; then
-      devpod up --devcontainer-path "$DEVCONTAINER_PATH" "$WORKSPACE_ID"
+      echo "→ Starting workspace '$WORKSPACE_ID'..."
+      devpod up --devcontainer-path "$DEVCONTAINER_PATH" "$WORKSPACE_ID" "$@"
     else
-      devpod up . --devcontainer-path "$DEVCONTAINER_PATH" --id "$WORKSPACE_ID" --ide "$IDE"
+      echo "→ Creating workspace '$WORKSPACE_ID'..."
+      devpod up . --devcontainer-path "$DEVCONTAINER_PATH" --id "$WORKSPACE_ID" --ide "$IDE" "$@"
     fi
     ;;
+
   recreate)
-    devpod up "$WORKSPACE_ID" --devcontainer-path "$DEVCONTAINER_PATH" --recreate
+    echo "→ Recreating workspace '$WORKSPACE_ID'..."
+    devpod up "$WORKSPACE_ID" --devcontainer-path "$DEVCONTAINER_PATH" --recreate "$@"
     ;;
+
   ssh)
+    echo "→ SSH into workspace '$WORKSPACE_ID'..."
     ssh "$WORKSPACE_ID.devpod" "$@"
     ;;
+
   stop)
-    devpod stop "$WORKSPACE_ID"
+    echo "→ Stopping workspace '$WORKSPACE_ID'..."
+    devpod stop "$WORKSPACE_ID" "$@"
     ;;
+
   delete)
-    devpod delete "$WORKSPACE_ID"
+    echo "→ Deleting workspace '$WORKSPACE_ID'..."
+    devpod delete "$WORKSPACE_ID" "$@"
     ;;
+
   status)
-    devpod list | grep -E "^NAME|^$WORKSPACE_ID"
+    echo "→ Workspace status for '$WORKSPACE_ID':"
+    devpod list | grep -E "^NAME|^$WORKSPACE_ID" || echo "Workspace not found"
+    ;;
+
+  *)
+    echo "Unknown command: $COMMAND"
+    echo "Run 'bin/dpod' for available commands"
+    exit 1
     ;;
 esac
 ```
+
+</details>
 
 The wrapper makes DevPod easier to use daily: `bin/dpod up` creates or starts your workspace, `bin/dpod ssh` gets you in, and `bin/dpod recreate` rebuilds from scratch - all without typing the same arguments repeatedly.
 
@@ -306,6 +357,98 @@ The script is idempotent and handles:
 - Git configuration (opt-in commit signing + hack mentioned below)
 - `ripgrep` and `fd` for nvim plugins
 - Claude Code CLI
+
+## Preventing Unnecessary Container Rebuilds
+
+**Update 2025-11-14:** After running this setup for a few days, I noticed containers were rebuilding even when nothing changed. Running `bin/dpod stop` followed by `bin/dpod up` would trigger a full rebuild of all container features - wasting 2-3 minutes each time.
+
+### The Problem
+
+The issue was the Docker build context. In my initial setup, the compose file used the project root as the build context:
+
+```yaml
+# .devcontainer-devpod/compose.yaml (BEFORE)
+services:
+  rails-app:
+    build:
+      context: ..                              # Project root
+      dockerfile: .devcontainer-devpod/Dockerfile
+```
+
+This meant Docker included the **entire project directory** in the build context (all your source code, config files, etc.). Any time files changed in directories like `.claude/`, `.ruby-lsp/`, or even uncommitted changes to setup scripts, Docker would see a different context and invalidate the cache.
+
+The build output showed the problem clearly:
+
+```
+#11 [dev_containers_target_stage 1/8] COPY ./.devpod-internal/ /tmp/build-features/
+#11 DONE 0.0s    # <- NOT CACHED! This invalidates all subsequent layers
+```
+
+### The Solution
+
+The fix is to use **`.devcontainer-devpod/` as the build context** instead of the project root. Looking at the Dockerfile, it only needs `build.sh` during the build:
+
+```dockerfile
+# .devcontainer-devpod/Dockerfile
+FROM ghcr.io/rails/devcontainer/images/ruby:3.4.7
+COPY build.sh /tmp/build.sh          # Only copies build.sh
+RUN /tmp/build.sh && sudo rm /tmp/build.sh
+```
+
+The project source code is mounted at runtime via volumes, not needed during the build. So we can change the build context:
+
+```yaml
+# .devcontainer-devpod/compose.yaml (AFTER)
+services:
+  rails-app:
+    build:
+      context: .                       # Just .devcontainer-devpod/ directory
+      dockerfile: Dockerfile
+    volumes:
+      - ../..:/workspaces:cached      # Source code mounted at runtime
+```
+
+### Extra Safety with .dockerignore
+
+For extra safety, I added a `.dockerignore` to exclude files that aren't needed during the build:
+
+```dockerfile
+# .devcontainer-devpod/.dockerignore
+# Only include what's needed for the image build
+# The Dockerfile only copies build.sh
+
+# Ignore compose files (used by docker-compose, not during build)
+compose.yaml
+compose.override.yaml
+compose.override.yaml.example
+
+# Ignore devcontainer config (used by DevPod, not during build)
+devcontainer.json
+
+# Ignore setup script (runs in postCreateCommand after build)
+setup.sh
+```
+
+Now the build context only includes `Dockerfile` and `build.sh` - nothing else. Changes to compose files, setup scripts, or devcontainer.json won't invalidate Docker's build cache.
+
+### The Results
+
+After this change, running `bin/dpod recreate` now shows everything cached:
+
+```
+#12 [dev_containers_target_stage 1/8] COPY ./.devpod-internal/ /tmp/build-features/
+#12 CACHED    # <- Now cached!
+
+#13 [dev_containers_target_stage 2/8] RUN chmod -R 0755 /tmp/build-features && ls /tmp/build-features
+#13 CACHED
+
+#14 [dev_containers_target_stage 3/8] RUN echo "_CONTAINER_USER_HOME=..."
+#14 CACHED
+
+# ... all subsequent layers CACHED
+```
+
+Rebuilds went from 2-3 minutes down to seconds. The container only rebuilds when you actually change files in `.devcontainer-devpod/` that affect the build - which is exactly what you want.
 
 ## Git Signing: The DevPod Gotcha
 
@@ -467,13 +610,13 @@ services:
 
 **Why this works for terminal users:** You're not maintaining a persistent SSH session - you SSH in when needed, do your work, and disconnect. Docker's native port mapping is active regardless of SSH connections, making it more suitable for this workflow.
 
-**Why VSCode users do it differently:** IDEs typically use `forwardPorts` *instead of* compose ports because they maintain persistent SSH connections and need this for remote scenarios (like Codespaces) where Docker's native port mapping won't work from your local browser.
+**Why VSCode users do it differently:** My understanding is that IDEs typically use `forwardPorts` *instead of* compose ports because they maintain persistent SSH connections and need this for remote scenarios (like Codespaces) where Docker's native port mapping won't work from your local browser.
 
 **Related DevPod issues:** The errors are somewhat harmless but noisy - tracked in [#793](https://github.com/loft-sh/devpod/issues/793). The need for active SSH sessions with `forwardPorts` is explained in [#871](https://github.com/loft-sh/devpod/issues/871).
 
 ## Summing up
 
-The main thing here is that DevPod is letting me regain control over my development environment and letting me get back to neovim. I'm already used to the SSH workflow using terminal multiplexers and am pretty comfortable with that. The downside is that everything requires explicit configuration and things are "less magical", but I personally see that as an opportunity to learn about "new stuff".
+The main thing here is that DevPod is letting me regain control over my development environment and letting me get back to neovim. I'm already used to the SSH workflow using terminal multiplexers and am pretty comfortable with that. The downside is that everything requires explicit configuration and things are "less magical", but I personally see that as an opportunity to learn about new stuff.
 
 After a week of experimentation and setting this up at work, I'm ready to use it daily.
 
