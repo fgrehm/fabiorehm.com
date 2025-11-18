@@ -1,7 +1,7 @@
 ---
 title: "Neovim and LazyVim for Rails Development over SSH"
-date: 2025-11-14
-draft: true
+date: 2025-11-17
+draft: false
 description: "Setting up Neovim with LazyVim for Rails development over SSH: clipboard integration, Ruby LSP configuration, multi-cursor editing, and honest gotchas."
 tags:
   - neovim
@@ -12,18 +12,9 @@ tags:
   - workflow
 ---
 
-```text
-TODO(@fabio/@claude): When publishing this post, make these cross-link updates:
-
-- Update series index at `/blog/2025/11/11/modernizing-my-terminal-based-dev-environment/` to add link to this post in Part 3 section
-- Update terminal workflow post to link to this post for Neovim details
-- Fix all `/drafts/` references in this file to use correct `/blog/YYYY/MM/DD/` paths once posts are published
-
-```
-
 **Note:** This post focuses on Neovim/LazyVim setup for Rails development over SSH. For the DevPod setup and overall terminal workflow, see:
 - [DevPod: SSH-Based Devcontainers](/blog/2025/11/11/devpod-ssh-devcontainers/) - DevPod setup and SSH access
-- [Using Zellij and Claude Code Over SSH](/blog/2025/11/13/using-zellij-and-claude-code-over-ssh/) - Daily terminal workflow with Zellij and Claude Code
+- [Using Zellij and Claude Code Over SSH](/blog/2025/11/14/using-zellij-and-claude-code-over-ssh/) - Daily terminal workflow with Zellij and Claude Code
 
 ## Why Neovim Over SSH?
 
@@ -439,5 +430,5 @@ Yes. The control over my editor, understanding of the stack, and terminal flexib
 **Related Posts:**
 
 - [DevPod: SSH-Based Devcontainers](/blog/2025/11/11/devpod-ssh-devcontainers/) - DevPod setup
-- [Terminal Workflow with Zellij and Claude Code](/drafts/terminal-workflow-zellij-nvim-claude-ssh/) - Daily terminal workflow
+- [Using Zellij and Claude Code Over SSH](/blog/2025/11/14/using-zellij-and-claude-code-over-ssh/) - Daily terminal workflow
 - [Index Caching Feature Request #1040](https://github.com/Shopify/ruby-lsp/issues/1040)

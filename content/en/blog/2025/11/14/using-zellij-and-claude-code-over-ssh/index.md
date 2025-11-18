@@ -1,7 +1,7 @@
 ---
 title: "Using Zellij and Claude Code Over SSH"
-date: 2025-11-13
-draft: true
+date: 2025-11-14
+draft: false
 description: "What it's actually like to use SSH-based development with Zellij and Claude Code CLI. The good parts, the gotchas, and the friction that IDE users don't deal with."
 tags:
   - terminal
@@ -12,16 +12,9 @@ tags:
   - devpod
 ---
 
-```text
-TODO(@fabio/@claude): When publishing this post, make these cross-link updates:
-  - Update series index at `/blog/2025/11/11/modernizing-my-terminal-based-dev-environment/` to add link to this post in Part 2 section
-  - Update DevPod post at `/blog/2025/11/11/devpod-ssh-devcontainers/` to uncomment the cross-link at top and fix the path to this post's final published path
-  - Fix all `/drafts/` references in this file to use correct `/blog/2025/11/13/` paths once published
-```
-
 **Note:** This post covers the daily terminal workflow experience with Zellij and Claude Code. For related topics, see:
 - [DevPod: SSH-Based Devcontainers](/blog/2025/11/11/devpod-ssh-devcontainers/) - DevPod setup and SSH access
-- [Neovim and LazyVim for Rails Development](/blog/2025/11/14/neovim-lazyvim-rails-ssh/) - Editor setup, Ruby LSP, and configuration
+- [Neovim and LazyVim for Rails Development](/blog/2025/11/17/neovim-lazyvim-rails-ssh/) - Editor setup, Ruby LSP, and configuration
 
 ## The Setup
 
@@ -33,9 +26,9 @@ I recently switched to SSH-based development using DevPod for devcontainers (see
 - **Zellij** - Terminal multiplexer (tabs, panes, persistent sessions)
 - **Claude Code** - AI coding assistant (CLI, not GUI)
 - **Oh My Zsh** - Shell with custom prompt
-- **Neovim / LazyVim** - IDE... (covered in a separate post `TODO: Link to other post`)
+- **Neovim / LazyVim** - Editor configuration (covered in a separate post)
 
-This post focuses on the terminal multiplexer (Zellij) and AI assistant (Claude Code CLI) experience. For editor setup (Neovim/LazyVim), see the [companion post](/drafts/neovim-lazyvim-rails-ssh/).
+This post focuses on the terminal multiplexer (Zellij) and AI assistant (Claude Code CLI) experience. For editor setup (Neovim/LazyVim), see the [companion post](/blog/2025/11/17/neovim-lazyvim-rails-ssh/).
 
 For setup details (config persistence, git signing fixes, port forwarding), see the [DevPod post](/blog/2025/11/11/devpod-ssh-devcontainers/).
 
@@ -438,7 +431,7 @@ There are complex workarounds involving symlinks and socket management. They're 
 
 **Flexibility:** Want to try a different multiplexer? Install it. Different shell? Configure it. Different editor? Use it. Not locked into an IDE's worldview.
 
-**Worktrees:** Multiple branches running simultaneously with dedicated ports/databases. See [git worktrees post](/drafts/git-worktrees-docker-parallel-development/) for details.
+**Worktrees:** Multiple branches running simultaneously with dedicated ports/databases. (Post on git worktrees with Docker coming soon!)
 
 **Learning:** Solving these friction points teaches you more about terminals, shells, and SSH than clicking buttons in an IDE ever would.
 

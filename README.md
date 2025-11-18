@@ -14,6 +14,14 @@ sudo snap install hugo
 
 Alternative installation methods: <https://gohugo.io/installation/>
 
+### Initial Setup
+
+After cloning the repository, initialize the theme submodule:
+
+```bash
+git submodule update --init --recursive
+```
+
 ### Content Structure
 
 This blog uses a dual-repository setup:
