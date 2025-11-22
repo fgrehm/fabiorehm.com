@@ -3,10 +3,17 @@
   "includeCoAuthoredBy": false,
   "permissions": {
     "allow": [
+      "Bash(git log:*)",
       "Bash(hugo:*)",
+      "Skill(blog-fact-checking)",
+      "Skill(blog-proofreading)",
+      "Skill(blog-publishing)",
+      "Skill(blog-resume)",
+      "Skill(blog-scaffolding)",
+      "Skill(blog-topic-research)",
+      "Skill(blog-voice-review)",
       "WebFetch(domain:github.com)",
-      "WebSearch",
-      "Bash(git log:*)"
+      "WebSearch"
     ],
     "deny": [],
     "ask": [
