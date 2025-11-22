@@ -1,6 +1,9 @@
 ---
 name: blog-voice-review
-description: Review blog content for authentic voice and tone. Use when checking if content sounds like Fabio's conversational, honest technical writing style.
+description: |
+  Review blog content for authentic voice and tone. Checks if content sounds like Fabio's conversational, honest technical writing style.
+  Trigger phrases: "voice", "voice review", "tone", "sounds like me", "authentic", "check voice", "voice check"
+allowed-tools: Read
 ---
 
 # Voice & Tone Review

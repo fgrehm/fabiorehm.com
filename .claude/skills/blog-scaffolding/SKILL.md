@@ -1,6 +1,9 @@
 ---
 name: blog-scaffolding
-description: Create new blog post structure for fabiorehm.com. Use when starting a new blog post - validates topic uniqueness, identifies personal angle, then creates scaffold through conversation.
+description: |
+  Create new blog post structure for fabiorehm.com. Validates topic uniqueness, identifies personal angle, then creates scaffold through conversation.
+  Trigger phrases: "new post", "write about", "scaffold", "create post", "start writing", "new blog post"
+allowed-tools: Read, Write, Grep, Glob, WebSearch
 ---
 
 # Blog Post Scaffolding

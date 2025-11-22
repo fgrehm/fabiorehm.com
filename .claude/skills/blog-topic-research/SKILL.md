@@ -1,6 +1,9 @@
 ---
 name: blog-topic-research
-description: Validate topic uniqueness and identify unique angles before writing. Use when considering a new blog post topic - prevents generic content and helps find your specific value.
+description: |
+  Validate topic uniqueness and identify unique angles before writing. Prevents generic content and helps find your specific value.
+  Trigger phrases: "topic research", "validate topic", "should I write", "is this unique", "research topic", "check topic"
+allowed-tools: Read, Grep, Glob, WebSearch
 ---
 
 # Blog Topic Research

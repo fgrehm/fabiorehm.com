@@ -1,9 +1,41 @@
 ---
 name: blog-publishing
-description: Pre-publish validation and checklist for blog posts. Use when preparing to publish a post - runs checks and walks through final review.
+description: |
+  Pre-publish validation and checklist for blog posts. Runs automated checks, optional research, and final review before publishing.
+  Trigger phrases: "publish", "ship it", "ready to publish", "go live", "pre-publish", "publish post"
+allowed-tools: Read, Bash, Grep, WebSearch, WebFetch
 ---
 
 # Publishing Workflow
+
+## 0. Pre-Publishing Review
+
+**Before running automated checks, confirm content readiness:**
+
+Check the conversation history for evidence of prior reviews:
+- Look for "blog-voice-review skill is running" or voice review results
+- Look for "blog-proofreading skill is running" or proofreading results
+- Check for link testing (curl commands), formatting checks, etc.
+
+**If reviews were already done in this conversation:**
+- Note that and proceed directly to automated checks
+- Example: "I see you already did voice review and proofreading earlier, let's run the validation checks..."
+
+**If no evidence of reviews, suggest running them:**
+
+```
+Before we publish, let's make sure the content is ready:
+
+- Voice review: checks for authentic voice, personal experience, conversational tone
+- Proofreading: tests links, checks formatting, reviews flow
+- Fact checking: verifies claims against sources (if applicable)
+
+Want to run voice review and proofreading now? Or skip to publishing validation?
+```
+
+**If user confirms they're done or wants to skip, proceed to automated checks.**
+
+The typical publishing readiness pattern is: **write → voice → facts (if needed) → proofread → publish**
 
 ## 1. Automated Checks
 

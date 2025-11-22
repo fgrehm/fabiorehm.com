@@ -1,6 +1,9 @@
 ---
 name: blog-resume
-description: Resume work on blog posts - both in-progress drafts and published posts needing updates. Use when returning to continue work on any post.
+description: |
+  Resume work on blog posts - both in-progress drafts and published posts needing updates. Restores context when returning to continue work.
+  Trigger phrases: "resume", "continue", "work on", "update post", "continue working", "resume post", "continue post"
+allowed-tools: Read, Grep
 ---
 
 # Resume Blog Post Work

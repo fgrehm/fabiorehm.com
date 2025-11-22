@@ -1,6 +1,9 @@
 ---
 name: blog-fact-checking
-description: Verify claims against referenced sources. Use when checking if blog content accurately represents external resources, APIs, or documentation.
+description: |
+  Verify claims against referenced sources. Checks if blog content accurately represents external resources, APIs, or documentation.
+  Trigger phrases: "fact check", "verify", "check claims", "verify claims", "check sources", "verify sources"
+allowed-tools: Read, WebFetch
 ---
 
 # Fact Checking

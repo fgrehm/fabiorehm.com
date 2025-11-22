@@ -1,6 +1,9 @@
 ---
 name: blog-proofreading
-description: Check blog posts for flow, broken links, and formatting issues. Use when content is ready for technical review.
+description: |
+  Check blog posts for flow, broken links, and formatting issues. Technical review for content ready to publish.
+  Trigger phrases: "proofread", "check links", "formatting", "technical review", "check formatting", "review links"
+allowed-tools: Read, Bash, WebFetch
 ---
 
 # Proofreading
