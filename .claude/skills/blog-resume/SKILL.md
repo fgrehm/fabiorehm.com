@@ -29,6 +29,13 @@ allowed-tools: Read, Grep
 - Identify sections with content vs placeholders
 - Note what's written vs what's outlined
 
+**Check for accumulated notes:**
+- If draft has lots of detailed notes/changelogs from previous sessions
+- Consider reorganizing with `<details><summary>` blocks
+- Collapse reference material, detailed logs, iteration notes
+- Keep main structure clean with TODOs for narrative writing
+- Example: "Detailed iteration changelog" → collapsed, leaving just outcome visible
+
 **Search conversation history** (if helpful):
 - Use `conversation_search` to find prior discussions
 - Look for: decisions made, angles explored, context

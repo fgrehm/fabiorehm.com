@@ -105,6 +105,12 @@ What's your specific experience with this that would add genuine value beyond wh
    - Mark sections that need the author's voice
    - Reference the validated unique angle in TODO guidance
 
+4. **Collapse reference material:**
+   - Use `<details><summary>` blocks for research findings, examples, technical notes
+   - Example: Research findings from external search → collapsed under "Research findings for reference"
+   - Example: Technical examples or code snippets → collapsed under "Technical details"
+   - Keeps the main structure clean while preserving context for writing
+
 ## Frontmatter Template
 
 ```yaml
