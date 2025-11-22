@@ -19,8 +19,12 @@ allowed-tools: Read, Bash, WebFetch
 ### 2. Links
 - Test external URLs resolve (use `web_fetch` or `curl -I`)
 - Check internal links exist
+- **Convert inline URLs to reference-style links:**
+  - Inline format: `[text](https://example.com)` → should be `[text][ref-name]`
+  - All references defined at bottom of post in format: `[ref-name]: https://example.com`
+  - Check for any raw URLs like `https://example.com` that should be wrapped in links
 - Verify reference-style links formatted correctly: `[text][ref]`
-- References defined at bottom of post
+- Verify all reference definitions exist at bottom
 
 ### 3. Formatting
 - Code blocks have language tags: ```bash, ```python, etc.
