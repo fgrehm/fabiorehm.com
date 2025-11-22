@@ -45,7 +45,7 @@ I then work from inside that zellij session and the browser on my machine:
 - App is accessible from `localhost:3000` in the browser
 - Other Zellij tabs / panes are used to run tests, edit files with nvim, use Claude Code, run migrations, etc
 
-The only "special" thing I do is pass `-s work` to zellij to ensure I have a distinct name for the window when alt tabbing between multiple terminals. Other than that, I currently don't use any [complex layouts](https://zellij.dev/documentation/layouts.html) - just SSH in, start zellij and GSD.
+The only "special" thing I do is pass `-s work` to zellij to ensure I have a distinct name for the window when alt tabbing between multiple terminals. Other than that, I currently don't use any [complex layouts][zellij-layouts] - just SSH in, start zellij and GSD.
 
 **NOTE:** `bin/dpod` is a wrapper script that makes DevPod easier to use in my environment. See the [DevPod post's "Workspace Stickiness" section](/blog/2025/11/11/devpod-ssh-devcontainers/#workspace-stickiness) for the full implementation.
 
@@ -57,13 +57,13 @@ The only big issue I have atm is SSH agent forwarding for git operations (signin
 
 ### Zellij
 
-Zellij is a terminal multiplexer - a tool that lets you run multiple terminal sessions inside a single window with tabs and panes. If you're new to the concept, check out [this Zellij vs tmux comparison guide](https://typecraft.dev/tutorial/zellij-vs-tmux) for an introduction.
+Zellij is a terminal multiplexer - a tool that lets you run multiple terminal sessions inside a single window with tabs and panes. If you're new to the concept, check out [this Zellij vs tmux comparison guide][zellij-vs-tmux] for an introduction.
 
 #### The Friction
 
 The main issue I ran into was keyboard shortcuts. Zellij's defaults intercept a bunch of shortcuts I need for Claude Code and nvim - `Ctrl+T` (Claude's todo toggle), `Ctrl+O` (view thinking), `Ctrl+G` (edit in nvim). Pretty annoying when you're trying to work and half your shortcuts don't fire.
 
-The fix is Zellij's ["Unlock-First" preset](https://zellij.dev/documentation/keybinding-presets.html#the-unlock-first-non-colliding-preset) - it works like tmux's prefix key. Default state is "locked" (shortcuts pass through to your apps), then you hit `Ctrl+G` to unlock and access Zellij modes with single keys (`p` for panes, `t` for tabs). Navigation with `Alt+Arrow` works in all modes.
+The fix is Zellij's ["Unlock-First" preset][zellij-unlock-first] - it works like tmux's prefix key. Default state is "locked" (shortcuts pass through to your apps), then you hit `Ctrl+G` to unlock and access Zellij modes with single keys (`p` for panes, `t` for tabs). Navigation with `Alt+Arrow` works in all modes.
 
 To enable it: `Ctrl+O` -> `C` (config menu) -> select "Unlock-First (non-colliding)" -> **`Ctrl+A` to save** (not just Enter!).
 
@@ -96,7 +96,7 @@ Beyond unlock-first, I added these to my `~/.config/zellij/config.kdl` for more 
 - `Ctrl+PageUp/Down` - Browser-style tab navigation
 - `Ctrl+Shift+PageUp/Down` - Move tabs left/right
 
-See Zellij's [swap layouts](https://zellij.dev/documentation/swap-layouts) if you want to make `Alt+N` placement deterministic based on pane count.
+See Zellij's [swap layouts][zellij-swap-layouts] if you want to make `Alt+N` placement deterministic based on pane count.
 
 _NOTE: I should push the full config to GitHub at some point_
 
@@ -104,7 +104,7 @@ _NOTE: I should push the full config to GitHub at some point_
 
 ### Claude Code CLI
 
-Claude Code runs via CLI, integrating directly into my terminal workflow: it runs where my code runs. As a side effect of this setup, I no longer suffer from the [terminal scrolling bug](https://github.com/anthropics/claude-code/issues/826) that causes frequent "stroboscope effects" that I experienced in Cursor.
+Claude Code runs via CLI, integrating directly into my terminal workflow: it runs where my code runs. As a side effect of this setup, I no longer suffer from the [terminal scrolling bug][claude-code-scrolling-bug] that causes frequent "stroboscope effects" that I experienced in Cursor.
 
 The keyboard shortcuts conflict with Zellij's default, but I solved by using unlock-first mode and my custom shortcuts (covered earlier). The thing that I still could not get working was image pasting, but that's something I could not get working in Cursor either. For now I just get my screenshots into a file at `tmp/` and `@tmp/file.png` when I want Claude to read it.
 
@@ -174,13 +174,23 @@ For me, this is a workflow I'm comfortable with - just needed to adapt to new to
 
 **Official Documentation:**
 
-- [Zellij Documentation](https://zellij.dev/documentation/)
-- [Claude Code Documentation](https://code.claude.com/docs/claude)
+- [Zellij Documentation][zellij-docs]
+- [Claude Code Documentation][claude-code-docs]
 
 **Related Posts:**
 
 - [DevPod: SSH-Based Devcontainers](/blog/2025/11/11/devpod-ssh-devcontainers/) - DevPod setup and SSH access
 - [Neovim and LazyVim for Rails Development](/blog/2025/11/20/neovim-lazyvim-rails-ssh/) - Editor setup, Ruby LSP, and configuration
-- [Zellij as Part of Your Development Workflow](https://haseebmajid.dev/posts/2024-12-18-part-7-zellij-as-part-of-your-development-workflow/) - Practical Zellij setup guide (Dec 2024)
-- [Terminal-Based Development with Neovim, tmux, and CLI Tools](https://joshuamichaelhall.com/blog/2025/03/23/terminal-based-development-environment/) - Full terminal setup walkthrough (March 2025)
-- [Zellij vs Tmux](https://typecraft.dev/tutorial/zellij-vs-tmux) - Feature comparison for choosing a multiplexer
+- [Zellij as Part of Your Development Workflow][haseeb-zellij] - Practical Zellij setup guide (Dec 2024)
+- [Terminal-Based Development with Neovim, tmux, and CLI Tools][joshua-terminal-dev] - Full terminal setup walkthrough (March 2025)
+- [Zellij vs Tmux][zellij-vs-tmux] - Feature comparison for choosing a multiplexer
+
+[zellij-layouts]: https://zellij.dev/documentation/layouts.html
+[zellij-vs-tmux]: https://typecraft.dev/tutorial/zellij-vs-tmux
+[zellij-unlock-first]: https://zellij.dev/documentation/keybinding-presets.html#the-unlock-first-non-colliding-preset
+[zellij-swap-layouts]: https://zellij.dev/documentation/swap-layouts
+[claude-code-scrolling-bug]: https://github.com/anthropics/claude-code/issues/826
+[zellij-docs]: https://zellij.dev/documentation/
+[claude-code-docs]: https://code.claude.com/docs/claude
+[haseeb-zellij]: https://haseebmajid.dev/posts/2024-12-18-part-7-zellij-as-part-of-your-development-workflow/
+[joshua-terminal-dev]: https://joshuamichaelhall.com/blog/2025/03/23/terminal-based-development-environment/

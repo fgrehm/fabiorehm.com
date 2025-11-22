@@ -20,7 +20,7 @@ _**NOTE:** This is Part 3 of the [Modernizing my Terminal-Based Development Envi
 
 ## The Editor Setup
 
-When you SSH into a devcontainer, you have two choices: use a terminal-based editor (nvim, vim, nano) or use an IDE with [remote development extensions](https://code.visualstudio.com/docs/remote/ssh) (VS Code and others handle this pretty well). I chose Neovim with [LazyVim](https://www.lazyvim.org/) - a preconfigured Neovim distribution with sane defaults, LSP support, and a plugin ecosystem.
+When you SSH into a devcontainer, you have two choices: use a terminal-based editor (nvim, vim, nano) or use an IDE with [remote development extensions][vscode-remote-ssh] (VS Code and others handle this pretty well). I chose Neovim with [LazyVim][lazyvim] - a preconfigured Neovim distribution with sane defaults, LSP support, and a plugin ecosystem.
 
 Once a vim user, always a vim user. I was even using vim keybindings in Cursor, so going back to actual Neovim felt natural.
 
@@ -38,7 +38,7 @@ Installation happens through the custom DevPod setup scripts:
 
 ### Clipboard Integration (OSC 52)
 
-Copying from nvim to host clipboard works perfectly via [OSC 52](https://github.com/ojroques/vim-oscyank#what-is-osc-52) (a terminal escape sequence for clipboard operations)!
+Copying from nvim to host clipboard works perfectly via [OSC 52][osc52] (a terminal escape sequence for clipboard operations)!
 
 - Yank text with `yy` in nvim inside the container, paste on host with `Ctrl+V` / `Ctrl+Shift+V`
 - For pasting FROM host clipboard INTO nvim I just use terminal paste (`Ctrl+Shift+V`) in insert mode. OSC 52 paste doesn't seem to work reliably in nvim and causes weird timeout issues.
@@ -47,7 +47,7 @@ My learning here was that OSC 52 is basically one-directional for this workflow 
 
 ### Multi-Cursor Editing
 
-[vim-visual-multi](https://github.com/mg979/vim-visual-multi) works great for [`Ctrl+N` style multi-cursor](https://www.sublimetext.com/docs/multiple_selection_with_the_keyboard.html) (popularized by Sublime Text). Select a word, press `Ctrl+N` to add next occurrence, edit simultaneously. Works great for quick refactoring.
+[vim-visual-multi][vim-visual-multi] works great for [`Ctrl+N` style multi-cursor][sublime-multicursor] (popularized by Sublime Text). Select a word, press `Ctrl+N` to add next occurrence, edit simultaneously. Works great for quick refactoring.
 
 **Usage:**
 1. Put cursor on a word
@@ -59,21 +59,21 @@ My learning here was that OSC 52 is basically one-directional for this workflow 
 
 ### Global Find and Replace
 
-LazyVim ships with [grug-far](https://github.com/MagicDuck/grug-far.nvim) (`<leader>sr`) for project-wide search/replace with visual preview. The interface is a bit unintuitive at first (look for keybinding hints in status bar), but powerful once you get it.
+LazyVim ships with [grug-far][grug-far] (`<leader>sr`) for project-wide search/replace with visual preview. The interface is a bit unintuitive at first (look for keybinding hints in status bar), but powerful once you get it.
 
 ## The Friction
 
 ### Ruby LSP Setup
 
-Getting Ruby LSP working took some troubleshooting. LazyVim's default setup uses [Mason](https://github.com/williamboman/mason.nvim) to manage LSP servers, which is convenient for most languages but didn't work well for Rails - the globally installed ruby-lsp didn't have access to my project's gems from the Gemfile.
+Getting Ruby LSP working took some troubleshooting. LazyVim's default setup uses [Mason][mason-nvim] to manage LSP servers, which is convenient for most languages but didn't work well for Rails - the globally installed ruby-lsp didn't have access to my project's gems from the Gemfile.
 
-After pairing with Claude Code, I found [adam12/ruby-lsp.nvim](https://github.com/adam12/ruby-lsp.nvim) as the solution. See the configuration details below for the full setup.
+After pairing with Claude Code, I found [adam12/ruby-lsp.nvim][ruby-lsp-nvim] as the solution. See the configuration details below for the full setup.
 
 ### Ruby LSP Performance with Git Worktrees
 
-I use [git worktrees](https://git-scm.com/docs/git-worktree) to work on multiple branches simultaneously, and ran into a performance issue: each worktree creates its own ruby-lsp index independently. So if you have 3 worktrees, each one will create its own `.ruby-lsp/` directory and re-index the entire project + all gems from scratch. No shared caching between them.
+I use [git worktrees][git-worktree] to work on multiple branches simultaneously, and ran into a performance issue: each worktree creates its own ruby-lsp index independently. So if you have 3 worktrees, each one will create its own `.ruby-lsp/` directory and re-index the entire project + all gems from scratch. No shared caching between them.
 
-Index caching doesn't seem to be implemented yet, so you're stuck with 3x indexing time if you have 3 worktrees. There are open feature requests for this ([Issue #1040](https://github.com/Shopify/ruby-lsp/issues/1040) for project-based caching, [Issue #1009](https://github.com/Shopify/ruby-lsp/issues/1009) for gem caching).
+Index caching doesn't seem to be implemented yet, so you're stuck with 3x indexing time if you have 3 worktrees. There are open feature requests for this ([Issue #1040][ruby-lsp-issue-1040] for project-based caching, [Issue #1009][ruby-lsp-issue-1009] for gem caching).
 
 I haven't tried this yet, but you can reduce indexing time by excluding unnecessary files and gems via `.ruby-lsp/config.yml` in your project root. The config lets you exclude test files, gems you never navigate to (like rubocop, rspec internals, factory_bot, etc.), and include gems that are normally excluded (development group gems and test files are excluded by default). Here's an example:
 
@@ -111,9 +111,9 @@ Note: `.index.yml` is deprecated, use `.ruby-lsp/config.yml` instead. Changes re
 
 ### Navigation Between Nvim Splits and Zellij Panes
 
-I tried getting seamless Alt+Arrow navigation between nvim splits and Zellij panes working with [zellij-nav.nvim](https://github.com/swaits/zellij-nav.nvim), but it requires [zellij-autolock](https://github.com/fresh2dev/zellij-autolock) which messed up my Zellij setup.
+I tried getting seamless Alt+Arrow navigation between nvim splits and Zellij panes working with [zellij-nav.nvim][zellij-nav], but it requires [zellij-autolock][zellij-autolock] which messed up my Zellij setup.
 
-For now I just use `Ctrl+W` `H/J/K/L` for nvim splits and `Alt+Arrow` for Zellij panes - different keybindings, but no mode switching headaches. I'll come back to this another time and see if I can get things working like I used to have in [my "old" tmux days](https://github.com/christoomey/vim-tmux-navigator).
+For now I just use `Ctrl+W` `H/J/K/L` for nvim splits and `Alt+Arrow` for Zellij panes - different keybindings, but no mode switching headaches. I'll come back to this another time and see if I can get things working like I used to have in [my "old" tmux days][vim-tmux-navigator].
 
 ## LazyVim Configuration Details
 
@@ -363,15 +363,32 @@ Overall, it's great. The friction is acceptable and I'm learning more about my t
 
 **Official Documentation:**
 
-- [LazyVim](https://www.lazyvim.org/)
-- [Neovim](https://neovim.io/)
-- [adam12/ruby-lsp.nvim](https://github.com/adam12/ruby-lsp.nvim)
-- [Ruby LSP Official Docs](https://shopify.github.io/ruby-lsp/)
-- [vim-visual-multi](https://github.com/mg979/vim-visual-multi)
-- [grug-far](https://github.com/MagicDuck/grug-far.nvim)
+- [LazyVim][lazyvim]
+- [Neovim][neovim]
+- [adam12/ruby-lsp.nvim][ruby-lsp-nvim]
+- [Ruby LSP Official Docs][ruby-lsp-docs]
+- [vim-visual-multi][vim-visual-multi]
+- [grug-far][grug-far]
 
 **Related Posts:**
 
 - [DevPod: SSH-Based Devcontainers](/blog/2025/11/11/devpod-ssh-devcontainers/) - DevPod setup
 - [Using Zellij and Claude Code Over SSH](/blog/2025/11/19/using-zellij-and-claude-code-over-ssh/) - Daily terminal workflow
-- [Index Caching Feature Request #1040](https://github.com/Shopify/ruby-lsp/issues/1040)
+- [Index Caching Feature Request #1040][ruby-lsp-issue-1040]
+
+[vscode-remote-ssh]: https://code.visualstudio.com/docs/remote/ssh
+[lazyvim]: https://www.lazyvim.org/
+[osc52]: https://github.com/ojroques/vim-oscyank#what-is-osc-52
+[vim-visual-multi]: https://github.com/mg979/vim-visual-multi
+[sublime-multicursor]: https://www.sublimetext.com/docs/multiple_selection_with_the_keyboard.html
+[grug-far]: https://github.com/MagicDuck/grug-far.nvim
+[mason-nvim]: https://github.com/williamboman/mason.nvim
+[ruby-lsp-nvim]: https://github.com/adam12/ruby-lsp.nvim
+[git-worktree]: https://git-scm.com/docs/git-worktree
+[ruby-lsp-issue-1040]: https://github.com/Shopify/ruby-lsp/issues/1040
+[ruby-lsp-issue-1009]: https://github.com/Shopify/ruby-lsp/issues/1009
+[zellij-nav]: https://github.com/swaits/zellij-nav.nvim
+[zellij-autolock]: https://github.com/fresh2dev/zellij-autolock
+[vim-tmux-navigator]: https://github.com/christoomey/vim-tmux-navigator
+[neovim]: https://neovim.io/
+[ruby-lsp-docs]: https://shopify.github.io/ruby-lsp/
