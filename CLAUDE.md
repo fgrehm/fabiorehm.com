@@ -21,6 +21,13 @@
 - Don't create generic content - always push for personal experience
 - Don't assume what the conclusion should be
 - Don't remove the authentic voice in favor of "cleaner" writing
+- Don't add structure that wasn't in the original brain dump
+- Don't smooth over struggle and frustration - they're features, not bugs
+- Don't sanitize casual language: keep "PITA", "HUGE", ALL CAPS emphasis, emoticons :)
+- Don't remove personal disclaimers like "I'm not 100% sure" or "I'm not a X guy"
+- Don't hide iterative attempts - "this is my third attempt" builds credibility
+
+**If the post could work as official documentation, you've gone too far.**
 
 ## Git Commit Guidelines
 
