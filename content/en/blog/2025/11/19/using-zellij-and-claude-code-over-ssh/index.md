@@ -1,14 +1,16 @@
 ---
 title: "Using Zellij and Claude Code Over SSH"
 date: 2025-11-19
-draft: true
 description: "What it's actually like to use SSH-based development with Zellij and Claude Code CLI. The good parts, the gotchas, and the friction that IDE users don't deal with."
 tags:
   - terminal
+  - terminal-multiplexer
   - zellij
   - ssh
+  - remote-development
   - workflow
   - claude-code
+  - mcp-servers
   - devpod
 ---
 

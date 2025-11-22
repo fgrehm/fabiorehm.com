@@ -1,14 +1,16 @@
 ---
 title: "Neovim and LazyVim for Rails Development over SSH"
 date: 2025-11-20
-draft: true
-description: "Setting up Neovim with LazyVim for Rails development over SSH: clipboard integration, Ruby LSP configuration, multi-cursor editing, and honest gotchas."
+description: "Using Neovim and LazyVim for Rails development over SSH - the good parts, the LSP friction, and what keeps me in the terminal anyway."
 tags:
   - neovim
+  - vim
   - lazyvim
   - rails
   - ruby-lsp
   - ssh
+  - remote-development
+  - osc52
   - workflow
 ---
 
