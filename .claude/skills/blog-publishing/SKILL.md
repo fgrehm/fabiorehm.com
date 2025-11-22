@@ -103,9 +103,9 @@ Walk through interactively:
 - [ ] Conversational and authentic voice?
 - [ ] Technical concepts explained accessibly?
 - [ ] Honest about limitations?
-- [ ] Credits and attributions included?
 - [ ] Links tested and working?
-- [ ] Invitation for feedback at end?
+- [ ] Credits/attributions where appropriate? (optional - not every post needs this)
+- [ ] Closing feels natural? (no required format - some posts just end)
 
 ## 4. Final Publishing Steps
 

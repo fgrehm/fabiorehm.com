@@ -58,16 +58,24 @@ description: Resume work on blog posts - both in-progress drafts and published p
 - Identify where in post it fits
 - Suggest structure for the update
 
-**Updates section pattern:**
-If adding significant updates, suggest adding/using Updates section at end:
+**Update patterns - two approaches:**
 
+**Inline updates (preferred for corrections/evolution):**
+```markdown
+<s>Old information that's no longer accurate</s>
+_**UPDATE**: As of version X, this now works differently because...
+```
+
+**Updates section (for substantial additions):**
 ```markdown
 ## Updates
 
 ### October 30, 2025
-Brief summary of what changed and why. Keep it conversational 
+Brief summary of what changed and why. Keep it conversational
 and honest about what you learned or what broke.
 ```
+
+Use inline updates when showing evolution of thinking in context. Use Updates section for substantial new content that doesn't fit inline.
 
 **Update plan:**
 ```

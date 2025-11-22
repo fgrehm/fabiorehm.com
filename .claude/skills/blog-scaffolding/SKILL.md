@@ -118,19 +118,19 @@ description: "TODO(@fabio): Add one-line description for SEO"
 
 **Note**: Post stays in `/content/en/drafts/` until ready to publish. When publishing, move to `/content/en/blog/YYYY/MM/DD/slug/` and update date.
 
-## Post Structure Patterns
+## Structural Notes
 
-### Opening Approaches
-- **Problem Statement**: Start by identifying a pain point or need
-- **Context Setting**: Provide background about situation or experience
-- **Tool/Project Introduction**: Directly introduce what you're announcing
+**Headers emerge from content organically** - don't prescribe structure. Examples from past posts show different approaches:
+- 2017 Serverless: "Background", "Why do I think...", "How did it go?", "TL;DR"
+- 2025 AI/Lazy: "The YAGNI Reality Check", "Tool Experimentation Journey"
+- 2025 VirtualBox: "The Problem", "The Solution", "Troubleshooting"
 
-### Common Section Headers
-- "Why bother?" / "Why do I think..." (motivation)
-- "How does it work?" (mechanics)
-- "What's next?" / "Future work" (future plans)
-- "Worth mentioning limitations" (honest about drawbacks)
-- "That's it!" / "Summing up" (conclusion)
+**Opening approaches vary:**
+- Jump straight into the problem/context
+- Start with personal background/motivation
+- Lead with "I've been doing X but..."
+
+Let the narrative dictate the structure, not a template.
 
 ## Anti-patterns
 
@@ -147,6 +147,9 @@ description: "TODO(@fabio): Add one-line description for SEO"
 - Generic examples instead of referencing validated personal experience
 - Assuming the conclusion
 - Missing the `draft: true` flag
+- Adding meta-framing sections: "Who This Is For", "What You'll Learn", "Key Takeaway:", "Prerequisites", etc.
+- Creating "The Bottom Line" or summary boxes
+- Over-structuring with series navigation boilerplate
 
 ## Relationship to blog-topic-research Skill
 
