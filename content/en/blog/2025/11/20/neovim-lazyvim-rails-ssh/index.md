@@ -75,40 +75,6 @@ I use [git worktrees][git-worktree] to work on multiple branches simultaneously,
 
 Index caching doesn't seem to be implemented yet, so you're stuck with 3x indexing time if you have 3 worktrees. There are open feature requests for this ([Issue #1040][ruby-lsp-issue-1040] for project-based caching, [Issue #1009][ruby-lsp-issue-1009] for gem caching).
 
-I haven't tried this yet, but you can reduce indexing time by excluding unnecessary files and gems via `.ruby-lsp/config.yml` in your project root. The config lets you exclude test files, gems you never navigate to (like rubocop, rspec internals, factory_bot, etc.), and include gems that are normally excluded (development group gems and test files are excluded by default). Here's an example:
-
-<details>
-<summary>Example .ruby-lsp/config.yml</summary>
-
-```yaml
-# Exclude test files (indexed by default)
-excluded_patterns:
-  - "spec/**/*.rb"
-  - "test/**/*.rb"
-  - "features/**/*.rb"
-
-# Exclude gems you never navigate to
-excluded_gems:
-  - "rubocop"
-  - "rubocop-rails"
-  - "rubocop-rspec"
-  - "rspec-core"
-  - "rspec-expectations"
-  - "rspec-mocks"
-  - "factory_bot"
-  - "faker"
-  - "debug"
-  - "web-console"
-
-# Include gems normally excluded (development group gems are excluded by default)
-included_gems:
-  - "ruby-lsp"  # if you want to navigate into ruby-lsp source
-```
-
-Note: `.index.yml` is deprecated, use `.ruby-lsp/config.yml` instead. Changes require restarting ruby-lsp (`:LspRestart` in Neovim).
-
-</details>
-
 ### Navigation Between Nvim Splits and Zellij Panes
 
 I tried getting seamless Alt+Arrow navigation between nvim splits and Zellij panes working with [zellij-nav.nvim][zellij-nav], but it requires [zellij-autolock][zellij-autolock] which messed up my Zellij setup.
