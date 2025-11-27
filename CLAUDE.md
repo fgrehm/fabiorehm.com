@@ -26,8 +26,22 @@
 - Don't sanitize casual language: keep "PITA", "HUGE", ALL CAPS emphasis, emoticons :)
 - Don't remove personal disclaimers like "I'm not 100% sure" or "I'm not a X guy"
 - Don't hide iterative attempts - "this is my third attempt" builds credibility
+- Don't make claims without sources - always cite where information came from
 
 **If the post could work as official documentation, you've gone too far.**
+
+## Citations and Sources
+
+When writing technical content that makes claims about how tools/systems work:
+
+- **Always cite sources** for factual claims about behavior, architecture, or features
+- **Distinguish between documented facts and interpretation**: "The docs say X" vs "This suggests Y"
+- **Link to primary sources**: Official docs, source code, release notes
+- **Be honest about synthesis**: If you're connecting dots from multiple sources, say so
+- **When uncertain**: Mark claims with "TODO(@claude): Verify this claim" and note what you're unsure about
+
+Good: "According to the [CLI reference][link], system prompts are processed before user messages."
+Bad: "System prompts are foundational behavioral rules" (without citing where this is documented)
 
 ## Git Commit Guidelines
 
@@ -48,7 +62,7 @@ This blog uses two separate git repositories:
 - Git commands: `git add`, `git commit`, `git push` (default, from project root)
 
 **Drafts repo (fgrehm/blog-drafts - private):**
-- Located at `/content/en/drafts/` (nested git repo, gitignored by main repo)
+- Located at `content/en/drafts/` (nested git repo, gitignored by main repo)
 - All draft posts and `_index.md`
 - Git commands: `git -C content/en/drafts add/commit/push`
 
@@ -64,12 +78,12 @@ This blog uses two separate git repositories:
 ## Content Workflow
 
 ### Draft Posts
-- All new posts start in `/content/en/drafts/slug/`
+- All new posts start in `content/en/drafts/slug/`
 - Visible at `/drafts/` when running dev server
 - No date path required until publishing
 
 ### Publishing
-- Move post from `/content/en/drafts/slug/` to `/content/en/blog/YYYY/MM/DD/slug/`
+- Move post from `content/en/drafts/slug/` to `content/en/blog/YYYY/MM/DD/slug/`
 - Update `date` field in frontmatter to publish date
 - Can remove `draft: true` from frontmatter (optional - location determines status)
 
