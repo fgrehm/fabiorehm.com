@@ -52,6 +52,6 @@ What daily development actually feels like with Zellij (terminal multiplexer) an
 
 Setting up Neovim with LazyVim for Rails development over SSH. Clipboard integration using OSC 52, Ruby LSP configuration with bundled gems (avoiding Mason's global installation for Rails projects), multi-cursor editing, global find/replace, and performance considerations when using git worktrees.
 
-### Part 4: Managing Parallel Git Branches in Devcontainers with Worktrees (Coming Soon)
+### Part 4: [Working on Multiple Branches Without Losing My Mind](/blog/2025/11/27/working-on-multiple-branches-without-losing-my-mind/)
 
-How I built a Git worktree manager for running multiple branches simultaneously - port allocation, database isolation, and branch-specific AI context that survives container recreation. Most git worktree guides focus on basic workflows; the devcontainer-specific challenges seeem to be largely unexplored.
+How I built a Git worktree manager for running multiple branches simultaneously - port allocation, database isolation, and branch-specific Claude Code context that survives container recreation.
