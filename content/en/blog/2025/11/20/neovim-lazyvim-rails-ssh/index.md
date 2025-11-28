@@ -1,6 +1,7 @@
 ---
 title: "Neovim and LazyVim for Rails Development over SSH"
 date: 2025-11-20
+lastmod: 2025-11-26
 description: "Using Neovim and LazyVim for Rails development over SSH - the good parts, the LSP friction, and what keeps me in the terminal anyway."
 tags:
   - neovim
@@ -65,15 +66,17 @@ LazyVim ships with [grug-far][grug-far] (`<leader>sr`) for project-wide search/r
 
 ### Ruby LSP Setup
 
-Getting Ruby LSP working took some troubleshooting. LazyVim's default setup uses [Mason][mason-nvim] to manage LSP servers, which is convenient for most languages but didn't work well for Rails - the globally installed ruby-lsp didn't have access to my project's gems from the Gemfile.
-
-After pairing with Claude Code, I found [adam12/ruby-lsp.nvim][ruby-lsp-nvim] as the solution. See the configuration details below for the full setup.
+The [Ruby LSP documentation recommends against using Mason][ruby-lsp-editors] for installation due to Ruby version and C extension compatibility issues. I followed their guidance and landed on a simple config (updated 2025-11-26 from the adam12 plugin approach) using LazyVim's native Ruby LSP support (available since v12.33.0) with `bundle exec ruby-lsp`. See the configuration details below for the full setup.
 
 ### Ruby LSP Performance with Git Worktrees
 
-I use [git worktrees][git-worktree] to work on multiple branches simultaneously, and ran into a performance issue: each worktree creates its own ruby-lsp index independently. So if you have 3 worktrees, each one will create its own `.ruby-lsp/` directory and re-index the entire project + all gems from scratch. No shared caching between them.
+I use [git worktrees][git-worktree] to work on multiple branches simultaneously, and ran into a performance issue: Ruby LSP reindexes the entire project every time you open Neovim. This isn't a bug - it's because Ruby LSP [doesn't have persistent index caching yet][ruby-lsp-issue-1040].
 
-Index caching doesn't seem to be implemented yet, so you're stuck with 3x indexing time if you have 3 worktrees. There are open feature requests for this ([Issue #1040][ruby-lsp-issue-1040] for project-based caching, [Issue #1009][ruby-lsp-issue-1009] for gem caching).
+For my work project, that's ~16 seconds of indexing on every nvim startup. With worktrees, each one creates its own `.ruby-lsp/` directory and re-indexes independently, so 3 worktrees = 3x the pain.
+
+I tested aggressive exclusions (specs, test gems, dev tools) via `init_options.indexing` config, but they made zero performance difference for my codebase - most of my files are application code, not tests/gems. Your mileage may vary depending on your project's test-to-code ratio.
+
+There are open feature requests for persistent caching ([Issue #1040][ruby-lsp-issue-1040] for project-based caching, [Issue #1009][ruby-lsp-issue-1009] for gem caching), but no ETA yet.
 
 ### Navigation Between Nvim Splits and Zellij Panes
 
@@ -224,11 +227,12 @@ return {
 <details>
 <summary>Ruby LSP Configuration</summary>
 
-Using [adam12/ruby-lsp.nvim](https://github.com/adam12/ruby-lsp.nvim) instead of Mason:
-- Use your project's bundled ruby-lsp gem (from Gemfile)
-- Run via `bundle exec ruby-lsp` ensuring correct Ruby version
-- Automatically configure lspconfig without Mason interference
-- Get Rails-specific code lens features (jump to views/routes, run tests, etc.)
+_Updated 2025-11-26: Simplified to use LazyVim's native Ruby LSP support instead of the [adam12/ruby-lsp.nvim][ruby-lsp-nvim] plugin._
+
+Using LazyVim's native Ruby LSP support (available since v12.33.0):
+- Use your project's bundled ruby-lsp gem via `bundle exec`
+- No extra plugins needed
+- Disable Mason to avoid version conflicts
 
 **Step 1: Ensure ruby-lsp is in Your Gemfile**
 
@@ -247,54 +251,17 @@ Create `~/.config/nvim/lua/plugins/ruby-lsp.lua`:
 
 ```lua
 return {
-  -- Use adam12/ruby-lsp.nvim to manage ruby-lsp with the correct Ruby version
-  {
-    "adam12/ruby-lsp.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "neovim/nvim-lspconfig",
-    },
-    ft = "ruby",
-    opts = {
-      -- Don't auto-install - use the bundled gem from Gemfile
-      auto_install = false,
-      -- Pass configuration to lspconfig
-      lspconfig = {
-        cmd = { "bundle", "exec", "ruby-lsp" },
-        init_options = {
-          formatter = "rubocop",
-          linters = { "rubocop" },
-        },
-      },
-    },
-  },
-
-  -- Disable Mason from managing ruby_lsp
-  {
-    "mason-org/mason-lspconfig.nvim",
-    optional = true,
-    opts = function(_, opts)
-      opts.ensure_installed = opts.ensure_installed or {}
-      -- Remove ruby_lsp from auto-install list
-      opts.ensure_installed = vim.tbl_filter(function(server)
-        return server ~= "ruby_lsp"
-      end, opts.ensure_installed)
-    end,
-  },
-
-  -- Prevent LazyVim from setting up ruby_lsp via default mechanism
   {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
         ruby_lsp = {
           mason = false,
+          cmd = { "bundle", "exec", "ruby-lsp" },
+          init_options = {
+            formatter = "rubocop",
+          },
         },
-      },
-      setup = {
-        ruby_lsp = function()
-          return true -- Skip default setup, handled by ruby-lsp.nvim
-        end,
       },
     },
   },
@@ -331,7 +298,6 @@ Overall, it's great. The friction is acceptable and I'm learning more about my t
 
 - [LazyVim][lazyvim]
 - [Neovim][neovim]
-- [adam12/ruby-lsp.nvim][ruby-lsp-nvim]
 - [Ruby LSP Official Docs][ruby-lsp-docs]
 - [vim-visual-multi][vim-visual-multi]
 - [grug-far][grug-far]
@@ -358,3 +324,4 @@ Overall, it's great. The friction is acceptable and I'm learning more about my t
 [vim-tmux-navigator]: https://github.com/christoomey/vim-tmux-navigator
 [neovim]: https://neovim.io/
 [ruby-lsp-docs]: https://shopify.github.io/ruby-lsp/
+[ruby-lsp-editors]: https://shopify.github.io/ruby-lsp/editors.html
