@@ -40,8 +40,35 @@ When writing technical content that makes claims about how tools/systems work:
 - **Be honest about synthesis**: If you're connecting dots from multiple sources, say so
 - **When uncertain**: Mark claims with "TODO(@claude): Verify this claim" and note what you're unsure about
 
-Good: "According to the [CLI reference][link], system prompts are processed before user messages."
-Bad: "System prompts are foundational behavioral rules" (without citing where this is documented)
+### Configuration Examples - CRITICAL
+
+**NEVER invent configuration formats, file paths, or API options:**
+
+- ❌ **Don't create example configs based on what "should" exist**
+- ❌ **Don't assume file formats (YAML, JSON, TOML) without verification**
+- ❌ **Don't invent configuration file paths** (e.g., `.tool-name/config.yml`)
+- ✅ **Only show configs you can cite from official docs or source code**
+- ✅ **When suggesting optimizations, search docs first, then present findings**
+- ✅ **If unsure, use TODO(@claude) and explain what needs verification**
+
+**Before writing any configuration example:**
+1. Search official documentation for the exact file format
+2. Verify the configuration options actually exist
+3. Link to the source where you found it
+4. If you can't find documentation, say "I couldn't find official docs for this" instead of guessing
+
+Good: "According to the [Ruby LSP editors guide](link), you can configure exclusions via `init_options.indexing.excludedGems`"
+Bad: "You can configure exclusions in `.ruby-lsp/config.yml`" (when this file format doesn't exist)
+
+### Real-World Verification
+
+When making performance claims or optimization suggestions:
+- **Test when possible**: If you're suggesting optimizations, note they're untested theories
+- **Acknowledge unknowns**: "This should reduce indexing time" vs "This reduces indexing time by 50%"
+- **Distinguish theory from measurement**: Make it clear when you're making educated guesses vs stating measured facts
+
+Good: "Excluding test files might reduce indexing time, though the actual impact depends on your project's test-to-code ratio"
+Bad: "This will reduce indexing from 30s to 15s" (without actually measuring)
 
 ## Git Commit Guidelines
 

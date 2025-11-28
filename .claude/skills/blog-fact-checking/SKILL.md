@@ -14,6 +14,8 @@ allowed-tools: Read, WebFetch
 - Quotes and attributions
 - Technical specifications
 - Links match what's claimed in text
+- **Configuration examples** (file paths, formats, options)
+- **Performance claims** (optimization suggestions, benchmark numbers)
 
 ## Process
 
@@ -35,6 +37,35 @@ allowed-tools: Read, WebFetch
    - ✅ Verified: matches source
    - ⚠️ Outdated: source has changed
    - ❌ Mismatch: claim doesn't match source
+   - 🚨 Hallucinated: config format/option doesn't exist in docs
+
+## Configuration Examples - Special Scrutiny
+
+**CRITICAL**: Configuration examples are high-risk for hallucination. Before approving any config:
+
+1. **Verify the file path exists in official docs**
+   - `.tool-name/config.yml` - does this file format exist?
+   - `config/settings.json` - is this the documented path?
+
+2. **Verify the configuration options**
+   - Are the option names exactly as documented?
+   - Are the data types correct (array vs object vs string)?
+   - Are nested paths correct?
+
+3. **Check for deprecated formats**
+   - Has the config format changed in recent versions?
+   - Are we showing old patterns that no longer work?
+
+4. **Common hallucination patterns to watch for:**
+   - Inventing `.hidden-dir/config.yml` files
+   - Creating YAML configs when tool uses TOML or JSON
+   - Mixing up config locations (LSP `init_options` vs separate config files)
+   - Assuming config file exists because directory exists (e.g., `.ruby-lsp/` ≠ `.ruby-lsp/config.yml`)
+
+**Red flags:**
+- "You can configure X via `some/path.yml`" without a documentation link
+- Config examples with TODO(@claude) markers still in them
+- Performance claims without measurements ("this reduces time by 50%")
 
 ## Not Exhaustive
 This is **targeted checking**, not an audit of every claim. User points to specific sections they want verified.
