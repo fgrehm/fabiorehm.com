@@ -12,7 +12,7 @@ description: "An alternative to 'No AI Days' - flip the roles and use Claude as 
 
 [A few months ago](/blog/2025/08/29/afraid-ai-would-make-me-lazy/), I wrote about overcoming my fear that AI tools would make me lazy as a developer. I found [Claude Code fit my terminal workflow](/blog/2025/11/11/modernizing-my-terminal-based-dev-environment/), and I thought I'd solved the problem by doing _augmented coding_, not _vibe coding_, while still being in the "driver's seat". Except I wasn't really driving _that much_ anymore.
 
-I was writing prompts and doing what some call Spec Driven Development with [agent-os][agent-os]. I was also reviewing code properly, asking for changes, catching bugs, maintaining standards, etc. But the pattern was always the same: I'd describe what I needed, Claude would implement it, and I'd review. Rinse and repeat. I was becoming a really good code reviewer and prompt engineer, but after some time I realized I was writing very little code myself (something I've been enjoying to do for almost 20 years now).
+I was writing prompts and doing what some call Spec Driven Development with [agent-os][agent-os]. I was also reviewing code properly, asking for changes, catching bugs, maintaining standards, etc. But the pattern was always the same: I'd describe what I needed, Claude would implement it, and I'd review. Rinse and repeat. I was spending most of my time reviewing code and writing prompts, but after some time I realized I was writing very little code myself (something I've been enjoying doing for almost 20 years now).
 
 What got me thinking about this was that over time I started noticing how it felt _easier_ to explain what I wanted than to just write. Not because the task was hard, it was just easier to describe than implement. That didn't sit right though. The augmented / vibe coding approach is very passive and we all seem to become "mere reviewers" instead of builders.
 
@@ -22,7 +22,7 @@ Before it was too late, I tried an experiment: what if I flipped the roles? What
 
 ## "Flip the roles"?!
 
-A lot of people describe AI coding tools as "having an intern" - you tell it what to do, it does the work, you review. But that's not pair programming the way I learned and experienced at ThoughtWorks back in 2011 when I first experienced it full time. What most of us are doing is "delegation with oversight".
+A lot of people describe AI coding tools as "having an intern" - you tell it what to do, it does the work, you review. But that's not pair programming the way I first experienced it at ThoughtWorks back in 2011. What most of us are doing is "delegation with oversight".
 
 The way most of us use AI coding tools is like being permanently in the navigator seat (reviewing AI output) while AI is permanently the driver (writing all the code). That's not pairing - it's just like having a very fast intern who never learns to navigate.
 
@@ -34,7 +34,8 @@ This post is about my journey getting Claude Code to behave like a "proper pair 
 
 ## Teaching Claude to navigate
 
-I've been iterating on this for almost a month now. Four different approaches at different levels of "the stack", each one teaching me something about what actually makes instructions stick.
+
+I've been iterating on this for almost a month now. Four different approaches at different levels of "the stack" - context files, append prompts, full system prompt replacement, and finally output styles - each one teaching me something about what actually makes instructions stick.
 
 All of the iterations were based on a collaboration between me pointing out what was wrong and Claude doing some self reflection + explaining why changes were being proposed.
 
@@ -82,7 +83,11 @@ The key difference from system prompt replacement: this works *with* Claude Code
 
 The real insight came from identifying where Claude naturally drifts into implementation mode. Five specific patterns kept appearing:
 
-First, the research-to-action slide - running read-only commands then flowing directly into "here's what I'll change" without stopping. Second, describing exact file paths and line numbers, which feels like navigation but is actually implementation territory. Third, assuming forward motion after presenting options. Fourth, tool classification ambiguity about what requires driver mode. Fifth, the general confusion between describing changes versus making them.
+1. The research-to-action slide - running read-only commands then flowing directly into "here's what I'll change" without stopping
+2. Describing exact file paths and line numbers, which feels like navigation but is actually implementation territory
+3. Assuming forward motion after presenting options
+4. Tool classification ambiguity about what requires driver mode
+5. The general confusion between describing changes versus making them
 
 Each feature in the output style targets one of these drift patterns:
 
@@ -103,34 +108,27 @@ Writing code myself forced me to actually understand what needed to change. I ca
 
 The navigator role extended beyond code review to the whole engineering workflow: commit strategy planning, identifying what needs stakeholder clarification, strategic thinking about "what's left to do." This isn't just "review my code" - it's a thinking partner for engineering work.
 
-There was a typo catch that was a concrete win: Claude found `task_assigments` (missing 'n') in 4 different files - model associations and controller queries. I had written the code myself, checked it visually, and thought I was done. That typo would probably get caught by another colleague during code review as well, but Claude caught it first before I even committed the change. It's cool to have a "second pair of eyes" catching what you miss when you're deep in implementation.
+There was a typo catch that was a concrete win: Claude found `task_assigments` (missing 'n') in 4 different files during a code review - model associations and controller queries. I had written the code myself, checked it visually, and thought I was done. That typo would probably get caught by another colleague during code review as well, but Claude caught it first before I even committed the change. It's cool to have a "second pair of eyes" catching little things like this when you're deep in implementation.
 
 ### The friction
 
-Yes, it's slower. But part of that slowness is *thinking* - engaging with the problem instead of accepting solutions. For learning or maintaining skills, the extra time is probably worth it. For production crunch time, maybe not.
+Yes, this is slower. But part of that slowness is because we are actively *thinking* and engaging with the problem instead of accepting solutions. For learning or maintaining skills, the extra time is probably worth it. For production crunch time, maybe not.
 
-The rigid "navigator only" mode didn't match how I actually worked. Real pattern: "Now get out of NAVIGATOR mode and just do the work" mid-conversation, then "let's get back to business" to resume navigator mode. Back and forth as needed. The output style needed to support ping-pong, not strict single-mode sessions.
+Another thing that required some tweaking was the rigid "navigator only" mode I initially wanted to do which didn't match how I wanted to work. Real pattern: "Now get out of NAVIGATOR mode and just do the work" mid-conversation, then "let's get back to business" to resume navigator mode. Back and forth as needed. The output style needed to support ping-pong, not strict single-mode sessions.
 
 ### The surprise
 
-Over time the mode switching became trivial. I expected it to be complicated or require restarting conversations. Instead: I'd say "you take over", Claude would say "Got it! Switching to execution mode..." and just do it. No ceremony, no confusion. This was way more practical than I expected.
+Over time the mode switching became trivial. I expected it to be complicated or require restarting conversations. Instead: I can just say "you take over", Claude says "Got it! Switching to execution mode..." and just does it. No ceremony, no confusion. This was way more practical than I expected.
 
-## When to use this
+## When will I use this
 
-Probably not every day, at least not for everything. My team is small and the company is growing - I need to move faster than what "write every line yourself" allows now that I got used to this.
+I won't use this for everything - my team is small and the company is growing, and I've already gotten used to moving faster than "write every line myself" allows. But what I'm considering is one or two pomodoros each day with Claude in navigator mode. Not full "No AI Days" where you go completely dark - I still have Claude as a thinking partner for discussing architecture, writing tests, exploring the codebase, helping with commit messages, etc. The difference is that I will write the production code during part of those sessions.
 
-What I'm considering is like one or two pomodoros each day with Claude in navigator mode. Not full "No AI Days" where you go completely dark - you still have Claude as a thinking partner for discussing architecture, writing tests, exploring the codebase. The difference is *you* write the production code during part of those sessions.
+It doesn't make sense to do this under tight deadlines or when the task is just boring boilerplate. The point is to have the option to write code yourself when that's what serves you best.
 
-This is the alternative to No AI Days the title promises. Keep AI engaged but invert the relationship as needed. Use AI as navigator while you drive. You get the benefits (second pair of eyes, thinking partner, typo catching) without the passivity of full delegation.
+For sure there's discipline required. It's always easier to describe than implement, and Claude is very willing to take over. The Claude output style helps enforce boundaries, but you still have to consciously choose "I'm driving this one" vs "go do it all for me."
 
-Finally, context matters since this isn't about purity. Navigator mode will probably work well for:
-- Solo learning or when you want to maintain skills
-- Features where you want deep understanding
-- Times when engagement matters more than speed
-
-It doesn't make sense under tight deadlines or when the task is just boring boilerplate. The point is to have the option to write code yourself when that's what serves you best.
-
-There's discipline required. It's always easier to describe than implement, and Claude is very willing to take over. The output style helps enforce boundaries, but you still have to consciously choose "I'm driving this one."
+This is the alternative to "No AI Days" that the title promises. Keep AI engaged but invert the relationship as needed. Use AI as navigator while you drive. You get the benefits (second pair of eyes, thinking partner, typo catching) without just watching Claude do all the work.
 
 ## The output style
 
