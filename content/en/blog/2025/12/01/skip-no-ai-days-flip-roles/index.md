@@ -63,17 +63,17 @@ This worked well, but Claude's base behaviors still leaked through occasionally.
 
 I still wasn't satisfied with my sessions, I really wanted to have control over when I was going to code vs when Claude was meant to do the work. I poked around and decided to try a "nuclear option": the `--system-prompt` which supposedly replaces the full system prompt used by Claude.
 
-I found some people that [reverse engineered the system prompts][tweakcc] baked into Claude Code (which apparently is dynamic) and merged the pair programming constraints with what seems to be "Claude Code essentials". I went through multiple iterations (v4-v8), each one fixing a specific failure mode I discovered through actual use.
+I found some people that [reverse engineered the system prompts][tweakcc] baked into Claude Code (which apparently is dynamic) and merged the pair programming constraints with what seems to be "Claude Code essentials". I went through like 4 iterations, each one fixing a specific failure mode I discovered through actual use.
 
-v4 was a complete redesign based on prompt engineering research - turned out [negative instructions can backfire][negative-prompting]. Telling Claude what NOT to do keeps those behaviors top of mind. The fix: explain WHY the split exists, show concrete examples, describe what TO do.
+One of the versions was a complete redesign based on prompt engineering research - turned out [negative instructions can backfire][negative-prompting]. Telling Claude what NOT to do keeps those behaviors top of mind.
 
-Later versions fixed other issues: Claude responding without reading the context I explicitly referenced, misinterpreting "sgtm" as permission to execute instead of just agreement to the approach, creating implementation todos when it should only explore.
+Later versions fixed other issues: Claude responding without reading the context I explicitly referenced, misinterpreting "sgtm" as permission to execute instead of just agreement to the approach, creating implementation `/todo`s when it should only explore.
 
-But behavior still degraded over time in ways I couldn't quite pin down. I'd start a session and immediately have to remind Claude to stay in navigator mode. Maybe Claude updates broke things, maybe instruction decay at scale. Hard to measure.
+But behavior still degraded over time in ways I couldn't quite track down. I'd start a session and immediately have to remind Claude to stay in navigator mode. Maybe some automatic Claude update broke things, maybe instruction decay at scale. TBH it's kinda hard to measure.
 
 [tweakcc]: https://github.com/Piebald-AI/tweakcc/blob/168b5b8a16b9674785e30dfed7ba5bee117734a3/data/prompts/prompts-2.0.55.json#L138-L191
 
-All of the above led me to take a step back and reconsider: is there a more sustainable approach? Turns out that there is, and Claude itself taught me about it through a session on claude.ai on my phone while I was waiting for something else.
+All of the above led me to take a step back and reconsider: is there a more sustainable approach? Turns out that there is, and Claude itself taught me about it through a session on claude.ai on my phone while I was waiting for something else away from the computer.
 
 ### Output style (the winner)
 
@@ -106,7 +106,7 @@ Writing code myself forced me to actually understand what needed to change. I ca
 
 The navigator role extended beyond code review to the whole engineering workflow: commit strategy planning, identifying what needs stakeholder clarification, strategic thinking about "what's left to do." This isn't just "review my code" - it's a thinking partner for engineering work.
 
-There was a typo catch that was a nice little win: Claude found `task_assigments` (missing 'n') in 4 different files during a code review - model associations and controller queries. I had written the code myself, checked it visually, and thought I was done. That typo would probably get caught by another colleague during code review as well, but Claude caught it first before I even committed the change. It's cool to have a "second pair of eyes" catching little things like this when you're deep in implementation.
+There was a typo catch that was a nice little win: Claude found `task_assigments` (missing 'n') in 4 different files during a code review for model associations and controller queries. I had written the code myself, checked it visually, and thought I was done. That typo would probably get caught by another colleague during code review as well, but Claude caught it first before I even committed the change. It's cool to have a "second pair of eyes" catching little things like this when you're deep in implementation.
 
 ### The friction
 
@@ -116,7 +116,7 @@ Another thing that required some tweaking was the rigid "navigator only" mode I 
 
 ### The surprise
 
-Over time the mode switching became trivial. I expected it to be complicated or require restarting conversations. Instead: I can just say "you take over", Claude says "Got it! Switching to execution mode..." and just does it. No ceremony, no confusion. This was way more practical than I expected.
+After a few iterations the mode switching became trivial. I expected it to be complicated or require restarting conversations but instead I can just say "you take over", Claude says "Got it! Switching to execution mode..." and just does it. No ceremony, no confusion. This was way more practical than I expected.
 
 ## When will I use this
 
@@ -199,6 +199,6 @@ The full file has more examples, tool classifications, RFC 2119 constraints, and
 [agent-os]: https://buildermethods.com/agent-os
 [no-ai-days]: https://www.linkedin.com/pulse/why-ai-days-essential-staying-sharp-developer-grant-emerson-t2twc
 [claude-code-hooks]: https://code.claude.com/docs/en/hooks#sessionstart-decision-control
-[negative-prompting]: https://blog.promptlayer.com/prompt-engineering-with-anthropic-claude-5399da57461d/
+[negative-prompting]: https://blog.promptlayer.com/prompt-engineering-with-anthropic-claude-5399da57461d#tip-7-avoid-negative-prompting
 [xml-tags]: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/use-xml-tags
 [agent-sops]: https://aws.amazon.com/blogs/opensource/introducing-strands-agent-sops-natural-language-workflows-for-ai-agents/
