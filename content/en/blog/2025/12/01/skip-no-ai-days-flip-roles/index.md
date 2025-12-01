@@ -51,7 +51,7 @@ Unfortunately I don't have those prompts anymore to illustrate what I was doing,
 
 I eventually learned about the `--append-system-prompt` flag and spent a few days iterating. This worked much better - instructions seemed to "stick" more because they're part of the system context, not just conversation history.
 
-I went through six iterations here. The breakthrough came when I stopped saying "don't write code" (too vague) and started constraining which tools Claude could use: "In navigator mode, you MUST NOT use: Edit, Write, NotebookEdit." Much clearer boundary.
+I went through six iterations here. The breakthrough came when I stopped saying "don't write code" (too vague) and started constraining which tools Claude could use: "In navigator mode, you MUST NOT use: Edit, Write." Much clearer boundary.
 
 I also switched to [RFC 2119][rfc2119] wording - MUST, SHOULD, MAY instead of casual language. Turns out Claude responds better to precise language about constraints.
 
