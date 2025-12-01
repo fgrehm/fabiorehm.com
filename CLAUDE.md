@@ -95,8 +95,8 @@ This blog uses two separate git repositories:
 
 **When working on drafts:**
 - Read/write files normally: `content/en/drafts/post-name/index.md`
-- Commit to drafts repo: `git -C content/en/drafts commit -m "update post"`
 - Hugo serves drafts at `/drafts/` in dev mode
+- There's a background process that keeps commiting and pushing those drafts to GitHub, there's no need to commit those changes
 
 **When publishing:**
 - Move post from drafts to blog with date path

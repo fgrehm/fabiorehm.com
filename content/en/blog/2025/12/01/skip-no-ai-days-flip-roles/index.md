@@ -65,7 +65,7 @@ I still wasn't satisfied with my sessions, I really wanted to have control over 
 
 I found some people that [reverse engineered the system prompts][tweakcc] baked into Claude Code (which apparently is dynamic) and merged the pair programming constraints with what seems to be "Claude Code essentials". I went through multiple iterations (v4-v8), each one fixing a specific failure mode I discovered through actual use.
 
-v4 was a complete redesign based on prompt engineering research - turned out negative instructions backfire. Telling Claude what NOT to do keeps those behaviors top of mind. The fix: explain WHY the split exists, show concrete examples, describe what TO do.
+v4 was a complete redesign based on prompt engineering research - turned out [negative instructions can backfire][negative-prompting]. Telling Claude what NOT to do keeps those behaviors top of mind. The fix: explain WHY the split exists, show concrete examples, describe what TO do.
 
 Later versions fixed other issues: Claude responding without reading the context I explicitly referenced, misinterpreting "sgtm" as permission to execute instead of just agreement to the approach, creating implementation todos when it should only explore.
 
@@ -79,26 +79,24 @@ All of the above led me to take a step back and reconsider: is there a more sust
 
 Output styles are a [built-in Claude Code feature][output-styles] for customizing how Claude responds. They're markdown files with frontmatter that live in `.claude/output-styles/` and activate with `/output-style`.
 
-The key difference from system prompt replacement: this works *with* Claude Code instead of fighting it. Updates won't break it. The structure is designed for persistence - Claude reads it at session start and the instructions actually stick.
+The key difference from system prompt replacement is that it works *with* Claude Code instead of fighting it or "trying too hard"  to bend it my way. My understanding is that Claude reads it at session start and the instructions actually stick because "Output styles directly modify Claude Code’s system prompt" ([docs](https://code.claude.com/docs/en/output-styles#how-output-styles-work)).
 
-The real insight came from identifying where Claude naturally drifts into implementation mode. Five specific patterns kept appearing:
+The real insights came from getting Claude to reflect and identify where it drifts into implementation mode. Some specific patterns kept appearing, most common ones being:
 
-1. The research-to-action slide - running read-only commands then flowing directly into "here's what I'll change" without stopping
-2. Describing exact file paths and line numbers, which feels like navigation but is actually implementation territory
-3. Assuming forward motion after presenting options
-4. Tool classification ambiguity about what requires driver mode
-5. The general confusion between describing changes versus making them
+- "Research-to-action sliding" - running read-only commands then flowing directly into "here's what I'll change" without stopping
+- Describing exact file paths and line numbers, which feels like navigation but is actually implementation territory
+- Assuming forward motion / implementation right after presenting options of how to solve a problem
 
-Each feature in the output style targets one of these drift patterns:
+To handle those, the output style incorporated some Claude self reflection paired with features like:
 
-- **XML tags + RFC 2119 keywords** - Anthropic's own research shows Claude is 12% more likely to follow instructions in XML format vs Markdown. Combined with MUST/SHOULD/MAY wording from [RFC 2119][rfc2119], the boundaries are crystal clear.
-- **Implementation territory smell test** - A section that lists concrete warning signs Claude is crossing into implementation territory: "specifying exact file paths and line numbers", "describing specific code replacements", etc. When Claude spots these patterns in its own thinking, it knows to stop and ask about driver mode.
-- **Mandatory checkpoints** - After any research phase, Claude MUST stop and ask: "Want me in driver mode to make changes, or will you implement?" This prevents the research -> action slide I kept hitting before.
-- **Good/bad examples** - Concrete scenarios showing what Navigator mode looks like in practice vs what violates it. Claude learns to generalize from these instead of abstract rules.
+- XML tags + RFC 2119 keywords - Using [XML format for structured instructions][xml-tags] combined with MUST/SHOULD/MAY wording from [RFC 2119][rfc2119] makes the boundaries crystal clear. The explicit structure helps Claude parse constraints more reliably than prose. AWS recently open-sourced their [Agent SOPs framework][agent-sops] using RFC 2119 keywords to provide precise control over agent behavior while preserving reasoning ability.
+- Implementation territory smell test - A section that lists concrete warning signs Claude is crossing into implementation territory: "specifying exact file paths and line numbers", "describing specific code replacements", etc. When Claude spots these patterns in its own thinking, it knows to stop and ask about driver mode.
+- Mandatory checkpoints - After any research phase, Claude MUST stop and ask: "Want me in driver mode to make changes, or will you implement?" This prevents the research -> action slide I kept hitting before.
+- Good/bad examples - Concrete scenarios showing what Navigator mode looks like in practice vs what violates it. Claude learns to generalize from these instead of abstract rules.
 
 I've been testing this for about two days of actual coding work across different tasks. The behavior is noticeably more stable - Claude stays in navigator mode without constant reminders, the mode switching works smoothly, and the checkpoints catch drift before it happens.
 
-[output-styles]: https://docs.claude.com/docs/claude-code/output-styles
+[output-styles]: https://code.claude.com/docs/en/output-styles
 
 ## What I learned
 
@@ -108,7 +106,7 @@ Writing code myself forced me to actually understand what needed to change. I ca
 
 The navigator role extended beyond code review to the whole engineering workflow: commit strategy planning, identifying what needs stakeholder clarification, strategic thinking about "what's left to do." This isn't just "review my code" - it's a thinking partner for engineering work.
 
-There was a typo catch that was a concrete win: Claude found `task_assigments` (missing 'n') in 4 different files during a code review - model associations and controller queries. I had written the code myself, checked it visually, and thought I was done. That typo would probably get caught by another colleague during code review as well, but Claude caught it first before I even committed the change. It's cool to have a "second pair of eyes" catching little things like this when you're deep in implementation.
+There was a typo catch that was a nice little win: Claude found `task_assigments` (missing 'n') in 4 different files during a code review - model associations and controller queries. I had written the code myself, checked it visually, and thought I was done. That typo would probably get caught by another colleague during code review as well, but Claude caught it first before I even committed the change. It's cool to have a "second pair of eyes" catching little things like this when you're deep in implementation.
 
 ### The friction
 
@@ -201,3 +199,6 @@ The full file has more examples, tool classifications, RFC 2119 constraints, and
 [agent-os]: https://buildermethods.com/agent-os
 [no-ai-days]: https://www.linkedin.com/pulse/why-ai-days-essential-staying-sharp-developer-grant-emerson-t2twc
 [claude-code-hooks]: https://code.claude.com/docs/en/hooks#sessionstart-decision-control
+[negative-prompting]: https://blog.promptlayer.com/prompt-engineering-with-anthropic-claude-5399da57461d/
+[xml-tags]: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/use-xml-tags
+[agent-sops]: https://aws.amazon.com/blogs/opensource/introducing-strands-agent-sops-natural-language-workflows-for-ai-agents/
