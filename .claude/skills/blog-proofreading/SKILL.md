@@ -15,6 +15,7 @@ allowed-tools: Read, Bash, WebFetch
 - Paragraph lengths are reasonable
 - Technical explanations are clear
 - No jarring jumps in logic
+- Check for contradicting statements (within paragraphs, between sections, intro vs conclusion)
 
 ### 2. Links
 - Test external URLs resolve (use `web_fetch` or `curl -I`)
@@ -35,6 +36,7 @@ allowed-tools: Read, Bash, WebFetch
 ### 4. Basic Checks
 - Spelling and grammar (light touch)
 - Consistent terminology throughout
+- Consistent person (first person for experience, "you" when addressing reader is OK, but no "users should" or "one might")
 - Section headers match content
 
 ## Tools
