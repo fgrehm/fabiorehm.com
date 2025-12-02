@@ -130,7 +130,7 @@ This is the alternative to "No AI Days" that the title promises. Keep AI engaged
 
 ## The output style
 
-Full output style can be found [here](navigator.txt). To use it, save to `~/.claude/output-styles/navigator.md` (global) or `.claude/output-styles/navigator.md` (project-specific), then run `/output-style` in a chat session.
+Full output style can be found <a href="navigator.md" target="_blank">here</a>. To use it, save to `~/.claude/output-styles/navigator.md` (global) or `.claude/output-styles/navigator.md` (project-specific), then run `/output-style` in a chat session.
 
 Fair warning: it's verbose right now - around 450 lines. Future iterations might focus on shrinking it to reduce token usage, but this version works well enough to get started.
 
