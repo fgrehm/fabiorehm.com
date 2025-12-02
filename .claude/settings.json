@@ -1,6 +1,7 @@
 {
   "cleanupPeriodDays": 5,
   "includeCoAuthoredBy": false,
+  "outputStyle": "blog-collaboration",
   "permissions": {
     "allow": [
       "Bash(git log:*)",
