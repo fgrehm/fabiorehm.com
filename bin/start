@@ -47,6 +47,14 @@ echo "🚀 Starting fabiorehm.com dev environment"
 echo "================================================"
 echo ""
 
+# 0. Ensure git submodules are initialized (e.g. hugo-coder theme)
+if [ -f "$PROJECT_ROOT/.gitmodules" ] && [ -z "$(ls -A "$PROJECT_ROOT/themes/hugo-coder" 2>/dev/null)" ]; then
+  echo -e "${YELLOW}Theme submodule not initialized. Running git submodule update --init...${NC}"
+  git submodule update --init
+  echo -e "  ${GREEN}✓ Submodules initialized${NC}"
+  echo ""
+fi
+
 # 1. Start Hugo server
 echo -e "${GREEN}[1/2]${NC} Starting Hugo server..."
 hugo server -D &
