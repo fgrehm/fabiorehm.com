@@ -6,13 +6,11 @@ The code and content behind [fabiorehm.com](https://fabiorehm.com).
 
 ### Prerequisites
 
-Install Hugo via snap (recommended for Linux):
+Install [Hugo Extended](https://gohugo.io/installation/) (required for SCSS):
 
 ```bash
-sudo snap install hugo
+sudo snap install hugo --channel=extended
 ```
-
-Alternative installation methods: <https://gohugo.io/installation/>
 
 ### Content Structure
 

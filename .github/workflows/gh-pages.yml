@@ -39,7 +39,7 @@ jobs:
         uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: 'latest'
-          extended: false
+          extended: true
 
       - name: Build with Hugo
         env:

@@ -55,6 +55,31 @@ if [ -f "$PROJECT_ROOT/.gitmodules" ] && [ -z "$(ls -A "$PROJECT_ROOT/themes/hug
   echo ""
 fi
 
+# 0.5. Clone drafts repo if not present
+DRAFTS_DIR="$PROJECT_ROOT/content/en/drafts"
+if [ ! -d "$DRAFTS_DIR/.git" ]; then
+  echo -e "${YELLOW}Drafts repo not found. Cloning...${NC}"
+  if git clone git@github.com:fgrehm/blog-drafts.git "$DRAFTS_DIR" 2>/dev/null; then
+    echo -e "  ${GREEN}✓ Drafts repo cloned${NC}"
+  else
+    echo -e "  ${YELLOW}⚠ Could not clone drafts repo (no access or offline). Skipping.${NC}"
+  fi
+  echo ""
+fi
+
+# 0.6. Verify Hugo Extended is available (required for SCSS)
+if ! hugo version 2>/dev/null | grep -q '+extended'; then
+  echo -e "${RED}ERROR: Hugo Extended is required but not installed.${NC}"
+  echo "  Your version: $(hugo version 2>/dev/null || echo 'hugo not found')"
+  echo "  The hugo-coder theme needs SCSS support from Hugo Extended."
+  echo ""
+  echo "  Install options:"
+  echo "    snap:  sudo snap install hugo --channel=extended"
+  echo "    brew:  brew install hugo  (extended by default)"
+  echo "    other: https://github.com/gohugoio/hugo/releases (download hugo_extended_*)"
+  exit 1
+fi
+
 # 1. Start Hugo server
 echo -e "${GREEN}[1/2]${NC} Starting Hugo server..."
 hugo server -D &
