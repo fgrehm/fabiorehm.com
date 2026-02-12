@@ -59,11 +59,27 @@ def validate_post(filepath):
                 warnings.append(f"Future date: {date_match.group(1)}")
         except ValueError:
             issues.append(f"Invalid date format: {date_match.group(1)}")
-    
-    # Check directory structure
-    parent = path.parent.name
-    if parent != "index.md" and not re.match(r'^[\w-]+$', parent):
-        warnings.append(f"Directory name might not match slug: {parent}")
+
+    # Check location (drafts vs blog)
+    path_parts = str(path.parent).split('/')
+    if 'drafts' in path_parts:
+        warnings.append("Post is in /drafts/ - remember to move to /blog/YYYY/MM/DD/slug/ when publishing")
+    elif 'blog' in path_parts:
+        warnings.append("Post is already in /blog/ - is this an update or republish?")
+    else:
+        issues.append("Post is not in /content/en/drafts/ or /content/en/blog/ - unexpected location")
+
+    # Check directory structure matches post slug
+    parent_dir = path.parent.name
+    title_match = re.search(r'^title:\s*"?([^"\n]+)"?', frontmatter, re.MULTILINE)
+    if title_match:
+        title = title_match.group(1)
+        # Generate expected slug from title
+        expected_slug = re.sub(r'[^\w\s-]', '', title.lower())
+        expected_slug = re.sub(r'[\s_]+', '-', expected_slug)
+
+        if parent_dir != expected_slug:
+            warnings.append(f"Directory '{parent_dir}' doesn't match expected slug '{expected_slug}' from title")
     
     # Report results
     print(f"\n📝 Validating: {path.name}")

@@ -1,8 +1,8 @@
 ---
 name: blog-topic-research
 description: |
-  Validate topic uniqueness and identify unique angles before writing. Prevents generic content and helps find your specific value.
-  Trigger phrases: "topic research", "validate topic", "should I write", "is this unique", "research topic", "check topic"
+  Validate topic uniqueness and research existing content at ANY point in the writing process. Use for mid-writing validation, checking specific angles, or researching without scaffolding a new post. Prevents generic content and helps find your specific value.
+  Trigger phrases: "topic research", "validate topic", "validate angle", "should I write", "is this unique", "research topic", "check topic", "mid-writing research"
 allowed-tools: Read, Grep, Glob, WebSearch
 ---
 
@@ -11,10 +11,15 @@ allowed-tools: Read, Grep, Glob, WebSearch
 ## When to Use
 
 Trigger when:
-- User mentions wanting to write about a topic
-- User asks "should I write about X?"
-- Before running blog-scaffolding
-- User wants to validate an idea
+- User wants standalone research WITHOUT starting a new post
+- Mid-writing validation: "Is this section/angle actually unique?"
+- Additional research after scaffold exists
+- Surgical validation anytime during writing process
+- User asks "should I write about X?" but doesn't want to scaffold yet
+
+**Do NOT trigger when:**
+- User says "new post" or "write about X" (use blog-scaffolding instead - it includes validation as Phase 1)
+- User wants to create a post structure (that's scaffolding's job)
 
 ## Purpose
 
@@ -80,9 +85,9 @@ Compare what exists vs. what you can offer:
 - The topic is well-covered and you have nothing new
 - You're writing it because you "should" not because you experienced it
 
-## Response Format
+## Response Formats
 
-Present findings conversationally:
+### When Unique Angle Exists (Proceed)
 
 ```
 I searched for existing content on [topic]. Here's what I found:
@@ -91,26 +96,52 @@ I searched for existing content on [topic]. Here's what I found:
 - [Common angle 1 with examples]
 - [Common angle 2 with examples]
 
-**Potential unique angles from your experience:**
-- [Your specific implementation/discovery]
-- [Edge case you encountered]
+**Your unique angle:**
+- [Specific implementation/discovery from their experience]
+- [Edge case they encountered]
 - [Contrarian finding]
 
-**Recommendation:**
-[Proceed with unique angle] OR [This might be too generic - consider X instead]
+**Recommendation:** ✅ PROCEED - Your [specific aspect] adds genuine value that doesn't exist elsewhere.
 
-What's your specific experience with this that would add value?
+What's your timeline/plan for writing this?
 ```
 
-## Integration with Other Skills
+### When No Unique Angle (Don't Proceed)
 
-**Before blog-scaffolding:**
-- Topic research validates the idea
-- Scaffolding uses the unique angle to structure the post
+```
+I searched for existing content on [topic]. Here's what I found:
+
+**Already well-covered:**
+- [Comprehensive existing coverage with examples]
+- [Authority sources that cover this thoroughly]
+
+**Your current angle:**
+- [What they described]
+
+**Recommendation:** ❌ DON'T PROCEED - This would duplicate [source]. Unless you have:
+- Hands-on experience they don't discuss
+- Problems with common solutions you discovered
+- Implementation that solves a specific gap
+
+Do you have specific experience beyond what exists? If so, what problems did you encounter?
+```
+
+## Relationship to blog-scaffolding
+
+**blog-scaffolding includes validation as its Phase 1** - use that for "I want to write about X" flows
+
+**blog-topic-research is standalone for:**
+- Mid-writing validation ("is this section/angle actually unique?")
+- Additional research after initial scaffold
+- Researching content without starting a new post
+- Surgical validation anytime during writing process
+
+**Think of it as:** scaffolding = validation + structure creation | topic-research = validation only, anytime
 
 **During scaffolding conversation:**
-- Reference the unique angle identified
-- Push for personal experience on that specific angle
+- If scaffolding triggers, it handles its own validation
+- Reference any unique angles identified in prior topic-research
+- Push for personal experience on the specific angle
 - Avoid generic content based on research gaps
 
 ## Anti-patterns

@@ -1,15 +1,18 @@
 ---
 name: blog-scaffolding
 description: |
-  Create new blog post structure for fabiorehm.com. Validates topic uniqueness, identifies personal angle, then creates scaffold through conversation.
-  Trigger phrases: "new post", "write about", "scaffold", "create post", "start writing", "new blog post"
+  Create new blog post structure through two-phase workflow: (1) validate topic uniqueness and identify personal angle, (2) create scaffold with TODOs. Always validates before scaffolding to prevent generic content. Use when starting a NEW blog post.
+  Trigger phrases: "new post", "write about", "scaffold", "create post", "start writing", "new blog post", "start post"
 allowed-tools: Read, Write, Grep, Glob, WebSearch
 ---
 
 # Blog Post Scaffolding
 
 ## When to Use
-Trigger when user wants to create a new blog post or says "new post", "write about", etc.
+
+Trigger when user wants to CREATE A NEW BLOG POST. This skill includes validation as Phase 1.
+
+**For standalone research/validation without creating a post, use blog-topic-research instead.**
 
 ## Two-Phase Workflow
 
@@ -84,6 +87,45 @@ What's your specific experience with this that would add genuine value beyond wh
 
 **Key principle: The blog exists to share experience, not summarize knowledge.**
 
+**MUST NOT proceed to Phase 2 if:**
+- No personal hands-on experience shared
+- Angle duplicates existing content
+- User responds with "I think people should know" without specifics
+
+**Response when not proceeding:**
+
+```
+Based on your responses, I'm concerned this might end up generic. The existing content covers [X] thoroughly, and I'm not seeing your unique angle yet.
+
+Before scaffolding, I need to understand:
+- What specific problems did YOU encounter that others don't discuss?
+- What did YOU build/discover that's different?
+- What failed for YOU that contradicts common advice?
+
+Without personal experience to differentiate, this post risks being a summary of others' work rather than sharing your experience.
+
+Want to explore a different angle, or do you have more specific experience to share?
+```
+
+### PRE-SCAFFOLD: Context Dump (Optional but Recommended)
+
+Before outlining structure, encourage comprehensive context gathering:
+
+**Prompt:**
+```
+Before we outline, dump everything you know about this - your experience, struggles, what you discovered, dead ends, links, tangents. No need to organize yet - just get it all out. This helps me ask better questions and structure the post around YOUR actual experience.
+```
+
+**Exit condition:** You understand their specific angle deeply enough to ask clarifying questions about edge cases, not just basics.
+
+**Why this helps:**
+- Surfaces details they might forget to mention
+- Identifies patterns in their experience
+- Reveals the actual story structure (chronological vs problem-first vs technical-first)
+- Reduces back-and-forth during writing
+
+**Ghostwriting boundary:** The context dump is Fabio's content, not Claude-generated. You're gathering, not inventing.
+
 ### PHASE 2: Scaffold Creation
 
 **Only proceed after angle is validated through conversation.**
@@ -92,6 +134,30 @@ What's your specific experience with this that would add genuine value beyond wh
    - What sections make sense for THIS angle?
    - How does your experience map to structure?
    - What's the "why bother" for readers?
+
+### PHASE 2b: Narrative Framing (When Structure Isn't Clear)
+
+If the section structure isn't obvious from the context dump, offer alternatives:
+
+**Prompt:**
+```
+I'm seeing a few ways you could tell this story:
+
+1. **Chronological Discovery** - "1st try (failed because X), 2nd try (failed because Y), finally Z worked"
+2. **Problem-First** - "Here's the pain point, here's what I tried, here's what worked"
+3. **Technical-First** - "The mechanism is X, I chose it because Y, here's how it evolved"
+
+Which narrative fits your experience? Or would you combine them?
+```
+
+**Use when:**
+- Multiple valid structures exist
+- User seems stuck on organization
+- The context dump suggests multiple angles
+
+**Don't use when:**
+- Structure is obvious from their story
+- They've already indicated their preference
 
 2. **Create structure:**
    - Directory: `content/en/drafts/slug-from-title/`
@@ -110,6 +176,35 @@ What's your specific experience with this that would add genuine value beyond wh
    - Example: Research findings from external search → collapsed under "Research findings for reference"
    - Example: Technical examples or code snippets → collapsed under "Technical details"
    - Keeps the main structure clean while preserving context for writing
+
+### PHASE 2c: Midpoint Quality Check (at ~80% completion)
+
+Once the post is roughly 80% drafted, suggest a "remove the filler" checkpoint:
+
+**Prompt:**
+```
+**Midpoint Quality Check:**
+
+Re-reading your draft, I notice:
+- [Section A could be tighter - is all of this necessary?]
+- [Paragraph B repeats what you said in § "Earlier Section"]
+- [You keep hedging with "I'm not 100% sure" - is that genuine uncertainty or overthinking?]
+
+What can we remove without losing important information?
+```
+
+**Why this helps:**
+- Prevents over-written blog posts
+- Catches redundancy before it multiplies
+- Aligns with preference for shorter, punchier posts (400-800 words ideal)
+- Identifies hedging that weakens vs. hedging that builds trust
+
+**When to suggest:**
+- After most content is written but before final polish
+- When post is trending toward 2000+ words
+- When you notice repetition or filler
+
+**Ghostwriting boundary:** Identify what could be removed, but let Fabio decide what to cut.
 
 ## Frontmatter Template
 

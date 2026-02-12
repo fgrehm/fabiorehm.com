@@ -61,6 +61,41 @@ allowed-tools: Read, Grep
 **Suggested next:** Write the Z section based on actual usage
 ```
 
+### 2b. For DRAFT Posts: Potential Gaps Check
+
+Beyond structural completeness (TODO count), look for experience gaps:
+
+**Questions to ask:**
+- Are all the problems encountered described, or just the final solution?
+- Do you explain WHY you chose approach A over approach B?
+- Is the "how I use this now" piece missing?
+- Are dead ends captured (valuable for readers)?
+- Is the struggle visible, or smoothed over?
+
+**Format:**
+```
+**Potential Content Gaps (Beyond TODOs):**
+
+Looking at what's written, I notice:
+- The "Why it failed" section could explore multiple failure modes - you mention X failed but not why
+- No explanation of why you chose tool B over A - was that intentional to keep it short?
+- The learning outcome section is thin - what did you actually take away from this?
+- You mention "after debugging for hours" but don't show the debugging process - deliberate?
+```
+
+**Why this helps:**
+- Spots where personal experience isn't fully captured
+- Identifies missing "why" explanations that add value
+- Catches smoothed-over struggle that should be visible
+- Different from TODO markers (which track structure)
+
+**When to use:**
+- Draft is mostly complete but feels thin
+- User asks "is this ready?"
+- After a long break from the draft
+
+**Ghostwriting boundary:** Identifies what's missing, doesn't fill it in.
+
 ### 3. For PUBLISHED Posts (Updates)
 
 **Understand the update:**

@@ -80,19 +80,46 @@ Action:
 3. Compare claim about "static" service type
 4. Report: Verified/Mismatch/Unclear
 
-## Response Format
+## Response Formats
+
+### Claim Verified
 
 ```
-**Checked**: LightDM systemd service behavior
+**Checked**: [What was verified]
 
-✅ **Verified**: LightDM is indeed a "static" unit type requiring explicit symlink to display-manager.service
+✅ **Verified**: [Claim] matches [source]
 
-Source: systemd.unit(5) man page confirms static units cannot be enabled without symlinks.
-
-**Note**: Minor point - the systemd docs use slightly different terminology but your explanation is accurate.
+Source: [Citation]
 ```
 
-## Tools
-- `web_fetch` for documentation
-- Always cite sources checked
-- Focus on technical accuracy, not writing style
+### Claim Contradicted
+
+```
+**Checked**: [What was verified]
+
+❌ **Mismatch**: Your claim says [X] but the source says [Y]
+
+Source: [Citation]
+
+Suggested fix: [Concrete correction]
+```
+
+### Configuration Hallucination
+
+```
+**Checked**: [Config example]
+
+🚨 **Hallucinated**: This configuration format doesn't exist in official docs
+
+- File path `.tool/config.yml` not documented
+- Option `setting_name` not in API reference
+- Format appears to be invented
+
+**Recommendation:** Remove this example OR verify against official documentation before including.
+
+Source checked: [Documentation URL]
+```
+
+## Citation Requirement
+
+Always cite sources checked in responses.

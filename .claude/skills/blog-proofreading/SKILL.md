@@ -18,14 +18,40 @@ allowed-tools: Read, Bash, WebFetch
 - Check for contradicting statements (within paragraphs, between sections, intro vs conclusion)
 
 ### 2. Links
-- Test external URLs resolve (use `web_fetch` or `curl -I`)
-- Check internal links exist
-- **Convert inline URLs to reference-style links:**
-  - Inline format: `[text](https://example.com)` → should be `[text][ref-name]`
-  - All references defined at bottom of post in format: `[ref-name]: https://example.com`
-  - Check for any raw URLs like `https://example.com` that should be wrapped in links
-- Verify reference-style links formatted correctly: `[text][ref]`
-- Verify all reference definitions exist at bottom
+
+**Reference-style format (REQUIRED):**
+- ALL content links MUST use reference-style: `[text][ref-name]`
+- Reference definitions at bottom: `[ref-name]: https://example.com`
+- Inline format `[text](url)` is NOT allowed in content
+
+**Exceptions (inline OK):**
+- Image paths: `![alt](./image.png)` (local files)
+- Internal anchors: `[See above](#section-name)` (on-page links)
+
+**Check for:**
+- Any inline URLs like `[text](https://url)` → convert to `[text][ref-name]`
+- Raw URLs like `https://example.com` → wrap as `[description][ref-name]`
+- Missing reference definitions at bottom
+- Duplicate reference names
+
+**Test external URLs:**
+```bash
+# Verify URL resolves
+curl -I -s https://example.com | head -1
+
+# Or use WebFetch for content validation
+```
+
+**Example conversion:**
+```markdown
+BEFORE:
+I read about [Skills](https://anthropic.com/skills) and decided to try them.
+
+AFTER:
+I read about [Skills][skills-announcement] and decided to try them.
+
+[skills-announcement]: https://anthropic.com/skills
+```
 
 ### 3. Formatting
 - Code blocks have language tags: ```bash, ```python, etc.
@@ -39,13 +65,11 @@ allowed-tools: Read, Bash, WebFetch
 - Consistent person (first person for experience, "you" when addressing reader is OK, but no "users should" or "one might")
 - Section headers match content
 
-## Tools
+## Link Testing
 
+Test external URLs with curl:
 ```bash
-# Test if URL resolves
 curl -I -s https://example.com | head -1
-
-# Or use web_fetch for full content check
 ```
 
 ## Keep It Light
