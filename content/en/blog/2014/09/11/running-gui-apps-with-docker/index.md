@@ -10,6 +10,8 @@ tags:
 - java
 ---
 
+> **2026 Update:** If you're looking for a more robust solution these days, check out [x11docker](https://github.com/mviereck/x11docker). I haven't had a need to try it myself, but it looks like the go-to tool for this kind of thing now.
+
 I've been doing all of my real (paid) work on VMs / containers for a while now but when it comes to writing Java code for some projects for university I still
 need to move away from using vim and install some full blown IDE in order to be
 productive. This has been bothering me for quite some time but this week I
