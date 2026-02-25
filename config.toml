@@ -9,7 +9,7 @@ languageCode = "en"
 
 # Modern Hugo pagination configuration
 [pagination]
-  pagerSize = 5
+  pagerSize = 10
 
 # https://gohugo.io/content-management/multilingual/
 [languages]
