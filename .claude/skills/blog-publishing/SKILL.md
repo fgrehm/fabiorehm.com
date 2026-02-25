@@ -141,6 +141,8 @@ Walk through interactively:
 
 ## 4. Final Publishing Steps
 
+### Blog Posts
+
 If all checks pass:
 
 1. **Update date** - Set `date` field in frontmatter to publish date
@@ -152,5 +154,19 @@ If all checks pass:
 3. **Clean frontmatter** - Remove `draft: true` (optional - location determines status)
 4. **Commit and push** - Post will be live on next build
 
+### Notes
+
+If all checks pass:
+
+1. **Update date** - Set `date` field in frontmatter to publish date
+2. **Move note** - Move from `/content/en/drafts/notes/slug/` to `/content/en/notes/slug/`
+   ```bash
+   # Example
+   mv content/en/drafts/notes/my-note content/en/notes/my-note
+   ```
+3. **Clean frontmatter** - Remove `draft: true` (optional - location determines status)
+4. **Verify AI provenance** - If `ai_assisted: true`, ensure `ai_description` is filled in (not a TODO)
+5. **Commit and push** - Note will be live on next build
+
 ## Script Location
-See `.claude/skills/blog-publishing/scripts/validate-post.py` for implementation.
+See `.claude/skills/blog-publishing/scripts/validate-post.py` for implementation. Works for both blog posts and notes.

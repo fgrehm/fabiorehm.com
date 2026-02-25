@@ -1,0 +1,35 @@
+{{ define "title" }}
+  {{ title (i18n (lower .Title)) | default .Title }} · {{ .Site.Title }}
+{{ end }}
+{{ define "content" }}
+  <section class="container list">
+    <header>
+      <h1 class="title">
+        <a class="title-link" href="{{ .Permalink | safeURL }}">
+          {{ title (i18n (lower .Title)) | default .Title }}
+        </a>
+      </h1>
+    </header>
+    {{ .Content }}
+    <ul>
+      {{- range .Paginator.Pages -}}
+      <li>
+        <span class="date">{{ .Date | time.Format (.Site.Params.dateFormat | default "January 2, 2006" ) }}</span>
+        {{ if .Title }}
+          <a class="title" href="{{ .RelPermalink }}">{{ .Title }}</a>
+        {{ else }}
+          <a class="title" href="{{ .RelPermalink }}">{{ .Summary | plainify | truncate 80 }}</a>
+        {{ end }}
+        {{ if .Params.ai_assisted }}
+          <span class="ai-badge" title="AI-assisted content"><i class="fa-solid fa-robot" aria-hidden="true"></i></span>
+        {{ end }}
+        {{ if .Draft }}
+          <span class="draft-badge">draft</span>
+        {{ end }}
+      </li>
+      {{- end -}}
+    </ul>
+
+    {{ partial "pagination.html" . }}
+  </section>
+{{ end }}

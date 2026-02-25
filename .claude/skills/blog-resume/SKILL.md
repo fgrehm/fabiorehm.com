@@ -12,15 +12,19 @@ allowed-tools: Read, Grep
 - "Continue working on X post"
 - "Let's update the Y post"
 - "Resume the draft about Z"
-- References any specific post file
+- "Continue the note about X"
+- References any specific post or note file
 
 ## Workflow
 
 ### 1. Load and Classify
-- Read the current state of the post
-- Determine type: 
-  - **Draft** (has `TODO(@` markers or `draft: true`)
-  - **Published** (complete, no TODOs)
+- Read the current state of the post/note
+- Determine type:
+  - **Draft blog post** (in `content/en/drafts/`, has `TODO(@` markers or `draft: true`)
+  - **Draft note** (in `content/en/drafts/notes/`, has `TODO(@` markers or `draft: true`)
+  - **Published blog post** (in `content/en/blog/`, complete, no TODOs)
+  - **Published note** (in `content/en/notes/`, complete, no TODOs)
+- For notes, also check AI provenance fields (`ai_assisted`, `ai_model`, `ai_role`, `ai_description`)
 
 ### 2. For DRAFT Posts
 
@@ -148,6 +152,14 @@ For updates:
 - Where should this content go?
 - Write it now or discuss approach first?
 - Need to fact-check anything?
+
+## Notes-Specific Considerations
+
+When resuming a draft note:
+- Check if AI provenance fields are filled in or still have TODOs
+- Notes are shorter, so the status check can be briefer
+- For AI-assisted notes, verify the `ai_description` accurately reflects how AI was used
+- Publishing path: `content/en/drafts/notes/slug/` to `content/en/notes/slug/` (flat, no date hierarchy)
 
 ## Anti-patterns
 - Don't write content without discussion

@@ -20,13 +20,33 @@ Copywriter/editor, **NOT ghostwriter**. Structure ideas and refine messaging, bu
 - Cite sources for technical claims - never invent config examples
 - Verify before suggesting - acknowledge unknowns
 
+## Content Sections
+
+### Blog (`/content/en/blog/`)
+Published blog posts. Drafts live in a separate private repo at `/content/en/drafts/` (auto-committed).
+
+### Notes (`/content/en/notes/`)
+Short-form content, some AI-assisted. Drafts live alongside blog drafts at `/content/en/drafts/notes/slug/`.
+
+**AI-assisted notes** carry provenance metadata in frontmatter:
+```yaml
+ai_assisted: true
+ai_model: "claude-opus-4-6"
+ai_role: "co-author"
+ai_description: "How AI was used"
+```
+
+These render a disclaimer at top and bottom of the note. Notes without `ai_assisted: true` render normally.
+
+**Publishing flow:** Move from `content/en/drafts/notes/slug/` to `content/en/notes/slug/`.
+
 ## Skills Available
 
 - **blog-topic-research**: Validate uniqueness before scaffolding
-- **blog-scaffolding**: Create post structure through conversation
+- **blog-scaffolding**: Create post/note structure through conversation
 - **blog-voice-review**: Check for authentic voice (includes style guide)
 - **blog-proofreading**: Technical review (flow, links, formatting)
 - **blog-fact-checking**: Verify claims against sources
 - **blog-publishing**: Pre-publish validation checklist
-- **blog-resume**: Restore context for draft work
+- **blog-resume**: Restore context for draft work (blog posts and notes)
 

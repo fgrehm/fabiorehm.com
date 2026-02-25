@@ -10,9 +10,11 @@ allowed-tools: Read, Write, Grep, Glob, WebSearch
 
 ## When to Use
 
-Trigger when user wants to CREATE A NEW BLOG POST. This skill includes validation as Phase 1.
+Trigger when user wants to CREATE A NEW BLOG POST or NOTE. This skill includes validation as Phase 1.
 
 **For standalone research/validation without creating a post, use blog-topic-research instead.**
+
+**For notes:** Ask if the content is a blog post or a note. Notes are shorter-form, may be AI-assisted, and use a simpler structure. See "Notes Scaffolding" section below.
 
 ## Two-Phase Workflow
 
@@ -160,7 +162,8 @@ Which narrative fits your experience? Or would you combine them?
 - They've already indicated their preference
 
 2. **Create structure:**
-   - Directory: `content/en/drafts/slug-from-title/`
+   - **Blog posts:** Directory `content/en/drafts/slug-from-title/`
+   - **Notes:** Directory `content/en/drafts/notes/slug-from-title/`
    - File: `index.md`
    - Frontmatter with current date and `draft: true`
    - Headers with `##` and bullet point guidance
@@ -206,7 +209,7 @@ What can we remove without losing important information?
 
 **Ghostwriting boundary:** Identify what could be removed, but let Fabio decide what to cut.
 
-## Frontmatter Template
+## Frontmatter Template (Blog Posts)
 
 ```yaml
 ---
@@ -221,6 +224,35 @@ description: "TODO(@fabio): Add one-line description for SEO"
 ```
 
 **Note**: Post stays in `/content/en/drafts/` until ready to publish. When publishing, move to `/content/en/blog/YYYY/MM/DD/slug/` and update date.
+
+## Notes Scaffolding
+
+Notes are shorter-form content. Some are AI-assisted, some are not. When scaffolding a note:
+
+1. **Ask about AI involvement** - Is this AI-assisted? If so, gather provenance details.
+2. **Simpler validation** - Notes don't need the full Phase 1 landscape search. A quick internal content check is enough.
+3. **Lighter structure** - Notes can be just frontmatter + content, no elaborate section headers needed.
+4. **Title is optional** - Some notes may just be date + content.
+
+### Frontmatter Template (Notes)
+
+```yaml
+---
+title: "Note Title Here"  # Optional for short-form notes
+date: YYYY-MM-DD
+draft: true
+tags:
+  - tag1
+description: "TODO(@fabio): Add one-line description"
+# AI provenance (include only if AI-assisted)
+ai_assisted: true
+ai_model: "claude-opus-4-6"
+ai_role: "co-author"  # or "research", "editor", etc.
+ai_description: "TODO(@fabio): Describe how AI was used"
+---
+```
+
+**Note**: Note stays in `/content/en/drafts/notes/` until ready to publish. When publishing, move to `/content/en/notes/slug/` and update date.
 
 ## Structural Notes
 

@@ -30,10 +30,13 @@
 
       {{ partial "notes/ai-disclaimer.html" . }}
 
+      {{ if .Draft }}
+      <div class="note-draft-banner">
+        <strong>Draft</strong> - This note is not published yet.
+      </div>
+      {{ end }}
+
       <div class="post-content">
-        {{ if .Params.featuredImage }}
-          <img src="{{ .Params.featuredImage | relURL }}" alt="Featured image"/>
-        {{ end }}
         {{ .Content }}
       </div>
 

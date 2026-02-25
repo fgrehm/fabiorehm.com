@@ -13,21 +13,54 @@
     </header>
 
     <div style="background: #ffd700; padding: 1rem; margin-bottom: 2rem; border-radius: 4px; color: #000;">
-      <strong>⚠️ Development Only</strong> - These posts are in draft mode and not published.
+      <strong>⚠️ Development Only</strong> - These posts and notes are in draft mode and not published.
     </div>
 
-    {{ $drafts := where .Site.RegularPages "Section" "drafts" }}
-    {{ if $drafts }}
+    {{ $allDrafts := where .Site.RegularPages "Section" "drafts" }}
+
+    {{ $blogDrafts := slice }}
+    {{ $noteDrafts := slice }}
+    {{ range $allDrafts }}
+      {{ if hasPrefix .File.Dir "drafts/notes/" }}
+        {{ $noteDrafts = $noteDrafts | append . }}
+      {{ else }}
+        {{ $blogDrafts = $blogDrafts | append . }}
+      {{ end }}
+    {{ end }}
+
+    {{ if $blogDrafts }}
+      <h2>Blog Posts</h2>
       <ul>
-        {{ range $drafts }}
+        {{ range $blogDrafts }}
           <li>
             <span class="date">{{ .Date.Format "2006-01-02" }}</span>
             <a class="title" href="{{ .Permalink }}">{{ .Title }}</a>
           </li>
         {{ end }}
       </ul>
-    {{ else }}
-      <p>No draft posts yet.</p>
+    {{ end }}
+
+    {{ if $noteDrafts }}
+      <h2>Notes</h2>
+      <ul>
+        {{ range $noteDrafts }}
+          <li>
+            <span class="date">{{ .Date.Format "2006-01-02" }}</span>
+            {{ if .Title }}
+              <a class="title" href="{{ .Permalink }}">{{ .Title }}</a>
+            {{ else }}
+              <a class="title" href="{{ .Permalink }}">{{ .Summary | plainify | truncate 80 }}</a>
+            {{ end }}
+            {{ if .Params.ai_assisted }}
+              <span class="ai-badge" title="AI-assisted content"><i class="fa-solid fa-robot" aria-hidden="true"></i></span>
+            {{ end }}
+          </li>
+        {{ end }}
+      </ul>
+    {{ end }}
+
+    {{ if and (not $blogDrafts) (not $noteDrafts) }}
+      <p>No drafts yet.</p>
     {{ end }}
   </section>
 {{ end }}

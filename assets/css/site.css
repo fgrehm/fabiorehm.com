@@ -62,6 +62,101 @@ details h6 a.bi-link {
   }
 }
 
+/* AI disclaimer for notes */
+.ai-disclaimer {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+  border-left: 4px solid #6366f1;
+  background-color: #eef2ff;
+  border-radius: 0 6px 6px 0;
+  font-size: 1.3rem;
+  line-height: 1.5;
+}
+
+.ai-disclaimer-icon {
+  color: #6366f1;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.ai-disclaimer-text {
+  color: #374151;
+}
+
+.ai-disclaimer-text code {
+  background-color: #ddd6fe;
+  padding: 0.1rem 0.4rem;
+  border-radius: 3px;
+  font-size: 0.85em;
+}
+
+/* AI badge in notes list */
+.ai-badge {
+  color: #6366f1;
+  font-size: 0.8em;
+  margin-left: 0.3rem;
+}
+
+/* Draft badge in notes list */
+.draft-badge {
+  font-size: 0.75em;
+  background: #ffd700;
+  color: #000;
+  padding: 0.1rem 0.4rem;
+  border-radius: 3px;
+  margin-left: 0.3rem;
+  font-weight: 600;
+}
+
+/* Draft banner on individual notes */
+.note-draft-banner {
+  background: #ffd700;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+  color: #000;
+  font-size: 0.9rem;
+}
+
+/* Dark mode for notes */
+@media (prefers-color-scheme: dark) {
+  .ai-disclaimer {
+    background-color: #1e1b4b;
+    border-left-color: #818cf8;
+  }
+
+  .ai-disclaimer-icon {
+    color: #818cf8;
+  }
+
+  .ai-disclaimer-text {
+    color: #e5e7eb;
+  }
+
+  .ai-disclaimer-text code {
+    background-color: #312e81;
+    color: #c4b5fd;
+  }
+
+  .ai-badge {
+    color: #818cf8;
+  }
+
+  .draft-badge {
+    background: #ca8a04;
+    color: #fff;
+  }
+
+  .note-draft-banner {
+    background: #ca8a04;
+    color: #fff;
+  }
+}
+
 /* Mobile homepage fixes */
 @media only screen and (max-width: 768px) {
   /* Fix excessive top padding and stack vertically on mobile */

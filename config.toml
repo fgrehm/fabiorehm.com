@@ -82,8 +82,13 @@ languageCode = "en"
   url = "blog/"
 
 [[languages.en.menu.main]]
-  name = "About"
+  name = "Notes"
   weight = 2
+  url = "notes/"
+
+[[languages.en.menu.main]]
+  name = "About"
+  weight = 3
   url = "about/"
 
 # Taxonomies

@@ -1,0 +1,13 @@
+{{ if .Params.ai_assisted }}
+<div class="ai-disclaimer">
+  <div class="ai-disclaimer-icon">
+    <i class="fa-solid fa-robot" aria-hidden="true"></i>
+  </div>
+  <div class="ai-disclaimer-text">
+    <strong>AI-assisted content.</strong>
+    {{ with .Params.ai_description }}{{ . }}{{ end }}
+    {{ with .Params.ai_model }} Model: <code>{{ . }}</code>.{{ end }}
+    {{ with .Params.ai_role }} Role: {{ . }}.{{ end }}
+  </div>
+</div>
+{{ end }}

@@ -3,6 +3,7 @@
 # Start blog development environment
 # - Hugo server (localhost:1313)
 # - Auto-commit loop for drafts (every 10 minutes)
+# - clone drafts
 #
 
 set -e
@@ -105,6 +106,7 @@ echo "================================================"
 echo ""
 echo "  🏠 Blog:          http://localhost:1313/"
 echo "  📝 Drafts:        http://localhost:1313/drafts/"
+echo "  📓 Notes:         http://localhost:1313/notes/"
 echo ""
 echo "  Auto-commit: Every 10 minutes"
 echo "  Manual commit: bin/drafts-autocommit"

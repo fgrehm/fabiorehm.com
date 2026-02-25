@@ -180,14 +180,21 @@ If you catch yourself doing ANY of these, STOP and leave a TODO marker instead:
 - Git commands: `git -C content/en/drafts add/commit/push`
 - **Important:** Background process auto-commits drafts, you MUST NOT commit these changes
 
-### When Publishing
+### When Publishing Blog Posts
 - Move post from `content/en/drafts/slug/` to `content/en/blog/YYYY/MM/DD/slug/`
+- Update `date` field in frontmatter
+- Commit the move in BOTH repos (removal in drafts, addition in main)
+
+### When Publishing Notes
+- Move note from `content/en/drafts/notes/slug/` to `content/en/notes/slug/`
 - Update `date` field in frontmatter
 - Commit the move in BOTH repos (removal in drafts, addition in main)
 </git_commit_guidelines>
 
 <content_workflow>
 ## Content Workflow
+
+### Blog Posts
 
 **Draft Posts:**
 - All new posts start in `content/en/drafts/slug/`
@@ -198,6 +205,29 @@ If you catch yourself doing ANY of these, STOP and leave a TODO marker instead:
 - Move from `content/en/drafts/slug/` to `content/en/blog/YYYY/MM/DD/slug/`
 - Update `date` field in frontmatter to publish date
 - Can remove `draft: true` (optional - location determines status)
+
+### Notes
+
+**Draft Notes:**
+- All new notes start in `content/en/drafts/notes/slug/`
+- Visible at `/drafts/` when running dev server (listed under "Notes" heading)
+- Flat directory structure (no date path)
+
+**AI-assisted notes** carry provenance metadata:
+```yaml
+ai_assisted: true
+ai_model: "claude-opus-4-6"
+ai_role: "co-author"        # or "research", "editor", etc.
+ai_description: "How AI was used in this note"
+```
+
+**Publishing:**
+- Move from `content/en/drafts/notes/slug/` to `content/en/notes/slug/`
+- Update `date` field in frontmatter to publish date
+- Can remove `draft: true` (optional - location determines status)
+
+### Consolidated Drafts Repo
+Both blog drafts and note drafts live in the same private repo at `content/en/drafts/` (auto-committed by background process). Blog drafts go directly in `drafts/slug/`, note drafts go in `drafts/notes/slug/`. You MUST NOT manually commit to this repo.
 </content_workflow>
 
 <skills_integration>

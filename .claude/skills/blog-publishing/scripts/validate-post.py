@@ -60,14 +60,30 @@ def validate_post(filepath):
         except ValueError:
             issues.append(f"Invalid date format: {date_match.group(1)}")
 
-    # Check location (drafts vs blog)
-    path_parts = str(path.parent).split('/')
-    if 'drafts' in path_parts:
+    # Check location (drafts vs blog vs notes)
+    path_str = str(path.parent)
+    path_parts = path_str.split('/')
+    is_draft_note = 'drafts' in path_parts and 'notes' in path_parts
+    if is_draft_note:
+        warnings.append("Note is in /drafts/notes/ - remember to move to /notes/slug/ when publishing")
+    elif 'notes' in path_parts:
+        warnings.append("Note is already in /notes/ - is this an update or republish?")
+    elif 'drafts' in path_parts:
         warnings.append("Post is in /drafts/ - remember to move to /blog/YYYY/MM/DD/slug/ when publishing")
     elif 'blog' in path_parts:
         warnings.append("Post is already in /blog/ - is this an update or republish?")
     else:
-        issues.append("Post is not in /content/en/drafts/ or /content/en/blog/ - unexpected location")
+        issues.append("Post is not in a recognized content location (/drafts/, /blog/, /notes/)")
+
+    # Check AI provenance for notes
+    is_note = is_draft_note or ('notes' in path_parts and 'drafts' not in path_parts)
+    has_ai_assisted = re.search(r'^ai_assisted:\s*true', frontmatter, re.MULTILINE)
+    if is_note and has_ai_assisted:
+        ai_desc = re.search(r'^ai_description:', frontmatter, re.MULTILINE)
+        if not ai_desc:
+            warnings.append("AI-assisted note missing ai_description field")
+        elif 'TODO' in (ai_desc.group(0) if ai_desc else ''):
+            issues.append("ai_description still has a TODO - fill it in before publishing")
 
     # Check directory structure matches post slug
     parent_dir = path.parent.name
