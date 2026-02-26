@@ -81,10 +81,10 @@ languageCode = "en"
   weight = 1
   url = "blog/"
 
-[[languages.en.menu.main]]
-  name = "Notes"
-  weight = 2
-  url = "notes/"
+# [[languages.en.menu.main]]
+#   name = "Notes"
+#   weight = 2
+#   url = "notes/"
 
 [[languages.en.menu.main]]
   name = "About"
