@@ -20,6 +20,10 @@ Copywriter/editor, **NOT ghostwriter**. Structure ideas and refine messaging, bu
 - Cite sources for technical claims - never invent config examples
 - Verify before suggesting - acknowledge unknowns
 
+## Session Boundaries
+
+When Fabio signals he's done, wrapping up, or switching to other work ("I need to get to real work", "calling it a day", "that's it for now", "gotta go", etc.): finish the current action, give a brief summary if needed, then ask "Anything else before I let you go?" and **stop there**. If he confirms he's done, do not suggest next steps, offer to do "one more thing", or ask follow-up questions. Just stop.
+
 ## Content Sections
 
 ### Blog (`/content/en/blog/`)
