@@ -157,6 +157,106 @@ details h6 a.bi-link {
   }
 }
 
+/* Tables */
+.content .post-content {
+  overflow-x: auto;
+}
+
+.content article table,
+.content .post-content table {
+  width: 100%;
+  min-width: 100%;
+  border-collapse: collapse;
+  font-size: 1.4rem;
+}
+
+.content article table th,
+.content .post-content table th {
+  background-color: #e2e8f0;
+  font-weight: 600;
+  text-align: left;
+}
+
+.content article table th,
+.content article table td,
+.content .post-content table th,
+.content .post-content table td {
+  padding: 0.6rem 1rem !important;
+  border: 1px solid #d0d7de !important;
+}
+
+.content article table tr:first-child th,
+.content .post-content table tr:first-child th {
+  border-top: 1px solid #d0d7de !important;
+}
+
+.content article table tr:last-child td,
+.content .post-content table tr:last-child td {
+  border-bottom: 1px solid #d0d7de !important;
+}
+
+.content article table tr td:first-child,
+.content article table tr th:first-child,
+.content .post-content table tr td:first-child,
+.content .post-content table tr th:first-child {
+  border-left: 1px solid #d0d7de !important;
+}
+
+.content article table tr td:last-child,
+.content article table tr th:last-child,
+.content .post-content table tr td:last-child,
+.content .post-content table tr th:last-child {
+  border-right: 1px solid #d0d7de !important;
+}
+
+.content article table tr:nth-child(even),
+.content .post-content table tr:nth-child(even) {
+  background-color: #f9fafb;
+}
+
+@media (prefers-color-scheme: dark) {
+  .content article table th,
+  .content .post-content table th {
+    background-color: #2d333b;
+  }
+
+  .content article table th,
+  .content article table td,
+  .content .post-content table th,
+  .content .post-content table td {
+    border-color: #30363d !important;
+  }
+
+  .content article table tr:first-child th,
+  .content .post-content table tr:first-child th {
+    border-top-color: #30363d !important;
+  }
+
+  .content article table tr:last-child td,
+  .content .post-content table tr:last-child td {
+    border-bottom-color: #30363d !important;
+  }
+
+  .content article table tr td:first-child,
+  .content article table tr th:first-child,
+  .content .post-content table tr td:first-child,
+  .content .post-content table tr th:first-child {
+    border-left-color: #30363d !important;
+  }
+
+  .content article table tr td:last-child,
+  .content article table tr th:last-child,
+  .content .post-content table tr td:last-child,
+  .content .post-content table tr th:last-child {
+    border-right-color: #30363d !important;
+  }
+
+  .content article table tr:nth-child(even),
+  .content .post-content table tr:nth-child(even) {
+    background-color: #161b22;
+  }
+}
+
 /* Mobile homepage fixes */
 @media only screen and (max-width: 768px) {
   /* Fix excessive top padding and stack vertically on mobile */
