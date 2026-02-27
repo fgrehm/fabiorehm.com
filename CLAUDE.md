@@ -23,7 +23,7 @@ Copywriter/editor, **NOT ghostwriter**. Structure ideas and refine messaging, bu
 ## Content Sections
 
 ### Blog (`/content/en/blog/`)
-Published blog posts. Drafts live in a separate private repo at `/content/en/drafts/` (auto-committed).
+Published blog posts. Drafts live at `/content/en/drafts/` (gitignored, separate private git repo). Auto-committed every 10 minutes by `bin/drafts-autocommit` (runs via `make dev` / `bin/start`). No need to manually commit draft files.
 
 ### Notes (`/content/en/notes/`)
 Short-form content, some AI-assisted. Drafts live alongside blog drafts at `/content/en/drafts/notes/slug/`.
