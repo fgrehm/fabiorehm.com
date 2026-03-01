@@ -1,11 +1,9 @@
 ---
 title: "Our coding agent commits deserve better than Co-Authored-By"
 date: 2026-03-01
-draft: true
 tags:
   - ai
   - git
-  - developer-workflow
 description: "Co-Authored-By was meant for people. Here's an alternative for attributing coding agents in commits."
 ---
 
