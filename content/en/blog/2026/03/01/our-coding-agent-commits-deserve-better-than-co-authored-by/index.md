@@ -21,7 +21,9 @@ I'm not the only one thinking about this. Bence Ferdinandy [wrote about this pro
 
 IMO the future is "multi-tool, multi-model and multi-agent". Attribution that only captures one dimension is already outdated by today's standards.
 
-Think about it: the same model (ex: `claude-opus-4-6`) can run behind Claude Code, [pi](https://pi.dev/), OpenCode, Cursor, Windsurf, or a fully custom agent. Each tool wraps the model with its own system prompts, context, behavior and tools. Seeing a "Co-Authored-By: Claude Code" in a commit in 2026 tells us nothing about what actually produced the code. We don't add the Ruby version or IDE to our commits, so why bother here? Because those tools are deterministic. Coding agents are not. The same prompt with a different model or tool can produce completely different code. If we care about "archeology" and better understanding of how the code came to be, what we really need to know is: which tool AND which model.
+Think about it: the same model (ex: `claude-opus-4-6`) can run behind Claude Code, [pi](https://pi.dev/), OpenCode, Cursor, Windsurf, or a fully custom agent. Each tool wraps the model with its own system prompts, context, behavior and tools. Seeing a "Co-Authored-By: Claude Code" in a commit in 2026 tells us nothing about what actually produced the code. We don't add the Ruby version or IDE to our commits, so why bother here? Because those tools are deterministic. Coding agents are not. The same prompt with a different model or tool can produce completely different code.
+
+If we care about "archeology" and better understanding of how the code came to be, what we really need to know is: which tool AND which model.
 
 ## What I Use Instead
 
