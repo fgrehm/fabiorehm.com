@@ -7,8 +7,6 @@ tags:
 description: "Co-Authored-By was meant for people. Here's an alternative for attributing coding agents in commits."
 ---
 
-Don't worry, this isn't another "how I 10x'd my productivity with AI" post. It's about something way less sexy: _commit metadata_.
-
 I've disabled Claude Code's `Co-Authored-By` setting ever since I started using it. The Claude avatar next to mine on GitHub always felt wrong. The coding agent is a tool, *I am* the one responsible for what it produces. `Co-Authored-By` in git [was meant for people who exchanged drafts](https://git-scm.com/docs/SubmittingPatches), it implies shared responsibility. That's not what's happening here. If a bug pops up in prod, Anthropic won't be the ones on call.
 
 And then there's the practical side. The `Co-Authored-By` trailer expects the same format as `Signed-off-by`: `Name <email>`. So Claude Code adds a fake email address just to not break the format. That's a smell. It's also clearly focused on marketing, using the one trailer that shows up on GitHub's UI.
