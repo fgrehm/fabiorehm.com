@@ -16,6 +16,10 @@ In the past, I created developer tools and contributed to open source projects. 
 
 I started this blog in 2013 to share solutions to problems I encountered while developing. After an 8-year break (2017-2025), I'm trying to get back to writing about current development challenges and tools.
 
+## 🤖 AI Use
+
+I use AI as a coding and writing assistant for this blog and my projects. I review everything it produces, but I believe in being transparent about when and how it's involved.
+
 ## Get in Touch
 
 Feel free to reach out if you have questions about anything I've written, want to collaborate on a project, or just want to chat about development tools and practices.
