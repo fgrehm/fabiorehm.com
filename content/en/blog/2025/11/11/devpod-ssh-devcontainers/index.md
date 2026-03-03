@@ -9,6 +9,7 @@ tags:
   - workflow
   - terminal
   - developer-experience
+toc: true
 ---
 
 _**NOTE:** This is Part 1 of the [Modernizing my Terminal-Based Development Environment](/blog/2025/11/11/modernizing-my-terminal-based-dev-environment/) series._
