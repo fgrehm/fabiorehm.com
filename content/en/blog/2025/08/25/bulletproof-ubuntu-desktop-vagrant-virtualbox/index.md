@@ -10,6 +10,7 @@ tags:
   - desktop
   - gnome
   - lightdm
+toc: true
 ---
 
 _A battle-tested guide to Ubuntu 24.04 desktop VMs that actually work_

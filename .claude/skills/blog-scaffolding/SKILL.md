@@ -220,6 +220,7 @@ tags:
   - tag1
   - tag2
 description: "TODO(@fabio): Add one-line description for SEO"
+# toc: true  # Uncomment if post has 15+ headings
 ---
 ```
 

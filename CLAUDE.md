@@ -31,6 +31,8 @@ If he then tries to start new work (new post, new topic, unrelated task), tell h
 ### Blog (`/content/en/blog/`)
 Published blog posts. Drafts live at `/content/en/drafts/` (gitignored, separate private git repo). Auto-committed every 10 minutes by `bin/drafts-autocommit` (runs via `make dev` / `bin/start`). No need to manually commit draft files.
 
+**TOC:** Add `toc: true` to frontmatter for posts with 15+ headings. Use `tocOpen: true` to have it expanded by default.
+
 ### Notes (`/content/en/notes/`)
 Short-form content, some AI-assisted. Drafts live alongside blog drafts at `/content/en/drafts/notes/slug/`.
 

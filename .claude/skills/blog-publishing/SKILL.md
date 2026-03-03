@@ -130,6 +130,7 @@ Walk through interactively:
 - [ ] Description suitable for SEO/social?
 - [ ] Tags are relevant and accurate?
 - [ ] Directory structure matches slug?
+- [ ] If 15+ headings: `toc: true` set in frontmatter?
 
 **Final Quality Check**
 - [ ] Conversational and authentic voice?

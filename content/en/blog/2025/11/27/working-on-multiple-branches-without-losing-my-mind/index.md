@@ -9,6 +9,7 @@ tags:
   - devcontainers
   - rails
   - claude-code
+toc: true
 ---
 
 _**NOTE:** This is Part 4 of the [Modernizing my Terminal-Based Development Environment][series] series._
