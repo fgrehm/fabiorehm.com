@@ -1,6 +1,7 @@
 ---
 title: "Our coding agent commits deserve better than Co-Authored-By"
 date: 2026-03-02
+lastmod: 2026-03-03
 tags:
   - ai
   - git
@@ -78,6 +79,16 @@ This is a small thing, but small conventions compound. Future us will appreciate
 
 If you have thoughts on this or a better convention, I'd love to hear about it, just reach out using the links below.
 
+---
+
+**Update (Mar 3):** Nothing like a good night of sleep... This morning I realized that what I'm describing is basically a user-agent string for coding tools :grimacing:
+
+Think about it: a browser's `User-Agent` header encodes layers: the browser, the rendering engine, the OS. My `Coding-Agent` + `Model` trailers are doing the same thing, identifying the tool layer and the model layer behind a commit.
+
+The parallel goes further. User-agents became a de facto standard because servers *needed* that information to adapt behavior. As codebases accumulate more AI-assisted commits, we might want the same thing. "Show me all commits where early Sonnet 4.5 touched the auth module" is the kind of query we might want to run if we care about this information in the future.
+
+But! There's a cautionary tale here too: `User-agent` strings are famously messy. Every browser started pretending to be Mozilla for backwards compatibility and the whole thing [became a pile of lies][ua-history]. If we want coding tool attribution to actually be useful long term, we need to keep it simple and resist the temptation to stuff everything into one field :v:
+
 [prev-post]: /blog/2025/08/29/afraid-ai-would-make-me-lazy/#code-attribution-ethics
 [git-trailers]: https://git-scm.com/docs/git-interpret-trailers
 [submitting-patches]: https://git-scm.com/docs/SubmittingPatches
@@ -94,3 +105,4 @@ If you have thoughts on this or a better convention, I'd love to hear about it, 
 [youtube-ai-disclosure]: https://blog.youtube/news-and-events/disclosing-ai-generated-content/
 [eu-ai-act]: https://weventure.de/en/blog/ai-labeling
 [about-ai]: /about/#-ai-use
+[ua-history]: https://webaim.org/blog/user-agent-string-history/
