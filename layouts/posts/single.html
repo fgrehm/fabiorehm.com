@@ -28,6 +28,8 @@
         </div>
       </header>
 
+      {{ partial "toc.html" . }}
+
       <div class="post-content">
         {{ if .Params.featuredImage }}
           <img src="{{ .Params.featuredImage | relURL }}" alt="Featured image"/>
@@ -40,6 +42,8 @@
         {{ partial "posts/github-discussions.html" . }}
       </footer>
     </article>
+
+    {{ partial "posts/related.html" . }}
 
     {{ partial "posts/math.html" . }}
   </section>

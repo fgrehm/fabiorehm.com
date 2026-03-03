@@ -257,6 +257,39 @@ details h6 a.bi-link {
   }
 }
 
+/* Related posts */
+.related-posts {
+  margin-top: 2rem;
+}
+
+.related-posts h4 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-secondary-text, #999);
+}
+
+.related-posts ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.related-posts li {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.6rem;
+  font-size: 1.4rem;
+  align-items: baseline;
+}
+
+.related-posts .date {
+  white-space: nowrap;
+  color: var(--color-secondary-text, #999);
+  flex-shrink: 0;
+}
+
 /* Mobile homepage fixes */
 @media only screen and (max-width: 768px) {
   /* Fix excessive top padding and stack vertically on mobile */

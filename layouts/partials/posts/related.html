@@ -1,0 +1,14 @@
+{{ $related := where (.Site.RegularPages.Related .) "Section" "blog" | first (.Site.Params.maxSeeAlsoItems | default 5) }}
+{{ with $related }}
+<aside class="related-posts">
+  <h4>Related Posts</h4>
+  <ul>
+    {{ range . }}
+    <li>
+      <span class="date">{{ .Date | time.Format ($.Site.Params.dateFormat | default "January 2, 2006") }}</span>
+      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+    </li>
+    {{ end }}
+  </ul>
+</aside>
+{{ end }}
