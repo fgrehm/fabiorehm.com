@@ -21,6 +21,17 @@ allowed-tools: Read
 - Claims without personal context
 - Marketing speak
 - Phrases like "leverage", "utilize" instead of "use"
+- Rule of three: three short parallel sentences/phrases in a row ("X does this. Y does that. Z does the other."). Real writing has uneven rhythm.
+- Aphoristic closers: short dramatic one-liners that sound quotable, especially at paragraph/section endings ("Maybe that's enough.", "The bridge is invisible."). Say what you actually think instead.
+- Negative parallelisms: "It's not just X, it's Y" or "Not only...but..." constructions. Just say the thing.
+- Copula avoidance: "serves as", "stands as", "functions as" instead of just "is". Use "is".
+- Em dashes: already banned in CLAUDE.md, but watch for them in drafted content.
+- Pitch deck cadence: short punchy fragments that sound like a slide deck ("Tiny core. Ship fast. Expand later."). Use full sentences with "I".
+- Summary/recap closers: "in conclusion" or recapping the post. End sideways instead: a philosophy, a hope, a matter-of-fact link. No heroic conclusions.
+- Abstract hedging: "may", "could potentially", "might indicate." Use first-person uncertainty instead: "I don't know", "I haven't figured it out."
+- Generalized problem statements: "Many developers struggle with..." Write "I needed X because Y" instead. Specific, personal, assumes the reader has the same setup.
+- Uniform explanation density: explaining everything at the same level. Only explain what was confusing, skip what's obvious.
+- Positive framing of failure: "This is a learning opportunity." Just say "this didn't work" and move on.
 
 ## Title & Clickbait Check
 Watch for clickbait patterns in titles:
