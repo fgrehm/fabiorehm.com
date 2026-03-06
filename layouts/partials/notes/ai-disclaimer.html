@@ -4,7 +4,7 @@
     <i class="fa-solid fa-robot" aria-hidden="true"></i>
   </div>
   <div class="ai-disclaimer-text">
-    <strong>AI-assisted content.</strong>
+    <strong>{{ with .Params.ai_label }}{{ . }}{{ else }}AI-assisted content.{{ end }}</strong>
     {{ with .Params.ai_description }}{{ . }}{{ end }}
     {{ with .Params.ai_model }} Model: <code>{{ . }}</code>.{{ end }}
     {{ with .Params.ai_role }} Role: {{ . }}.{{ end }}
