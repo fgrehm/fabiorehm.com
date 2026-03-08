@@ -1,7 +1,7 @@
 ---
 title: "Our coding agent commits deserve better than Co-Authored-By"
 date: 2026-03-02
-lastmod: 2026-03-03
+lastmod: 2026-03-08
 tags:
   - ai
   - git
@@ -88,6 +88,14 @@ Think about it: a browser's `User-Agent` header encodes layers: the browser, the
 The parallel goes further. User-agents became a de facto standard because servers *needed* that information to adapt behavior. As codebases accumulate more AI-assisted commits, we might want the same thing. "Show me all commits where early Sonnet 4.5 touched the auth module" is the kind of query we might want to run if we care about this information in the future.
 
 But! There's a cautionary tale here too: `User-agent` strings are famously messy. Every browser started pretending to be Mozilla for backwards compatibility and the whole thing [became a pile of lies][ua-history]. If we want coding tool attribution to actually be useful long term, we need to keep it simple and resist the temptation to stuff everything into one field :v:
+
+---
+
+**Update (Mar 8):** Got some good feedback on this. Someone pointed out that if we don't attribute compilers, linters, formatters, or IDEs in commits, why attribute AI tools? I covered the "deterministic" argument above, but then I started thinking a bit more about everything that goes into an AI-assisted code change: custom instructions (`CLAUDE.md` / `AGENTS.md`), skills, context window contents, thinking level... none of that is versioned. Capturing just tool + model gives a false sense of completeness. At the end of the day it might be more honest to just do `AI-Assisted: Yes` which is pointless :sweat_smile:
+
+There's another aspect to this which is the fact Claude Code doesn't always output the right model if I change mid session, so I just ended up dropping the trailers from my own setup.
+
+If anyone cares about this (whether for preference or compliance), the **ecosystem needs to solve it at the tool level first**. Something like coding agents exporting env vars with the currently selected model, so a simple (and predictable) git hook can handle the rest without manual intervention.
 
 [prev-post]: /blog/2025/08/29/afraid-ai-would-make-me-lazy/#code-attribution-ethics
 [git-trailers]: https://git-scm.com/docs/git-interpret-trailers
