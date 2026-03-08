@@ -93,7 +93,7 @@ But! There's a cautionary tale here too: `User-agent` strings are famously messy
 
 **Update (Mar 8):** Got some good feedback on this. Someone pointed out that if we don't attribute compilers, linters, formatters, or IDEs in commits, why attribute AI tools? I covered the "deterministic" argument above, but then I started thinking a bit more about everything that goes into an AI-assisted code change: custom instructions (`CLAUDE.md` / `AGENTS.md`), skills, context window contents, thinking level... none of that is versioned. Capturing just tool + model gives a false sense of completeness. At the end of the day it might be more honest to just do `AI-Assisted: Yes` which is pointless :sweat_smile:
 
-There's another aspect to this which is the fact Claude Code doesn't always output the right model if I change mid session, so I just ended up dropping the trailers from my own setup.
+There's another aspect to this which is the fact Claude Code doesn't always output the right model if I change mid session, so I just ended up [dropping the trailers from my own setup][dropped-trailers].
 
 If anyone cares about this (whether for preference or compliance), the **ecosystem needs to solve it at the tool level first**. Something like coding agents exporting env vars with the currently selected model, so a simple (and predictable) git hook can handle the rest without manual intervention.
 
@@ -114,3 +114,4 @@ If anyone cares about this (whether for preference or compliance), the **ecosyst
 [eu-ai-act]: https://weventure.de/en/blog/ai-labeling
 [about-ai]: /about/#-ai-use
 [ua-history]: https://webaim.org/blog/user-agent-string-history/
+[dropped-trailers]: https://github.com/fgrehm/dot-ai/commit/796652737e9a255e9cc1ab705b1b3da4261aeca5
