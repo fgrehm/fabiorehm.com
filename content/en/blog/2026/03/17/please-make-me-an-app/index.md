@@ -33,9 +33,9 @@ Both are part of another project called [Tauri][tauri] for creating cross-platfo
 
 ## So I built it
 
-[please-make-me-an-app][pmmap] (or `pmmap` for short) is like "dotfiles for your web apps". The idea is to turn _any_ website into a standalone desktop app with just YAML, no Electron, no bundled browser and no build step (small binaries FTW).
+[please-make-me-an-app][pmmaapp] (or `pmmaapp` for short) is like "dotfiles for your web apps". The idea is to turn _any_ website into a standalone desktop app with just YAML, no Electron, no bundled browser and no build step (small binaries FTW).
 
-`pmmap` uses your system's WebKit engine ([WebKitGTK][webkitgtk] in my case, running on Debian 13 / KDE Wayland) and provides profile isolation, meaning instances of your apps are truly isolated in terms of processes, cookies and the like. As a bonus, I added built-in ad blocking, CSS / JS injection and `.desktop` file generation with pretty icons fetched from the source site.
+`pmmaapp` uses your system's WebKit engine ([WebKitGTK][webkitgtk] in my case, running on Debian 13 / KDE Wayland) and provides profile isolation, meaning instances of your apps are truly isolated in terms of processes, cookies and the like. As a bonus, I added built-in ad blocking, CSS / JS injection and `.desktop` file generation with pretty icons fetched from the source site.
 
 Here's an example of using WhatsApp with it. Some sites (like WhatsApp) detect webview user agents and refuse to load, so the config spoofs a Chrome UA and navigator to get around that:
 
@@ -63,11 +63,11 @@ allowed_domains:
   - wa.me
 ```
 
-Full config reference is in the [README][pmmap-config].
+Full config reference is in the [README][pmmaapp-config].
 
 ## The banking story
 
-Fun fact: thanks to `pmmap` I no longer need to install some obscure `.deb` package to use my internet banking. The built-in UA and navigator spoofing lets me pretend I'm on SunOS, which makes the bank's security module go "I don't know what that is" and skip its check entirely. A 15+ year Linux frustration solved in a couple Claude Code sessions.
+Fun fact: thanks to `pmmaapp` I no longer need to install some obscure `.deb` package to use my internet banking. The built-in UA and navigator spoofing lets me pretend I'm on SunOS, which makes the bank's security module go "I don't know what that is" and skip its check entirely. A 15+ year Linux frustration solved in a couple Claude Code sessions.
 
 ## Not everything is purrfect
 
@@ -79,7 +79,7 @@ On the bright side, the Tauri folks are [working on Chromium rendering support][
 
 ## Go hack
 
-If you're on Linux and tired of second-class apps, you don't need to wait for companies to care about you. The web already has everything, we just need a better window for it. Even [Claude's own desktop app is Electron][claude-electron], so don't hold your breath, [give `pmmap` a try][pmmap] or go build your own :v:
+If you're on Linux and tired of second-class apps, you don't need to wait for companies to care about you. The web already has everything, we just need a better window for it. Even [Claude's own desktop app is Electron][claude-electron], so don't hold your breath, [give `pmmaapp` a try][pmmaapp] or go build your own :v:
 
 [tonsky-native]: https://tonsky.me/blog/fall-of-native/
 [warsaw]: https://www.hardware.com.br/artigos/warsaw-o-modulo-de-seguranca-bancario-que-continua-inportunando-os-usuarios/
@@ -89,8 +89,8 @@ If you're on Linux and tired of second-class apps, you don't need to wait for co
 [wry]: https://github.com/tauri-apps/wry
 [tauri]: https://tauri.app/
 [pake]: https://github.com/tw93/Pake
-[pmmap]: https://github.com/fgrehm/please-make-me-an-app
-[pmmap-config]: https://github.com/fgrehm/please-make-me-an-app/#config-reference
+[pmmaapp]: https://github.com/fgrehm/please-make-me-an-app
+[pmmaapp-config]: https://github.com/fgrehm/please-make-me-an-app/#config-reference
 [webkitgtk]: https://webkitgtk.org/
 [claude]: https://claude.ai
 [turnstile]: https://developers.cloudflare.com/turnstile/
