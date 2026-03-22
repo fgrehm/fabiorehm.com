@@ -1,6 +1,7 @@
 ---
 title: "DevPod: SSH-Based Devcontainers Without IDE Lock-in"
 date: 2025-11-11
+lastmod: 2026-03-22
 description: "How DevPod enables terminal-based devcontainer workflows through SSH, allowing you to use your own tools without VSCode/Cursor lock-in."
 tags:
   - devcontainers

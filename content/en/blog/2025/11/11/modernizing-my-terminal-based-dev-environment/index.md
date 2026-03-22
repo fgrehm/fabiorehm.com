@@ -1,6 +1,7 @@
 ---
 title: "Modernizing my Terminal-Based Development Environment"
 date: 2025-11-11
+lastmod: 2026-03-22
 description: "Returning to terminal-based development after a Cursor detour: SSH-based workflows with DevPod, modern multiplexers, and AI tools - the latest chapter in a 10+ year journey of working with virtualized dev environments."
 tags:
   - terminal
