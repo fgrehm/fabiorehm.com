@@ -14,6 +14,8 @@ toc: true
 
 _**NOTE:** This is Part 1 of the [Modernizing my Terminal-Based Development Environment](/blog/2025/11/11/modernizing-my-terminal-based-dev-environment/) series._
 
+_**UPDATE (March 2026):** I've since moved away from DevPod and built [crib](/blog/2026/03/20/crib-just-enough-devcontainers/), a smaller devcontainer runner that uses `docker exec` instead of SSH._
+
 ---
 
 ## Background

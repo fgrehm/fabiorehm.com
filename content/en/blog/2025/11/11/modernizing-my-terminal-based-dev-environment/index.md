@@ -24,15 +24,15 @@ When my current team adopted devcontainers, I ended up moving to Cursor because 
 
 I recently discovered DevPod and realized it solved my problem: SSH-based devcontainers without IDE lock-in. I could return to neovim, move to zellij (from tmux), and use my terminal tools while keeping the team's devcontainer benefits. Claude Code, which I was already using in Cursor's terminal, now works even better in a real terminal setup.
 
-This is me scratching my own itch again - the latest evolution of a 10+ year journey improving my own virtualized dev environments, this time building on top of other people's tooling instead of building my own :)
+This is me scratching my own itch again - the latest evolution of a 10+ year journey improving my own virtualized dev environments. It started with other people's tooling (DevPod), but I eventually ended up [building my own runner again](/blog/2026/03/20/crib-just-enough-devcontainers/) :)
 
 ## The Technical Stack
 
-Here's what I ended up with: [DevPod](https://devpod.sh/) gives me SSH access to devcontainers (instead of VSCode Remote Containers), running on standard [Docker](https://www.docker.com/). The team keeps using Cursor/VSCode with `.devcontainer/`, I opt into `.devcontainer-devpod/` - both read the same format, no disruption.
+Here's what I started with: [DevPod](https://devpod.sh/) gave me SSH access to devcontainers (instead of VSCode Remote Containers), running on standard [Docker](https://www.docker.com/). I've since switched to [crib](/blog/2026/03/20/crib-just-enough-devcontainers/), a smaller runner that uses `docker exec` instead of SSH. The team keeps using Cursor/VSCode/DevPod, but the same `devcontainer.json` works for everyone.
 
 Inside the container I'm using [Neovim](https://neovim.io/) ([LazyVim](https://lazyvim.org) config), [Zellij](https://zellij.dev/) for terminal multiplexing (tabs, panes, sessions), and [Oh My Zsh](https://ohmyz.sh/) for shell config. [Claude Code](https://claude.com/download) runs via CLI for AI assistance, and I'm using [git worktrees](https://git-scm.com/docs/git-worktree) for parallel branch development. Everything's mounted via Docker volumes so configs survive container recreation.
 
-After a few weeks of using this setup, I'm sticking with it. The control and understanding are worth the friction for me. But it's not necessarily better than Cursor/VSCode - it's a different set of tradeoffs that happens to match my preferences.
+I've been using this setup for a few months now and I'm sticking with it. The control and understanding are worth the friction for me. But it's not necessarily better than Cursor/VSCode, it's a different set of tradeoffs that happens to match my preferences.
 
 If you're happy with VSCode/Cursor, stay there - the IDE integration works well. But if you're terminal-based and frustrated by devcontainer IDE requirements, read on. Part 1 walks through the DevPod setup.
 
@@ -55,3 +55,7 @@ Setting up Neovim with LazyVim for Rails development over SSH. Clipboard integra
 ### Part 4: [Working on Multiple Branches Without Losing My Mind](/blog/2025/11/27/working-on-multiple-branches-without-losing-my-mind/)
 
 How I built a Git worktree manager for running multiple branches simultaneously - port allocation, database isolation, and branch-specific Claude Code context that survives container recreation.
+
+### Part 5: [crib: Just Enough Devcontainers](/blog/2026/03/20/crib-just-enough-devcontainers/)
+
+After DevPod's development stalled, I built my own devcontainer runner on top of the same spec. Covers the bugs, the plugin system, and how AI wrote most of the code but the opinions are still mine.
