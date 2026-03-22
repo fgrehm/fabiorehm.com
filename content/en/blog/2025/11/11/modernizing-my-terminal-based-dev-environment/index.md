@@ -13,7 +13,7 @@ tags:
   - series
 ---
 
-After over a decade as a "terminal-based developer", I ended up using Cursor for a while when we decided to make use of devcontainers at work. This series documents how I am "returning to my roots" using modern tools like [DevPod](https://devpod.sh/), [Zellij](https://zellij.dev/), and [Claude Code](https://claude.com/product/claude-code) AI assistance without leaving the command line.
+After over a decade as a "terminal-based developer", I ended up using Cursor for a while when we decided to make use of devcontainers at work. This series documents how I am "returning to my roots" using modern tools like [Zellij](https://zellij.dev/), [Claude Code](https://claude.com/product/claude-code), and devcontainers without leaving the command line.
 
 **NOTE:** This is a living series. I'll update posts as I discover new patterns, gotchas, and solutions. New posts may be added as the workflow evolves.
 
