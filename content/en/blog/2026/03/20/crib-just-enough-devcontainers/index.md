@@ -113,7 +113,7 @@ I've been building dev environment tooling on and off for many years and I'm not
 [devstep-squid3-ssl]: https://github.com/fgrehm/devstep-squid3-ssl
 [distilled-spec]: https://github.com/fgrehm/crib/blob/main/docs/devcontainers-spec.md
 [project-inception]: https://github.com/fgrehm/dot-ai/blob/01c4c35ccdd24b8eefef51960015cd5ed7e56e66/skills/project-inception/SKILL.md
-[crib-comparison]: https://fgrehm.github.io/crib/guides/comparison/
+[crib-comparison]: https://fgrehm.github.io/crib/comparison/
 [commit-hook-markers]: https://github.com/fgrehm/crib/commit/e131467
 [commit-path-interpolation]: https://github.com/fgrehm/crib/commit/54c1815
 [commit-env-probe]: https://github.com/fgrehm/crib/commit/929af2d
