@@ -12,7 +12,7 @@ Ever since I found out about [pi][pi-dev] and gave it a shot I loved it, it "jus
 
 I think I first came across it before the "OpenClaw boom" when someone shared [this post][pi-author-post] by its author on some social media feed and last week I put some effort into making it a first class citizen in my stack.
 
-_If you just want the setup instructions, [skip to Setup](#setup)._
+_If you just want the setup instructions: [skip to Setup](#setup), skip to [plugin extraction note](#update-theres-a-plugin-now) or head over to GitHub to [check out the plugin][pi-ollama-cloud-repo] I extracted which is a lot better than the setup described here._
 
 ## Getting off the "Claude train" for a bit
 
@@ -116,6 +116,15 @@ It did get the job done in the end, but I'll probably need to fine-tune my [`AGE
 
 Speaking of which: while wrapping up this post I noticed [`glm-5.1:cloud` dropped 5 days ago][glm-51] and it's supposedly better at sustaining performance "over hundreds of rounds and thousands of tool calls", they also claim that "the longer it runs, the better the result." About to try it out throughout the week. 🚀
 
+## Update: there's a plugin now
+
+A few days after publishing this post I went and wrapped the whole thing into a [Pi extension][pi-ollama-cloud-repo] so I don't have to manually manage the model list in `models.json`. It fetches the full model catalog from `ollama.com/v1/models`, pulls details for each model via `/api/show` to figure out which ones support tools and thinking, and caches all of that locally. Run `/ollama-cloud-refresh` whenever you want to update.
+
+It also bundles the web search and fetch tools that use the same Ollama Cloud API key, so no local server needed for those either. The provider name is `ollama-cloud` (different from the `ollama-api-key` I used in the manual setup above) so you can run both side by side if you're into that sort of thing.
+
+If you followed the manual setup above, the extension gives you the same end result with less config noise. If you're just starting out, just `pi install git:github.com/fgrehm/pi-ollama-cloud` and you're off to the races.
+
+[pi-ollama-cloud-repo]: https://github.com/fgrehm/pi-ollama-cloud
 [pi-dev]: https://pi.dev
 [vim-pi]: https://www.hansschnedlitz.com/writing/2026/03/08/pi-is-vim-for-agentic-coding
 [pi-author-post]: https://mariozechner.at/posts/2025-11-30-pi-coding-agent/
