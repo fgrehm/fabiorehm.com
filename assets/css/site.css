@@ -1,3 +1,8 @@
+/* Prevent social icons from wrapping to a second line */
+.centered .about ul {
+  white-space: nowrap;
+}
+
 details {
   border: 1px solid var(--border-color, #e1e4e8);
   border-radius: 6px;

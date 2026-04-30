@@ -51,26 +51,32 @@ languageCode = "en"
 # Social media links
 [[params.social]]
   name = "GitHub"
-  icon = "fa-brands fa-github fa-2x"
+  icon = "fa-brands fa-github fa-lg"
   weight = 1
   url = "https://github.com/fgrehm"
 
 [[params.social]]
   name = "LinkedIn"
-  icon = "fa-brands fa-linkedin fa-2x"
+  icon = "fa-brands fa-linkedin fa-lg"
   weight = 2
   url = "https://linkedin.com/in/fgrehm"
 
 [[params.social]]
-  name = "Email"
-  icon = "fa-solid fa-envelope fa-2x"
+  name = "X"
+  icon = "fa-brands fa-x-twitter fa-lg"
   weight = 3
+  url = "https://x.com/fgrehm"
+
+[[params.social]]
+  name = "Email"
+  icon = "fa-solid fa-envelope fa-lg"
+  weight = 4
   url = "mailto:site@fabiorehm.com"
 
 [[params.social]]
   name = "RSS"
-  icon = "fa-solid fa-rss fa-2x"
-  weight = 4
+  icon = "fa-solid fa-rss fa-lg"
+  weight = 5
   url = "https://fabiorehm.com/index.xml"
   rel = "alternate"
   type = "application/rss+xml"
