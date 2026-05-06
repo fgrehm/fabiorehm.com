@@ -1,7 +1,7 @@
 ---
 title: "Modernizing my Terminal-Based Development Environment"
 date: 2025-11-11
-lastmod: 2026-03-22
+lastmod: 2026-05-05
 description: "Returning to terminal-based development after a Cursor detour: SSH-based workflows with DevPod, modern multiplexers, and AI tools - the latest chapter in a 10+ year journey of working with virtualized dev environments."
 tags:
   - terminal
@@ -60,3 +60,7 @@ How I built a Git worktree manager for running multiple branches simultaneously 
 ### Part 5: [crib: Just Enough Devcontainers](/blog/2026/03/20/crib-just-enough-devcontainers/)
 
 After DevPod's development stalled, I built my own devcontainer runner on top of the same spec. Covers the bugs, the plugin system, and how AI wrote most of the code but the opinions are still mine.
+
+### Part 6: [Bridging Container and Host](/blog/2026/05/05/bridging-container-and-host/)
+
+Once the container is where I work, every leak / mismatch between it and the host gets painful. The small toolkit (cartage, lmk) I built to bridge those gaps, plus what changed when agents started wrapping the long-running stuff.
