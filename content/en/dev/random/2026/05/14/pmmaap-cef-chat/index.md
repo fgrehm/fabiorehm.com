@@ -1,5 +1,5 @@
 ---
-title: "AI Chat summary: Electron alternatives & CEF migration for please-make-me-an-app"
+title: "AI Chat: CEF migration for please-make-me-an-app"
 date: 2026-05-14
 ai_assisted: true
 ai_label: "AI-Collaboration: Chat steered by me, research and summarization done by Claude."

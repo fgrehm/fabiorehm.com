@@ -207,6 +207,19 @@ details h6 a.bi-link {
   }
 }
 
+/* Bold links: theme forces a { font-weight: 500 }, which overrides parent <strong>.
+   Make links inside bold/heading containers inherit weight. */
+strong a,
+b a,
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+  font-weight: inherit;
+}
+
 /* Tables */
 .content .post-content {
   overflow-x: auto;
