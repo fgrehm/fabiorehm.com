@@ -4,11 +4,12 @@
 }
 
 details {
-  border: 1px solid var(--border-color, #e1e4e8);
+  border: 1px solid #e1e4e8;
   border-radius: 6px;
   padding: 16px;
   margin: 16px 0;
-  background-color: var(--details-bg, #f6f8fa);
+  background-color: #f6f8fa;
+  color: #24292f;
 }
 
 details summary {
@@ -20,10 +21,11 @@ details summary {
   margin: -16px -16px 0 -16px;
   padding: 16px;
   user-select: none;
+  color: #24292f;
 }
 
 details summary:hover {
-  background-color: var(--details-hover-bg, #f0f3f5);
+  background-color: #f0f3f5;
 }
 
 details:not([open]) summary:hover {
@@ -33,7 +35,7 @@ details:not([open]) summary:hover {
 details[open] summary {
   list-style-type: '▼ ';
   margin-bottom: 16px;
-  border-bottom: 1px solid var(--border-color, #e1e4e8);
+  border-bottom: 1px solid #e1e4e8;
   border-radius: 0;
 }
 
@@ -54,16 +56,21 @@ details h6 a.bi-link {
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
   details {
-    border-color: #30363d;
-    background-color: #161b22;
+    border-color: #3d444d;
+    background-color: #22272e;
+    color: #c9d1d9;
+  }
+
+  details summary {
+    color: #e6edf3;
   }
 
   details summary:hover {
-    background-color: #1c2128;
+    background-color: #2d333b;
   }
 
   details[open] summary {
-    border-bottom-color: #30363d;
+    border-bottom-color: #3d444d;
   }
 }
 
@@ -99,11 +106,49 @@ details h6 a.bi-link {
   font-size: 0.85em;
 }
 
+/* Chaos disclaimer (human brain-dump warning) */
+.chaos-disclaimer {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+  border-left: 4px solid #d97706;
+  background-color: #fffbeb;
+  border-radius: 0 6px 6px 0;
+  font-size: 1.3rem;
+  line-height: 1.5;
+}
+
+.chaos-disclaimer-icon {
+  color: #d97706;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.chaos-disclaimer-text {
+  color: #374151;
+}
+
+@media (prefers-color-scheme: dark) {
+  .chaos-disclaimer {
+    background-color: #451a03;
+    border-left-color: #f59e0b;
+  }
+  .chaos-disclaimer-icon {
+    color: #f59e0b;
+  }
+  .chaos-disclaimer-text {
+    color: #e5e7eb;
+  }
+}
+
 /* AI badge in notes list */
 .ai-badge {
   color: #6366f1;
   font-size: 0.8em;
-  margin-left: 0.3rem;
+  margin-right: 0.4rem;
 }
 
 /* Draft badge in notes list */
@@ -340,4 +385,9 @@ details h6 a.bi-link {
     margin-right: 0 !important;
     float: none !important;
   }
+}
+
+.list .title code {
+  font-size: inherit;
+  padding: 5px;
 }

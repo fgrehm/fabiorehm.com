@@ -87,15 +87,19 @@ languageCode = "en"
   weight = 1
   url = "blog/"
 
-# [[languages.en.menu.main]]
-#   name = "Notes"
-#   weight = 2
-#   url = "notes/"
+[[languages.en.menu.main]]
+  name = "Random"
+  weight = 2
+  url = "dev/random/"
 
 [[languages.en.menu.main]]
   name = "About"
   weight = 3
   url = "about/"
+
+# Permalinks
+[permalinks]
+  "dev/random" = "/dev/random/:year/:month/:day/:slug/"
 
 # Taxonomies
 [taxonomies]

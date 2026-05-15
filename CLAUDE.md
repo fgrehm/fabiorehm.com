@@ -33,10 +33,10 @@ Published blog posts. Drafts live at `/content/en/drafts/` (gitignored, separate
 
 **TOC:** Add `toc: true` to frontmatter for posts with 15+ headings. Use `tocOpen: true` to have it expanded by default.
 
-### Notes (`/content/en/notes/`)
-Short-form content, some AI-assisted. Drafts live alongside blog drafts at `/content/en/drafts/notes/slug/`.
+### /dev/random (`/content/en/dev/random/`)
+Chaotic mixed-media posts: links, half-thoughts, clippings, AI-assisted brain dumps. URL: `/dev/random/YYYY/MM/DD/slug/`. Lower standards by design — ship rough stuff. Drafts live alongside blog drafts at `/content/en/drafts/dev/random/slug/`.
 
-**AI-assisted notes** carry provenance metadata in frontmatter:
+**AI-assisted posts** carry provenance metadata in frontmatter:
 ```yaml
 ai_assisted: true
 ai_model: "claude-opus-4-6"
@@ -44,9 +44,9 @@ ai_role: "co-author"
 ai_description: "How AI was used"
 ```
 
-These render a disclaimer at top and bottom of the note. Notes without `ai_assisted: true` render normally.
+These render a disclaimer at top and bottom of the post. Posts without `ai_assisted: true` render normally.
 
-**Publishing flow:** Move from `content/en/drafts/notes/slug/` to `content/en/notes/slug/`.
+**Publishing flow:** Move from `content/en/drafts/dev/random/slug/` to `content/en/dev/random/slug/`.
 
 ## Skills Available
 
@@ -56,5 +56,5 @@ These render a disclaimer at top and bottom of the note. Notes without `ai_assis
 - **blog-proofreading**: Technical review (flow, links, formatting)
 - **blog-fact-checking**: Verify claims against sources
 - **blog-publishing**: Pre-publish validation checklist
-- **blog-resume**: Restore context for draft work (blog posts and notes)
+- **blog-resume**: Restore context for draft work (blog posts and /dev/random)
 

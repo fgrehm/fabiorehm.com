@@ -28,7 +28,8 @@
         </div>
       </header>
 
-      {{ partial "notes/ai-disclaimer.html" . }}
+      {{ partial "dev-random/chaos-disclaimer.html" . }}
+      {{ partial "dev-random/ai-disclaimer.html" . }}
 
       {{ partial "toc.html" . }}
 
@@ -39,7 +40,6 @@
         {{ .Content }}
       </div>
 
-      {{ partial "notes/ai-disclaimer.html" . }}
     </article>
 
     {{ partial "posts/math.html" . }}

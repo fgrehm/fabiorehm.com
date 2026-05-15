@@ -19,10 +19,10 @@
     {{ $allDrafts := where .Site.RegularPages "Section" "drafts" }}
 
     {{ $blogDrafts := slice }}
-    {{ $noteDrafts := slice }}
+    {{ $randomDrafts := slice }}
     {{ range $allDrafts }}
-      {{ if hasPrefix .File.Dir "drafts/notes/" }}
-        {{ $noteDrafts = $noteDrafts | append . }}
+      {{ if hasPrefix .File.Dir "drafts/dev/random/" }}
+        {{ $randomDrafts = $randomDrafts | append . }}
       {{ else }}
         {{ $blogDrafts = $blogDrafts | append . }}
       {{ end }}
@@ -40,10 +40,10 @@
       </ul>
     {{ end }}
 
-    {{ if $noteDrafts }}
-      <h2>Notes</h2>
+    {{ if $randomDrafts }}
+      <h2>/dev/random</h2>
       <ul>
-        {{ range $noteDrafts }}
+        {{ range $randomDrafts }}
           <li>
             <span class="date">{{ .Date.Format "2006-01-02" }}</span>
             {{ if .Title }}
@@ -59,7 +59,7 @@
       </ul>
     {{ end }}
 
-    {{ if and (not $blogDrafts) (not $noteDrafts) }}
+    {{ if and (not $blogDrafts) (not $randomDrafts) }}
       <p>No drafts yet.</p>
     {{ end }}
   </section>

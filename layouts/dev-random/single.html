@@ -28,11 +28,12 @@
         </div>
       </header>
 
-      {{ partial "notes/ai-disclaimer.html" . }}
+      {{ partial "dev-random/chaos-disclaimer.html" . }}
+      {{ partial "dev-random/ai-disclaimer.html" . }}
 
       {{ if .Draft }}
       <div class="note-draft-banner">
-        <strong>Draft</strong> - This note is not published yet.
+        <strong>Draft</strong> - This post is not published yet.
       </div>
       {{ end }}
 
@@ -41,8 +42,6 @@
       <div class="post-content">
         {{ .Content }}
       </div>
-
-      {{ partial "notes/ai-disclaimer.html" . }}
     </article>
 
     {{ partial "posts/math.html" . }}

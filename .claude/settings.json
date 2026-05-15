@@ -21,9 +21,5 @@
       "Bash(git add -A:*)",
       "Bash(git commit:*)"
     ]
-  },
-  "statusLine": {
-    "type": "command",
-    "command": "bash .claude/scripts/context-monitor.sh"
   }
 }
