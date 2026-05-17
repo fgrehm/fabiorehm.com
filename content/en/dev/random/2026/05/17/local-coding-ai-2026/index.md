@@ -1,9 +1,11 @@
 ---
 title: "TokenLedger: Could a smaller model handle real coding work?"
 date: 2026-05-17
-ai_assisted: true
+description: "Chat with Claude on whether a small local model can do agentic coding in 2026 — MoE architecture, the trace-distillation idea, and what's actually runnable on a 16GB / 64GB box."
+ai_disclosure: mixed
 ai_label: "AI-Collaboration: Chat steered by me, research and summarization done by Claude."
 ai_model: "claude-opus-4.7"
+ai_provider: "Anthropic"
 ---
 
 There's a lot of discussion on running models locally these days, so I went on to Claude and asked some questions for my own learning.

@@ -1,9 +1,11 @@
 ---
 title: "LazyDigest #001 - LeChuck's Revenge"
 date: 2026-05-15
-ai_assisted: true
+description: "Tab bankruptcy, pirate-style. I dumped a week of unread links into deepseek-v4-pro and asked it to write a Monday-morning digest in LeChuck's voice."
+ai_disclosure: mixed
 ai_label: "AI-Collaboration: Links provided by me, synthesis and summarization done by the AI."
-ai_model: "ollama-cloud:deepseek-v4-pro"
+ai_model: "deepseek-v4-pro"
+ai_provider: "Ollama Cloud"
 ---
 
 Today I spent most of my "free time" getting ready to open source [lazyai](https://github.com/fgrehm/lazyai) after doing my daily "15min social network round" / tab hoarding.

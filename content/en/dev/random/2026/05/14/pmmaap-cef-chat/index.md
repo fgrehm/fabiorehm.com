@@ -1,9 +1,11 @@
 ---
 title: "TokenLedger: CEF migration for please-make-me-an-app"
 date: 2026-05-14
-ai_assisted: true
+description: "Chat summary with Claude exploring Electron alternatives and what a CEF in-process migration for please-make-me-an-app would look like in Rust."
+ai_disclosure: mixed
 ai_label: "AI-Collaboration: Chat steered by me, research and summarization done by Claude."
 ai_model: "claude-opus-4.7"
+ai_provider: "Anthropic"
 ---
 
 I've been thinking about ways to support more sites / apps with [please-make-me-an-app](https://github.com/fgrehm/please-make-me-an-app) lately so spent some time in a chat with Claude working through the state of Electron alternatives in 2026 and what a CEF integration would look like.

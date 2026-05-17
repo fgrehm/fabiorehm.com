@@ -51,8 +51,8 @@
             {{ else }}
               <a class="title" href="{{ .Permalink }}">{{ .Summary | plainify | truncate 80 }}</a>
             {{ end }}
-            {{ if .Params.ai_assisted }}
-              <span class="ai-badge" title="AI-assisted content"><i class="fa-solid fa-robot" aria-hidden="true"></i></span>
+            {{ with .Params.ai_disclosure }}
+              <span class="ai-badge" title="AI disclosure: {{ . }}"><i class="fa-solid fa-robot" aria-hidden="true"></i></span>
             {{ end }}
           </li>
         {{ end }}

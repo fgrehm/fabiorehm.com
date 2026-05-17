@@ -1,5 +1,9 @@
 {{- $inner := .Page.RenderString (dict "display" "block") .Inner -}}
-<div class="clickwall" data-clickwall data-clickwall-key="{{ .Page.RelPermalink }}">
+{{- $level := .Get "level" | default "ai-generated" -}}
+{{- $model := .Get "model" | default .Page.Params.ai_model -}}
+{{- $provider := .Get "provider" | default .Page.Params.ai_provider -}}
+<div class="clickwall" data-clickwall data-clickwall-key="{{ .Page.RelPermalink }}"
+     ai-disclosure="{{ $level }}"{{ with $model }} ai-model="{{ . }}"{{ end }}{{ with $provider }} ai-provider="{{ . }}"{{ end }}>
   <div class="clickwall-gate" data-clickwall-gate>
     <div class="clickwall-gate-inner">
       <p class="clickwall-title">

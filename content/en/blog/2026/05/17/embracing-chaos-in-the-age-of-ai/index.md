@@ -21,7 +21,7 @@ Suffice to say that I've ~~dumped~~ curated six different "pieces of content" th
 
 The idea of that section is to be a stream of low ceremony chaotic content. It's more of a psycological thing, having that little corner gives me the "permission" to be weird and write things for future me that might be useful or maybe funny to others. Those ChaosDumps and other notes I'll be pushing there are gonna be fully written by me with no AI intervention at all, the intent is to help my writing skills stay somewhat sharp by letting my fingers and mind just flow.
 
-As for the fully AI generated content, my hope is to make better use of the natural resources I'm burning to generate random tokens by sharing a summary online for others to consume. The boundaries between me and the silicon chips are called out at the top and a small bit of friction is present in the shape of a "clickwall" before people view the actual artificial content. The other reason I'm doing that is because I don't keep claude.ai / chatgpt chats once they've served their purpose, for privacy reasons.
+As for the fully AI generated content, my hope is to make better use of the natural resources I'm burning to generate random tokens by sharing a summary online for others to consume. The boundaries between me and the silicon chips are called out at the top and a small bit of friction is present in the shape of a "clickwall" before people view the actual artificial content. The other reason I'm doing that is because I don't keep claude.ai / chatgpt chats once they've served their purpose, for privacy reasons. For code related vibes, check [slop-collabs](https://github.com/fgrehm/slop-collabs).
 
 ## Ramblings on content polish
 
