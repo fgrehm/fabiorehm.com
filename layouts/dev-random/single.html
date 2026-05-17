@@ -42,7 +42,13 @@
       <div class="post-content">
         {{ .Content }}
       </div>
+
+      <footer>
+        {{ partial "posts/github-discussions.html" . }}
+      </footer>
     </article>
+
+    {{ partial "posts/related.html" . }}
 
     {{ partial "posts/math.html" . }}
   </section>
