@@ -12,6 +12,9 @@ I drove the questions, Claude surfaced data and research material, I made the ca
 
 ---
 
+
+{{< clickwall >}}
+
 ## What we covered
 
 Started as "what's the state of Electron alternatives in 2026" but quickly reframed: pmmaapp doesn't compete with Electron, it competes with site-wrapper tools (Pake, Nativefier, Tangram, WebApp Manager). The real question turned out to be about expanding pmmaapp's reach to sites that currently force a fallback to a system browser (claude.ai being the canonical example).
@@ -98,3 +101,5 @@ Cloned and reviewed the repo. Key findings:
 - Binding: Rust + cef-rs.
 - Subprocess browser backends will be deleted once `engine: cef` reaches parity.
 - Daemon model parked unless memory benchmarks later argue for it.
+
+{{< /clickwall >}}

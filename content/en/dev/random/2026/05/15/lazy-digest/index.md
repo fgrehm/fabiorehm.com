@@ -49,6 +49,8 @@ If one of the links fail fetching, write them to `errored.md`, then add a "vibe 
 
 ---
 
+{{< clickwall >}}
+
 ## ARRR! READ IT MONDAY, YE SPINELESS BILGE RATS!
 
 *AVAST! I, the dread pirate LeChuck, have assembled these treasures from the farthest reaches of the techno-seas. Cast yer weepin' eyeballs upon 'em and despair — or learn somethin', whichever comes first. Fail to read these by Monday and I'll have ye scrubbing the ectoplasmic barnacles off me ghostly hull with yer own toothbrush! FAIR WINDS AND FULL CONTEXTS TO YE — OR ELSE!*
@@ -75,7 +77,7 @@ Codemanship's Jason Gotshit — a name I'd carve into the mast of me own ghost s
 
 - Incidents per PR up a blood-curdlin' **242%**!
 - Bugs up **54%** — and ACCELERATIN' like a ship with a hole the size of a whale!
-- PRs makin' it to production with **ZERO HUMAN EYES** upon 'em up **31%** — the fools be callin' it "LGTM-speed," which in my tongue translates to "LORD GIVE THESE MORONS MERCY!" 
+- PRs makin' it to production with **ZERO HUMAN EYES** upon 'em up **31%** — the fools be callin' it "LGTM-speed," which in my tongue translates to "LORD GIVE THESE MORONS MERCY!"
 - Delivery lead times up a horrifyin' **480%** — FIVE! TIMES! LONGER! Because code's barrelling into downstream bottlenecks like lemmings off a cliff and cloggin' the entire damned harbor!
 
 > "Bigger changes hitin' downstream bottlenecks faster just causes longer delays. We walked into this ambush with our eyes wide open."
@@ -345,3 +347,5 @@ And for those generous souls who wish to cast their treasure maps into the publi
 *There ye have it — a cargo hold BURSTIN' with reading material to set yer Monday ablaze! Me? I'm skippin' the tokenmaxxin' drivel entirely and divin' STRAIGHT into the "slow the f**k down" cluster! Seems half the internet is FINALLY catchin' up to what we spectral pirates have been screamin' from the ghostly riggin' all along: THE CODE AIN'T THE PRODUCT! The MAINTAINABLE code ain't the product! The code that the NEXT POOR BASTARD can UNDERSTAND — THAT be the product!*
 
 *Now WEIGH ANCHOR and READ, ye bilge-drinking scallywags — OR I'LL HAUNT YER CI PIPELINE FOREVER!*
+
+{{< /clickwall >}}

@@ -10,6 +10,8 @@ There's a lot of discussion on running models locally these days, so I went on t
 
 ---
 
+{{< clickwall >}}
+
 *A report on a conversation between Claude and Fabio, a developer thinking through local coding model options. Published with Fabio's permission, AI-generated, with disclaimers at the bottom. Last updated: May 2026 — model landscape moves fast, expect drift.*
 
 It started with a random thought while Fabio was looking at [antirez's ds4 project](https://github.com/antirez/ds4): if this whole engine exists to run one specific big model on a MacBook, couldn't he just use something smaller? He didn't need a model that knows Italian poetry. He just wanted to code. Surely there was a tiny specialist that fits a laptop and does the job?
@@ -179,3 +181,5 @@ This piece was generated through a conversation between Fabio and Claude (Anthro
 **Conflicts of interest:** None known. Neither Claude nor Fabio has commercial ties to the companies or projects mentioned, though Claude is itself an Anthropic product, which is worth flagging.
 
 **Generation context:** Single conversation, web search enabled, no specialized agents or chained pipelines. The conversation took about an hour of back-and-forth. For anyone curious about the raw reasoning: agent traces of conversations like this one are exactly the data discussed in the trace section above — a recursion the reader is invited to enjoy.
+
+{{< /clickwall >}}

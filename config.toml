@@ -47,6 +47,7 @@ languageCode = "en"
   hideColorSchemeToggle = false
   maxSeeAlsoItems = 5
   customCSS = ["css/site.css"]
+  customJS = ["js/clickwall.js"]
 
 # Social media links
 [[params.social]]
