@@ -116,7 +116,7 @@ languageCode = "en"
 
 # Permalinks
 [permalinks]
-  "dev/random" = "/dev/random/:year/:month/:day/:slug/"
+  "dev/random" = "/dev/random/:year/:month/:day/:contentbasename/"
 
 # Taxonomies
 [taxonomies]
