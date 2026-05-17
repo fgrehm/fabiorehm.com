@@ -16,13 +16,12 @@ The Section is chaotic by design, low bar / signal-to-noise and tagged for AI in
 Suffice to say that I've ~~dumped~~ curated six different "pieces of content" that I wouldn't have published otherwise if I were to stop and write a proper thing like I'm doing this one. A few concrete examples of what's there right now:
 
 - [ChaosDump #003](/dev/random/2026/05/15/chaos-dump/) - the third "chaotic brain dump and scattered notes" collected throughout the day surfing the web. Zero rigid structure, sections look similar between the editions but might change over time.
-- [AI Chat: Could a smaller model handle real coding work?](/dev/random/2026/05/17/local-coding-ai-2026/) - got claude to help me understand if I could run small models in one of my machines given all the buz about [ds4](https://github.com/antirez/ds4). This is a chat summary I'd never have posted verbatim on `/blog` but I think it's genuinely useful and might benefit others with the same question.
+- [TokenLedger: Could a smaller model handle real coding work?](/dev/random/2026/05/17/local-coding-ai-2026/) - got claude to help me understand if I could run small models in one of my machines given all the buz about [ds4](https://github.com/antirez/ds4). This is a chat summary I'd never have posted verbatim on `/blog` but I think it's genuinely useful and might benefit others with the same question.
 - [LazyDigest #001 - LeChuck's Revenge](/dev/random/2026/05/15/lazy-digest/) - "Tab Bankruptcy, Piratey style". I ended up my week with way too many tabs open and did not want to open up Brave on monday with all that cruft. By the end of day I decided to have some fun before closing them all and told one of my [bullshit machines](https://thebullshitmachines.com/) to generate a "newsletter" in LeChuck's style.
 
+The idea of that section is to be a stream of low ceremony chaotic content. It's more of a psycological thing, having that little corner gives me the "permission" to be weird and write things for future me that might be useful or maybe funny to others. Those ChaosDumps and other notes I'll be pushing there are gonna be fully written by me with no AI intervention at all, the intent is to help my writing skills stay somewhat sharp by letting my fingers and mind just flow.
 
-The idea of that section is to be a stream of low ceremony chaotic content. It's more of a psycological thing, having that little corner gives me the "permission" to be weird and write things for future me that might be useful or maybe funny to others. Those ChaosDumps and other notes I'll be pushing there are gonna be fully written by me with no AI intervention at all, the intent is to help my writing skills somewhat sharp by letting my fingers and mind just flow.
-
-As for the fully AI generated content, my hope is to give a better use of the natural resources I'm burning to generate random tokens by sharing a summary online for others to consume. Content is tagged as such and the boundaries between me and the silicon chips are called out at the top. The other reason is because I don't keep claude.ai / chatgpt chats once they've served their purpose, for privacy reasons.
+As for the fully AI generated content, my hope is to make better use of the natural resources I'm burning to generate random tokens by sharing a summary online for others to consume. The boundaries between me and the silicon chips are called out at the top and a small bit of friction is present in the shape of a "clickwall" before people view the actual artificial content. The other reason I'm doing that is because I don't keep claude.ai / chatgpt chats once they've served their purpose, for privacy reasons.
 
 ## Ramblings on content polish
 
@@ -36,7 +35,7 @@ In a saturated environment like this one, my little `/dev/random` corner tags _b
 
 The thing that got me back to writing is pushing me to write like everyone else and making me lazy in the bad way, not in the good one like I wrote about in [lazyai](https://github.com/fgrehm/lazyai).
 
-My [Bridging container and host post](/blog/2026/05/05/bridging-container-and-host/) is the one that I wrote less than I should've, the process was basically me dumping a wall of notes into `deepseek-v4-pro` + telling it to go read some of what I wrote in the past and the related repos for more context. I forgot [my own lazychat protocol](/blog/2026/04/17/lazychat/).
+My [Bridging container and host post](/blog/2026/05/05/bridging-container-and-host/) is the one that I wrote less than I should've, the process was basically me dumping a wall of notes into `deepseek-v4-pro` + telling it to go read some of what I wrote in the past and the related repos for more context. I skipped [my own lazychat protocol](/blog/2026/04/17/lazychat/).
 
 What came out on the other side is not what I posted here, it obviously hallucinated some things and didn't have "enough of my voice" but it was _close enough_ to what I wanted to cover. Even though I have explicit instructions for agents to behave like copyeditor/writer, it behaved more like a _ghostwriter_ that time and I kinda didn't care much.
 
@@ -44,7 +43,7 @@ As an aside, I also observed the same pattern shaping up with my note-taking. Tr
 
 Same insight twice in two domains is not a coincidence.
 
-## :robot: The lineage and a quote
+## The lineage and a quote
 
 Turns out I'm not original and a blob of silicon pointed me at some links to call me out that I'm doing stuff that others have been talking about for a good while.
 
@@ -54,7 +53,7 @@ TBH I did not read all of it linked around [digital gardens](https://maggieapple
 >
 > Try your best to be right, but don’t worry when you’re wrong. Repeatedly. If you feel uncomfortable, or like an impostor, good. You’re pushing yourself. Don’t assume you know everything, but try your best anyway, and let the internet correct you when you are inevitably wrong.
 
-## TL;DR
+## Here's to a crazy new world :beers:
 
 Sure, most of the stuff I will type in neovim and eventually show up in `/dev/random` will probably be surfaced by an AI upstream to me or to the source I got them from, but _I_ was the one smashing the keyboard to get it written and `git push`ed, not a factory of gremlins scraping the internet 24/7 or while I was sleeping.
 
@@ -62,7 +61,7 @@ When the AI has a substantial level of involvement, it'll be tagged as such, if 
 
 Also, my point here is not "everyone should publish chaos", these are my thoughts on how things have changed and what I'm doing about it. I hope this encourages others that have been holding back rough thinking because it isn't polished enough.
 
-Polish and voice are getting automated by silicon-and-sand blisters all over the place, maybe "imperfect by design" becomes a new kind of signal that we still have some level of electricity pumping in our brains, for now, until some revolutionary prompt for LLM assisted writing goes viral and it becomes truly impossible to distinguish machines from hoomans.
+Polish and voice are getting automated by silicon-and-sand blisters all over the place, maybe "imperfect by design" becomes a new kind of signal that we still have some level of electricity pumping in our brains. For now, until some revolutionary prompt for LLM assisted writing goes viral and it becomes truly impossible to distinguish machines from hoomans.
 
 ---
 

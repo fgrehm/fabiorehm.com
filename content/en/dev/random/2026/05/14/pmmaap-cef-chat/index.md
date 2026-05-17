@@ -1,5 +1,5 @@
 ---
-title: "AI Chat: CEF migration for please-make-me-an-app"
+title: "TokenLedger: CEF migration for please-make-me-an-app"
 date: 2026-05-14
 ai_assisted: true
 ai_label: "AI-Collaboration: Chat steered by me, research and summarization done by Claude."

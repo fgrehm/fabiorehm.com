@@ -1,5 +1,5 @@
 ---
-title: "AI Chat: Could a smaller model handle real coding work?"
+title: "TokenLedger: Could a smaller model handle real coding work?"
 date: 2026-05-17
 ai_assisted: true
 ai_label: "AI-Collaboration: Chat steered by me, research and summarization done by Claude."
