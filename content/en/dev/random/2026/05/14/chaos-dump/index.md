@@ -2,6 +2,7 @@
 title: "ChaosDump #002"
 date: 2026-05-14
 chaos: true
+keywords: [chaos-dump]
 ---
 
 ## Background Noise

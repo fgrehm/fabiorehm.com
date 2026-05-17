@@ -15,12 +15,15 @@
       {{- range .Paginator.Pages -}}
       <li>
         <span class="date">{{ .Date | time.Format (.Site.Params.dateFormat | default "January 2, 2006" ) }}</span>
-        <a class="title" href="{{ .RelPermalink }}">
-        {{ with .Params.ai_disclosure }} <span class="ai-badge" title="AI disclosure: {{ . }}"><i class="fa-solid fa-robot" aria-hidden="true"></i></span>{{ end }}
-        {{ if .Title }}{{ .Title }}{{ else }}{{ .Summary | plainify | truncate 80 }}{{ end }}</a>
-        {{ if .Draft }}
-          <span class="draft-badge">draft</span>
-        {{ end }}
+        <div class="entry">
+          <a class="title" href="{{ .RelPermalink }}">
+          {{ with .Params.ai_disclosure }} <span class="ai-badge" title="AI disclosure: {{ . }}"><i class="fa-solid fa-robot" aria-hidden="true"></i></span>{{ end }}
+          {{ if .Title }}{{ .Title }}{{ else }}{{ .Summary | plainify | truncate 80 }}{{ end }}</a>
+          {{ if .Draft }}
+            <span class="draft-badge">draft</span>
+          {{ end }}
+          {{ with .Description }}<p class="description">{{ . }}</p>{{ end }}
+        </div>
       </li>
       {{- end -}}
     </ul>

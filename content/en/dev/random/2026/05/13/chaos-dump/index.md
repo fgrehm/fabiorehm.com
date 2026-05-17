@@ -2,6 +2,7 @@
 title: "ChaosDump #001"
 date: 2026-05-13
 chaos: true
+keywords: [chaos-dump]
 ---
 
 I mentioned I'm [tired of AI](/blog/2026/05/12/im-taired) yesterday, this first dump is mostly around AI since it is all over the place but my hope is to have something non-AI whenever I do one of these.

@@ -2,7 +2,7 @@
 title: "I'm tAIred (lazy brain dump edition)"
 date: 2026-05-12
 description: "Buzzword fatigue, in list form. Plus a book recommendation and a refusal to look up this week's AI drama."
-tags: ["meta", "rant"]
+keywords: [meta, rant, ai, random, ai-fatigue, lazyai]
 ---
 
 No, not a typo, I'm getting tired of "AI".

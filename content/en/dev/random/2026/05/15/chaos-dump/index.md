@@ -2,6 +2,7 @@
 title: "ChaosDump #003"
 date: 2026-05-15
 chaos: true
+keywords: [chaos-dump]
 ---
 
 ## Now Playing

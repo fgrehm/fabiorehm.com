@@ -2,6 +2,7 @@
 title: "TokenLedger: CEF migration for please-make-me-an-app"
 date: 2026-05-14
 description: "Chat summary with Claude exploring Electron alternatives and what a CEF in-process migration for please-make-me-an-app would look like in Rust."
+keywords: [token-ledger]
 ai_disclosure: mixed
 ai_label: "AI-Collaboration: Chat steered by me, research and summarization done by Claude."
 ai_model: "claude-opus-4.7"

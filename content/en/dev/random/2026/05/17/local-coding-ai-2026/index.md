@@ -2,6 +2,7 @@
 title: "TokenLedger: Could a smaller model handle real coding work?"
 date: 2026-05-17
 description: "Chat with Claude on whether a small local model can do agentic coding in 2026 — MoE architecture, the trace-distillation idea, and what's actually runnable on a 16GB / 64GB box."
+keywords: [token-ledger]
 ai_disclosure: mixed
 ai_label: "AI-Collaboration: Chat steered by me, research and summarization done by Claude."
 ai_model: "claude-opus-4.7"

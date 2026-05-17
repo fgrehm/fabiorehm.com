@@ -2,6 +2,7 @@
 title: "LazyDigest #001 - LeChuck's Revenge"
 date: 2026-05-15
 description: "Tab bankruptcy, pirate-style. I dumped a week of unread links into deepseek-v4-pro and asked it to write a Monday-morning digest in LeChuck's voice."
+keywords: [lazy-digest]
 ai_disclosure: mixed
 ai_label: "AI-Collaboration: Links provided by me, synthesis and summarization done by the AI."
 ai_model: "deepseek-v4-pro"

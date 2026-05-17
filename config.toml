@@ -11,6 +11,22 @@ languageCode = "en"
 [pagination]
   pagerSize = 10
 
+# Related posts: include newer pages so e.g. a 2026-05-12 post can surface a
+# related 2026-05-17 post. Default behavior excludes newer ones.
+[related]
+  includeNewer = true
+  threshold = 80
+  toLower = false
+  [[related.indices]]
+    name = "keywords"
+    weight = 100
+  [[related.indices]]
+    name = "tags"
+    weight = 80
+  [[related.indices]]
+    name = "date"
+    weight = 10
+
 # https://gohugo.io/content-management/multilingual/
 [languages]
   [languages.en]
