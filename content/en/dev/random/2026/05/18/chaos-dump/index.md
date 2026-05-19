@@ -20,7 +20,7 @@ keywords: [chaos-dump]
 - [`nvim-ufo` Not UFO in the sky, but an ultra fold in Neovim](https://github.com/kevinhwang91/nvim-ufo)
 - [AST-GREP: Find Code by Syntax](https://ast-grep.github.io/)
 
-Side note: [created an issue](https://github.com/earendil-works/pi/issues/4706) to start the discussions around integrating my very own [pi-ollama-cloud](https://github.com/fgrehm/pi-ollama-cloud) extension into pi core itself.
+~~Side note: [created an issue](https://github.com/earendil-works/pi/issues/4706) to start the discussions around integrating [pi-ollama-cloud](https://github.com/fgrehm/pi-ollama-cloud) extension into pi core itself.~~ [Not happening unfortunately](https://github.com/earendil-works/pi/issues/4706#issuecomment-4485561842)
 
 ## #sharing-is-caring
 
