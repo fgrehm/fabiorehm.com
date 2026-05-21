@@ -647,3 +647,89 @@ h6 a {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
   }
 }
+
+/* Clickwall: styled "alert" shown the first time someone copies AI content. */
+.clickwall-toast-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background-color: rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.clickwall-toast-overlay.is-visible {
+  opacity: 1;
+}
+
+.clickwall-toast {
+  width: 34rem;
+  max-width: 100%;
+  padding: 1.75rem 1.5rem;
+  border: 1px solid #e1e4e8;
+  border-radius: 10px;
+  background-color: #f6f8fa;
+  color: #24292f;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  transform: scale(0.9) translateY(8px);
+  transition: transform 0.2s ease;
+}
+
+.clickwall-toast-overlay.is-visible .clickwall-toast {
+  transform: scale(1) translateY(0);
+}
+
+.clickwall-toast-title {
+  margin: 0 0 0.6rem;
+  font-weight: 600;
+  font-size: 1.8rem;
+}
+
+.clickwall-toast-body {
+  margin: 0 0 1.25rem;
+  font-size: 1.35rem;
+  line-height: 1.5;
+}
+
+.clickwall-toast-dismiss {
+  cursor: pointer;
+  padding: 0.65rem 1.4rem;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background-color: var(--link-color, #2563eb);
+  color: #fff;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.clickwall-toast-dismiss:hover {
+  filter: brightness(1.08);
+}
+
+.colorscheme-dark .clickwall-toast {
+  background-color: #2a3036;
+  border-color: #3a4148;
+  color: #c9d1d9;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
+}
+
+@media (prefers-color-scheme: dark) {
+  .colorscheme-auto .clickwall-toast {
+    background-color: #2a3036;
+    border-color: #3a4148;
+    color: #c9d1d9;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .clickwall-toast-overlay,
+  .clickwall-toast {
+    transition: none;
+  }
+}
