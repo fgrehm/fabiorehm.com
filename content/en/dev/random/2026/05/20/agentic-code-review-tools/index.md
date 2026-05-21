@@ -1,15 +1,15 @@
 ---
 title: "TokenLedger: Landscape Survey on Agentic Code Review Tools"
-date: 2026-05-20
+date: 2026-05-21
 description: "Survey on a bunch of different tools used code reviews, for humans and agents"
 keywords: [token-ledger]
 ai_disclosure: mixed
 ai_label: "AI-Collaboration: List of projects and reserach guidance provided by me. Actual analysis and summarization made by Opus 4.7 and DeepSeek Pro V4."
 ---
 
-I'm writing a blog post on the "explosion" of terminal tooling to review code written by "The AI" and fed many 59 GitHub projects to LLMs. The list came from my own GitHub stars, personal notes of things I came across online and some basic GitHub project searching.
+I'm writing a blog post on the recent "explosion" of tooling to review and annotate code written by agents so I gave some related projects to LLMs for a first pass on analysis / clustering. The projects list came from my own GitHub stars, personal notes of things I came across online and some basic GitHub project searching.
 
-The research was done in a single DeepSeek V4 Pro chat powered by Pi using Ollama Cloud. The initial classification was done by Claude Opus 4.7 in another chat and "fact-checked" by DeepSeek afterwards in the original chat which had more context.
+The content below was generated from a single DeepSeek V4 Pro chat powered by Pi using Ollama Cloud. The initial classification was done by Claude Opus 4.7 in another chat and "fact-checked" by DeepSeek afterwards in the original chat which had more context. The final post will be linked back here once it's out
 
 ---
 
