@@ -1,7 +1,7 @@
 ---
 title: "TokenLedger: Landscape Survey on Agentic Code Review Tools"
 date: 2026-05-21
-description: "Survey on a bunch of different tools used code reviews, for humans and agents"
+description: "Survey on a bunch of different tools used for local code reviews, for humans and agents"
 keywords: [token-ledger]
 ai_disclosure: mixed
 ai_label: "AI-Collaboration: List of projects and reserach guidance provided by me. Actual analysis and summarization made by Opus 4.7 and DeepSeek Pro V4."
