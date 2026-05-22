@@ -11,7 +11,7 @@ ai_provider: "Ollama Cloud"
 
 Today I spent most of my "free time" getting ready to open source [lazyai](https://github.com/fgrehm/lazyai) after doing my daily "15min social network round" / tab hoarding.
 
-Didn't want to get into the weekend with this many tabs so decided to have a bit of fun and told deepseek-v4-pro to write a digest for me, basically a "Read it later LeChuck edition". :pirate:
+Didn't want to get into the weekend with this many tabs so decided to have a bit of fun and told deepseek-v4-pro to write a digest for me, basically a "Read it later LeChuck edition". 
 
 <details><summary> Click to see the prompt</summary>
 
