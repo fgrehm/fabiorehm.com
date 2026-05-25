@@ -9,7 +9,9 @@ ai_label: "AI-Collaboration: List of projects and reserach guidance provided by 
 
 I'm writing a blog post on the recent "explosion" of tooling to review and annotate code written by agents so I gave some related projects to LLMs for a first pass on analysis / clustering. The projects list came from my own GitHub stars, personal notes of things I came across online and some basic GitHub project searching.
 
-The content below was generated from a single DeepSeek V4 Pro chat powered by Pi using Ollama Cloud. The initial classification was done by Claude Opus 4.7 in another chat and "fact-checked" by DeepSeek afterwards in the original chat which had more context. The final post will be linked back here once it's out
+The content below was generated from a single DeepSeek V4 Pro chat powered by Pi using Ollama Cloud. The initial classification was done by Claude Opus 4.7 in another chat and "fact-checked" by DeepSeek afterwards in the original chat which had more context.
+
+**Update 2026-05-25:** I started scaffolding the proper blog post on this as a hands-on comparison of `revdiff`, `tuicr` and `hunk` and ended up killing it. Shit is moving way too fast for a "here's how I review agent code before PRs" post to be valuable at this point. The tools themselves keep changing and by the time I'd finish writing half of it would be stale or get stale within a week or so. Leaving the landscape here as a snapshot and moving on :v:
 
 ---
 
